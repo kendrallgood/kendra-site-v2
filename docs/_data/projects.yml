@@ -37,6 +37,7 @@ projects:
   - title: Exodus Unseen
     project_url: "/exodus-unseen"
     year: 2018
+    class: hero
     download_link: "/assets/images/projects/exodus/EXODUS UNSEEN.pdf"
     spotlight_image_url: "/assets/images/projects/exodus/opening-photo.jpg"
     images:
