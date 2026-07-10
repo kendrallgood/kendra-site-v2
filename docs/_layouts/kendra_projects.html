@@ -4,7 +4,7 @@ layout: kendra_default
 {% if site.data.projects %}
     <div class="projects">
         {% for project in site.data.projects.projects %}
-            <div class="hover-container">
+            <div class="hover-container{% if project.class %} {{ project.class }}{% endif %}">
                 <div class="content">
                     <!-- REMOTE VS LOCAL -->
                     <a href="{{ site.baseurl }}{{ project.project_url }}">
