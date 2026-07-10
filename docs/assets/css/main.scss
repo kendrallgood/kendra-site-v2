@@ -160,19 +160,21 @@ h3 {
   .projects {
     display: grid;
     grid-template-columns: repeat(2, 50%);
-
+    grid-auto-rows: 33vh;
     @include breakpoint($medium) {
       grid-template-columns: repeat(3, 33.333%);
+      grid-auto-rows: 50vh;
     }
   }
-
   .hover-container {
-    height: 33vh;
+    height: 100%;
     object-fit: cover;
     padding: 1em;
-
+  }
+  .hover-container.hero {
+    grid-column: span 2;
     @include breakpoint($medium) {
-      height: 50vh;
+      grid-row: span 2;
     }
   }
 
