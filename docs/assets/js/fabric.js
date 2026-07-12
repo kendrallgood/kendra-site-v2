@@ -386,7 +386,7 @@ function init() {
     scene = new THREE.Scene();
     var loader = new THREE.TextureLoader();
 
-    scene.background = new THREE.Color( backgroundColor );
+    //scene.background = new THREE.Color( backgroundColor );
     // scene.fog = new THREE.Fog( 0xcce0ff, 500, 10000 );
 
     // camera
@@ -532,7 +532,8 @@ function init() {
 
     // renderer
 
-    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+renderer.setClearColor( 0x000000, 0 );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
 

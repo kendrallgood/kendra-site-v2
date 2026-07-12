@@ -598,6 +598,7 @@ body{
   #hero-canvas canvas {
     position: relative;
     z-index: 2;
+pointer-events: none;
   }
 
   .word-grid {
