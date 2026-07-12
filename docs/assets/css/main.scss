@@ -160,21 +160,19 @@ h3 {
   .projects {
     display: grid;
     grid-template-columns: repeat(2, 50%);
-    grid-auto-rows: 33vh;
+
     @include breakpoint($medium) {
       grid-template-columns: repeat(3, 33.333%);
-      grid-auto-rows: 50vh;
     }
   }
+
   .hover-container {
-    height: 100%;
+    height: 33vh;
     object-fit: cover;
     padding: 1em;
-  }
-  .hover-container.hero {
-    grid-column: span 2;
+
     @include breakpoint($medium) {
-      grid-row: span 2;
+      height: 50vh;
     }
   }
 
@@ -586,4 +584,68 @@ body{
  
 .fadeIn-bottom {
   top: 80%;
+}
+// ============================================
+// LANDING PAGE WORD GRID — sits behind the hero fabric
+// Commit 1 of 2: markup + styling only. The canvas still
+// paints fully opaque on top (z-index:2) until the fabric.js
+// transparency/pointer-events change (commit 2) reveals it.
+// ============================================
+.layout--kendra_home {
+  #hero-canvas {
+    position: relative;
+  }
+  #hero-canvas canvas {
+    position: relative;
+    z-index: 2;
+  }
+
+  .word-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    column-gap: clamp(2px, 0.6vw, 12px);
+    row-gap: clamp(0px, 0.3vh, 6px);
+    align-content: center;
+    justify-items: center;
+    padding: 0;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+
+  .word-grid .word {
+    position: relative;
+    min-width: 0;
+    max-width: 100%;
+    white-space: nowrap;
+    font-weight: 800;
+    font-size: clamp(15px, 7.5vw, 130px);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .word-grid .word:nth-child(3n+1) { color: #1B6C64; } // About — teal
+  .word-grid .word:nth-child(3n+2) { color: #8B5E82; } // Projects — purple
+  .word-grid .word:nth-child(3n)   { color: #E77E96; } // Resume — pink
+
+  .word-grid .word::before {
+    content: "";
+    position: absolute;
+    left: -6%; top: 50%;
+    width: 112%; height: 0.5em;
+    margin-top: -0.25em;
+    background-image: url("/assets/images/marker-stroke.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    transform: scaleX(0) rotate(-0.6deg) translate3d(0,0,0);
+    transform-origin: left center;
+    transition: transform .22s ease-in-out;
+  }
+  .word-grid .word:hover::before {
+    transform: scaleX(1) rotate(-0.6deg) translate3d(0,0,0);
+  }
 }
