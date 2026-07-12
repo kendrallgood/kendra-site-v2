@@ -23,10 +23,10 @@ website_cred: "Sarah Jade"
 website_cred_link: "https://sarahjade.ca"
 # Build settings
 markdown: kramdown
-remote_theme: "mmistakes/minimal-mistakes@4.19.3"
+# remote_theme: "mmistakes/minimal-mistakes@4.19.3" # OLD — replaced below, kept for reference
+theme: minimal-mistakes-jekyll # NEW — vendored via Gemfile instead of fetched live
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
   - jekyll-include-cache
 
 atom_feed:
