@@ -16,7 +16,7 @@
 title: &name KENDRA ALLGOOD
 email: kendraallgood@gmail.com
 description: &description TEXTILE DESIGNER
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://kendrallgood.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 minimal_mistakes_skin: "contrast"
 website_cred: "Sarah Jade"
