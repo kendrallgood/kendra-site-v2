@@ -317,7 +317,7 @@ function simulate( now ) {
         pos = particle.position;
         
         if ( pos.y < floorPosition ) {
-            // pos.y = floorPosition;
+            pos.y = floorPosition;
         } else {
             if (pos.y > ceilingPosition) {
                 // pos.y = ceilingPosition;
@@ -359,7 +359,7 @@ pins = [ 0, cloth.w ]; // classic 2 pins
 pinsFormation.push( pins );
 
 // pins = pinsFormation[ 3 ];
-pins = [ 0, cloth.h, cloth.w ];
+pins = [];
 
 // function togglePins() {
 
