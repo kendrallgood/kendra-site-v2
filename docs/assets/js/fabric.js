@@ -405,7 +405,7 @@ function init() {
     // camera
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
     // camera.position.set( 1000, 50, 1500 );
-    camera.position.set( -100, 0, 2200 );
+    camera.position.set( 0, 0, 2200 );
 
     // camera.position.set( 0, 900, 2000 );
     // x: 201.21656221334072, y: 909.328513842752, z: 1993.845696252871
