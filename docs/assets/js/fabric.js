@@ -441,7 +441,6 @@ function init() {
     var clothMaterial = new THREE.MeshPhongMaterial( {
         map: clothTexture,
         side: THREE.DoubleSide,
-        alphaTest: 0.5,
         transparent: true,
         opacity: 0.7
     } );
