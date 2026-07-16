@@ -37,6 +37,10 @@ var pins = [];
 var windForce = new THREE.Vector3( 0, 0, 0 );
 
 var ballPosition = new THREE.Vector3( 0, - 45, 0 );
+var dragDistance = 0;
+var dragThreshold = 800;
+var hasFallen = false;
+var lastIntersectPoint = null;
 var ballSize = window.innerHeight / 10;
 
 var tmpForce = new THREE.Vector3();
@@ -284,6 +288,14 @@ function simulate( now ) {
         if ( intersects.length > 0 ) {
             sphere.scale.set(ballSize, ballSize, ballSize);
             ballPosition = intersects[ 0 ].point;
+            if ( lastIntersectPoint !== null && ! hasFallen ) {
+                dragDistance += lastIntersectPoint.distanceTo( ballPosition );
+                if ( dragDistance > dragThreshold ) {
+                    hasFallen = true;
+                    pins = [];
+                }
+            }
+            lastIntersectPoint = ballPosition.clone();
             
             for ( particles = cloth.particles, i = 0, il = particles.length; i < il; i ++ ) {
 
@@ -301,6 +313,7 @@ function simulate( now ) {
 
         } else {
             // sphere.scale.set(0, 0, 0);
+            lastIntersectPoint = null;
         }
 
 
@@ -359,7 +372,7 @@ pins = [ 0, cloth.w ]; // classic 2 pins
 pinsFormation.push( pins );
 
 // pins = pinsFormation[ 3 ];
-pins = [];
+pins = [ 0, cloth.h, cloth.w ];
 
 // function togglePins() {
 
