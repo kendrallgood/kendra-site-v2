@@ -591,7 +591,6 @@ body{
 // paints fully opaque on top (z-index:2) until the fabric.js
 // transparency/pointer-events change (commit 2) reveals it.
 // ============================================
-.layout--kendra_home {
   #hero-canvas {
     position: relative;
   }
@@ -649,4 +648,3 @@ pointer-events: none;
   .word-grid .word:hover::before {
     transform: scaleX(1) rotate(-0.6deg) translate3d(0,0,0);
   }
-}
