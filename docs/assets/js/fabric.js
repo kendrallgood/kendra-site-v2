@@ -372,7 +372,7 @@ pins = [ 0, cloth.w ]; // classic 2 pins
 pinsFormation.push( pins );
 
 // pins = pinsFormation[ 3 ];
-pins = [ 0, cloth.h, cloth.w ];
+pins = [ 0, Math.floor( cloth.w / 2 ), cloth.w ];
 
 // function togglePins() {
 
