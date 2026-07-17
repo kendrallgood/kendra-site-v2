@@ -1,4 +1,4 @@
---- --- {% include head.html %} {% include head/custom.html %} {% include_cached skip-links.html %}  {% include_cached masthead.html %}
+--- --- {% include head.html %} {% include head/custom.html %} {% include_cached skip-links.html %}  {% unless page.layout == "kendra_home" %}{% include_cached masthead.html %}{% endunless %}
 {{ content }}
 {% if site.search == true %}
 {% include_cached search/search_form.html %}
