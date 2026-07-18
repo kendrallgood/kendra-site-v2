@@ -660,6 +660,7 @@ pointer-events: none;
 }
 
 .exodus-hero {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -739,4 +740,139 @@ pointer-events: none;
   width: 100%;
   max-width: 1400px;
   filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4));
+}
+
+// Floating scattered elements around the closed book
+.exodus-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.exodus-floater {
+  position: absolute;
+  opacity: 0;
+  transform: scale(1.6) rotate(0deg);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.exodus-scrapbook.is-visible .exodus-floater {
+  opacity: 1;
+}
+
+.exodus-floater--memphis {
+  top: 6%;
+  left: 4%;
+  width: 260px;
+  max-width: 30vw;
+  opacity: 0.5;
+  z-index: 1;
+  transform: rotate(-8deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--memphis {
+  transform: rotate(-8deg) scale(1);
+  transition-delay: 0.05s;
+}
+
+.exodus-floater--wordmark {
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  max-width: 110vw;
+  transform: translate(-50%, -50%) scale(1.6);
+  opacity: 0.06;
+  z-index: 0;
+}
+.exodus-scrapbook.is-visible .exodus-floater--wordmark {
+  transform: translate(-50%, -50%) scale(1);
+  transition-delay: 0s;
+}
+
+.exodus-floater--ink {
+  top: 2%;
+  left: 10%;
+  width: 220px;
+  max-width: 26vw;
+  opacity: 0.35;
+  z-index: 1;
+  transform: rotate(6deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--ink {
+  transform: rotate(6deg) scale(1);
+  transition-delay: 0.15s;
+}
+
+.exodus-floater--sketch {
+  top: 8%;
+  right: 6%;
+  width: 160px;
+  max-width: 20vw;
+  z-index: 1;
+  transform: rotate(-10deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--sketch {
+  transform: rotate(-10deg) scale(1);
+  transition-delay: 0.25s;
+}
+
+.exodus-floater--linewarp {
+  bottom: 8%;
+  left: 6%;
+  width: 200px;
+  max-width: 24vw;
+  opacity: 0.4;
+  z-index: 1;
+  transform: rotate(4deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--linewarp {
+  transform: rotate(4deg) scale(1);
+  transition-delay: 0.35s;
+}
+
+.exodus-floater--splatter {
+  bottom: 4%;
+  right: 8%;
+  width: 220px;
+  max-width: 26vw;
+  opacity: 0.5;
+  z-index: 1;
+  transform: rotate(-6deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--splatter {
+  transform: rotate(-6deg) scale(1);
+  transition-delay: 0.2s;
+}
+
+.exodus-floater--sticker {
+  bottom: 14%;
+  left: 34%;
+  width: 130px;
+  max-width: 16vw;
+  z-index: 6;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+  transform: rotate(-5deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--sticker {
+  transform: rotate(-5deg) scale(1);
+  transition-delay: 0.45s;
+}
+
+.exodus-floater--cutout {
+  bottom: 0;
+  right: 8%;
+  width: 260px;
+  max-width: 30vw;
+  z-index: 6;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  transform: rotate(5deg) scale(1.6);
+}
+.exodus-scrapbook.is-visible .exodus-floater--cutout {
+  transform: rotate(5deg) scale(1);
+  transition-delay: 0.3s;
+}
+
+.exodus-hero__book {
+  position: relative;
+  z-index: 5;
 }

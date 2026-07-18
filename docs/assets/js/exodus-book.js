@@ -4,7 +4,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var hero = document.getElementById('exodus-hero');
   var bookWrap = document.getElementById('exodus-book-wrap');
   var flipEl = document.getElementById('exodus-flipbook');
+  var scrapbook = document.querySelector('.exodus-scrapbook');
   var pageFlip = null;
+
+  if (scrapbook && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          scrapbook.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(scrapbook);
+  } else if (scrapbook) {
+    scrapbook.classList.add('is-visible');
+  }
 
   openBtn.addEventListener('click', function () {
     hero.hidden = true;
