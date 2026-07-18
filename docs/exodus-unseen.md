@@ -1,5 +1,5 @@
 ---
-layout: kendra_project
+layout: kendra_project_exodus
 title: Exodus Unseen
 permalink: /exodus-unseen/
 project_description_text_color: white
