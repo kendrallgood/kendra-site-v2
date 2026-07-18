@@ -12,16 +12,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!pageFlip) {
       pageFlip = new St.PageFlip(flipEl, {
-        width: 550,
-        height: 733,
+        width: 638,
+        height: 825,
         size: 'stretch',
         minWidth: 315,
-        maxWidth: 1000,
-        minHeight: 420,
-        maxHeight: 1350,
+        maxWidth: 1275,
+        minHeight: 407,
+        maxHeight: 1650,
         maxShadowOpacity: 0.5,
         showCover: true,
-        mobileScrollSupport: false
+        mobileScrollSupport: false,
+        usePortrait: false
       });
       pageFlip.loadFromImages(exodusPageUrls);
     }

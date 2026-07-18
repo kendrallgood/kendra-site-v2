@@ -4,14 +4,6 @@ layout: kendra_default_no_footer
 <div class="exodus-scrapbook">
   <section class="exodus-hero" id="exodus-hero">
     <button class="exodus-hero__book" type="button" aria-label="Open Exodus Unseen" id="exodus-open-btn">
-      <img class="exodus-hero__cover" src="{{ '/assets/images/projects/exodus/scrapbook/cover.webp' |
-cat > ~/kendra-site/docs/_layouts/kendra_project_exodus.html << 'EOF'
----
-layout: kendra_default_no_footer
----
-<div class="exodus-scrapbook">
-  <section class="exodus-hero" id="exodus-hero">
-    <button class="exodus-hero__book" type="button" aria-label="Open Exodus Unseen" id="exodus-open-btn">
       <img class="exodus-hero__cover" src="{{ '/assets/images/projects/exodus/scrapbook/cover.webp' | relative_url }}" alt="Exodus Unseen — closed book cover">
     </button>
     <p class="exodus-hero__hint">click to open</p>
@@ -27,9 +19,10 @@ layout: kendra_default_no_footer
 <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <script>
   var exodusPageUrls = [];
-  for (var i = 1; i <= 17; i++) {
-    var num = i < 10 ? '0' + i : i;
-    exodusPageUrls.push('{{ "/assets/images/projects/exodus/book-pages/page-" | relative_url }}' + num + '.jpg');
+  var exodusPagePrefix = '{{ "/assets/images/projects/exodus/book-pages-split/page-" | relative_url }}';
+  for (var i = 1; i <= 32; i++) {
+    var num = i < 10 ? '00' + i : (i < 100 ? '0' + i : i);
+    exodusPageUrls.push(exodusPagePrefix + num + '.jpg');
   }
 </script>
 <script src="{{ '/assets/js/exodus-book.js' | relative_url }}"></script>
