@@ -876,3 +876,22 @@ pointer-events: none;
   position: relative;
   z-index: 5;
 }
+
+// Hover wiggle for floating elements
+.exodus-floater {
+  pointer-events: auto;
+  cursor: default;
+}
+
+.exodus-floater:hover {
+  animation: exodus-floater-wiggle 0.5s ease-in-out;
+  z-index: 20;
+}
+
+@keyframes exodus-floater-wiggle {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.12) rotate(-5deg); }
+  50% { transform: scale(1.12) rotate(5deg); }
+  75% { transform: scale(1.1) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
