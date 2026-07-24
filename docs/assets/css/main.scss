@@ -708,6 +708,7 @@ pointer-events: none;
 }
 
 .exodus-book-wrap {
+  overflow-x: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -740,7 +741,8 @@ pointer-events: none;
 
 #exodus-flipbook {
   width: 100%;
-  max-width: 1400px;
+  max-width: 900px;
+  margin: 0 auto;
   filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4));
 }
 
