@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!pageFlip) {
       pageFlip = new St.PageFlip(flipEl, {
-        width: 638,
+        width: 319,
         height: 825,
         size: 'stretch',
-        minWidth: 315,
-        maxWidth: 900,
+        minWidth: 158,
+        maxWidth: 450,
         minHeight: 407,
         maxHeight: 1163,
         maxShadowOpacity: 0.5,
