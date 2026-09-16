@@ -27,17 +27,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!pageFlip) {
       pageFlip = new St.PageFlip(flipEl, {
-        width: 319,
+        width: 637,
         height: 825,
         size: 'stretch',
-        minWidth: 158,
-        maxWidth: 450,
-        minHeight: 407,
-        maxHeight: 1163,
+        minWidth: 220,
+        maxWidth: 637,
+        minHeight: 285,
+        maxHeight: 825,
         maxShadowOpacity: 0.5,
         showCover: true,
         mobileScrollSupport: false,
-        usePortrait: false
+        usePortrait: true
       });
       pageFlip.loadFromImages(exodusPageUrls);
     }
