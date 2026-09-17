@@ -1,0 +1,19 @@
+quests:
+  - title: Loom Idea
+    color: "#1D9E75"
+    description: An early sketch for a new hand-loom weave structure, not yet fabricated.
+  - title: Sneaker Sole
+    color: "#D85A30"
+    description: Foam-and-knit sole concept exploring breathable midsole texture.
+  - title: Zine Layout
+    color: "#7F77DD"
+    description: Loose spread layout for a personal zine about material research.
+  - title: Dye Test
+    color: "#D4537E"
+    description: Natural dye swatches on cotton and wool, comparing colorfastness.
+  - title: Foam Scrap
+    color: "#BA7517"
+    description: Leftover EVA foam offcuts repurposed into a small material study.
+  - title: Pattern Draft
+    color: "#639922"
+    description: Unfinished repeat pattern, exploring a checkerboard motif variation.

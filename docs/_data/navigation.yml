@@ -5,6 +5,9 @@ main:
   - title: "Projects"
     url: /projects/
     nav-class-name: "kendra-nav-projects"
+  - title: "Side Quests"
+    url: /side-quests/
+    nav-class-name: "kendra-nav-side-quests"
   - title: "Resume"
     url: /resume/
     nav-class-name: "kendra-nav-resume"

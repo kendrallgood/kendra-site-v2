@@ -1,0 +1,192 @@
+---
+layout: kendra_default
+---
+<div id="quest-source" hidden>
+  {% for quest in site.data.side_quests.quests %}
+  <a class="quest-item-source"
+     data-title="{{ quest.title }}"
+     data-color="{{ quest.color }}"
+     data-desc="{{ quest.description }}"
+     {% if quest.project_url %}href="{{ site.baseurl }}{{ quest.project_url }}"{% endif %}></a>
+  {% endfor %}
+</div>
+
+<p class="quest-heading">Try clicking an icon to pick my brain.</p>
+<div class="quest-field" id="quest-field"></div>
+
+<script>
+  (function () {
+    var field = document.getElementById('quest-field');
+    var sourceEls = document.querySelectorAll('#quest-source .quest-item-source');
+    var items = Array.prototype.map.call(sourceEls, function (el) {
+      return {
+        name: el.dataset.title,
+        hex: el.dataset.color,
+        desc: el.dataset.desc,
+        url: el.getAttribute('href')
+      };
+    });
+
+    if (items.length === 0) return;
+
+    var w = field.clientWidth;
+    var h = 360;
+    field.style.height = h + 'px';
+    var r = 34;
+
+    var balls = items.map(function (it) {
+      return {
+        x: r + Math.random() * (w - 2 * r),
+        y: r + Math.random() * (h - 2 * r),
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        caught: false,
+        el: null,
+        popup: null,
+        data: it
+      };
+    });
+
+    function closeAllPopups() {
+      balls.forEach(function (b) {
+        if (b.popup) { b.popup.remove(); b.popup = null; }
+      });
+    }
+
+    balls.forEach(function (b) {
+      var el = document.createElement('div');
+      el.className = 'quest-icon';
+      el.style.width = (r * 2) + 'px';
+      el.style.height = (r * 2) + 'px';
+      el.style.background = b.data.hex + '22';
+      el.style.borderColor = b.data.hex;
+      el.style.color = b.data.hex;
+      el.textContent = b.data.name;
+
+      el.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (b.caught) {
+          if (b.popup) { b.popup.remove(); b.popup = null; return; }
+        } else {
+          b.caught = true;
+          b.vx = 0;
+          b.vy = 0;
+          el.style.background = b.data.hex;
+          el.style.color = '#fff';
+          el.classList.add('quest-caught');
+          el.addEventListener('animationend', function () {
+            el.classList.remove('quest-caught');
+          }, { once: true });
+        }
+
+        closeAllPopups();
+
+        var popup = document.createElement('div');
+        popup.className = 'quest-popup';
+        var popupWidth = 170;
+        var px = b.x + r + 10;
+        if (px + popupWidth > w) px = b.x - r - popupWidth - 10;
+        var py = Math.max(6, Math.min(b.y - 20, h - 100));
+        popup.style.left = px + 'px';
+        popup.style.top = py + 'px';
+        popup.style.width = popupWidth + 'px';
+
+        var linkHtml = b.data.url
+          ? '<span class="quest-popup__link">View project &rarr;</span>'
+          : '';
+        popup.innerHTML =
+          '<p class="quest-popup__title">' + b.data.name + '</p>' +
+          '<p class="quest-popup__desc">' + b.data.desc + '</p>' +
+          linkHtml;
+
+        if (b.data.url) {
+          popup.querySelector('.quest-popup__link').addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            window.location.href = b.data.url;
+          });
+        }
+
+        field.appendChild(popup);
+        b.popup = popup;
+      });
+
+      field.appendChild(el);
+      b.el = el;
+    });
+
+    var mouseX = -1000, mouseY = -1000;
+    field.addEventListener('mousemove', function (e) {
+      var rect = field.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+    field.addEventListener('mouseleave', function () {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+
+    function step() {
+      balls.forEach(function (b) {
+        if (b.caught) return;
+
+        var dx = b.x - mouseX;
+        var dy = b.y - mouseY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 55 && dist > 0.1) {
+          var force = (55 - dist) / 55 * 0.22;
+          b.vx += (dx / dist) * force;
+          b.vy += (dy / dist) * force;
+        }
+
+        b.x += b.vx;
+        b.y += b.vy;
+
+        var speed = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+        var maxSpeed = 1.9;
+        if (speed > maxSpeed) {
+          b.vx = (b.vx / speed) * maxSpeed;
+          b.vy = (b.vy / speed) * maxSpeed;
+        }
+        b.vx *= 0.965;
+        b.vy *= 0.965;
+
+        if (b.x < r) { b.x = r; b.vx = Math.abs(b.vx) * 0.8; }
+        if (b.x > w - r) { b.x = w - r; b.vx = -Math.abs(b.vx) * 0.8; }
+        if (b.y < r) { b.y = r; b.vy = Math.abs(b.vy) * 0.8; }
+        if (b.y > h - r) { b.y = h - r; b.vy = -Math.abs(b.vy) * 0.8; }
+      });
+
+      for (var i = 0; i < balls.length; i++) {
+        for (var j = i + 1; j < balls.length; j++) {
+          var a = balls[i], c = balls[j];
+          var dx = c.x - a.x, dy = c.y - a.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          var minDist = r * 2;
+          if (dist < minDist && dist > 0.1) {
+            var overlap = (minDist - dist) / 2;
+            var nx = dx / dist, ny = dy / dist;
+            if (!a.caught) { a.x -= nx * overlap; a.y -= ny * overlap; }
+            if (!c.caught) { c.x += nx * overlap; c.y += ny * overlap; }
+            var avx = a.vx, avy = a.vy;
+            if (!a.caught && !c.caught) {
+              a.vx = c.vx * 0.8; a.vy = c.vy * 0.8;
+              c.vx = avx * 0.8; c.vy = avy * 0.8;
+            }
+          }
+        }
+      }
+
+      balls.forEach(function (b) {
+        var jitter = 0.02;
+        b.vx += (Math.random() - 0.5) * jitter;
+        b.vy += (Math.random() - 0.5) * jitter;
+        b.el.style.left = (b.x - r) + 'px';
+        b.el.style.top = (b.y - r) + 'px';
+      });
+
+      requestAnimationFrame(step);
+    }
+
+    step();
+  })();
+</script>
