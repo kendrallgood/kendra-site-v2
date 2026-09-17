@@ -2,6 +2,7 @@ quests:
   - title: Loom Idea
     color: "#1D9E75"
     description: An early sketch for a new hand-loom weave structure, not yet fabricated.
+    project_url: "/loom-idea/"
   - title: Sneaker Sole
     color: "#D85A30"
     description: Foam-and-knit sole concept exploring breathable midsole texture.
