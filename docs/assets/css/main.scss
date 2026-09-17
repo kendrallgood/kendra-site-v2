@@ -1002,3 +1002,11 @@ pointer-events: none;
   color: #888;
   margin: 2px 0 0;
 }
+
+.checker-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  opacity: 0.5;
+}

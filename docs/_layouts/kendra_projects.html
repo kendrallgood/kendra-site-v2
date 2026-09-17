@@ -88,6 +88,14 @@ layout: kendra_default
         grid.appendChild(tile);
       }
 
+      function placePlaceholder(col, row) {
+        var ph = document.createElement('div');
+        ph.className = 'checker-placeholder';
+        ph.style.gridColumn = String(col + 1);
+        ph.style.gridRow = String(row + 1);
+        grid.appendChild(ph);
+      }
+
       var tIdx = 0;
       var fIdx = 0;
       var placed = 0;
@@ -96,14 +104,20 @@ layout: kendra_default
       while (placed < relevantCount) {
         for (var col = 0; col < cols; col++) {
           var phase = (row + col) % 2;
+          var didPlace = false;
           if ((cat === 'all' || cat === 'textile') && phase === 0 && tIdx < textileItems.length) {
             placeTile(textileItems[tIdx], col, row);
             tIdx++;
             placed++;
+            didPlace = true;
           } else if ((cat === 'all' || cat === 'footwear') && phase === 1 && fIdx < footwearItems.length) {
             placeTile(footwearItems[fIdx], col, row);
             fIdx++;
             placed++;
+            didPlace = true;
+          }
+          if (!didPlace) {
+            placePlaceholder(col, row);
           }
         }
         row++;
