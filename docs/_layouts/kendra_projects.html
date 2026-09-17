@@ -2,24 +2,112 @@
 layout: kendra_default
 ---
 {% if site.data.projects %}
-    <div class="projects">
+    <div id="projects-source" hidden>
         {% for project in site.data.projects.projects %}
-            <div class="hover-container{% if project.class %} {{ project.class }}{% endif %}">
-                <div class="content">
-                    <!-- REMOTE VS LOCAL -->
-                    <a href="{{ site.baseurl }}{{ project.project_url }}">
-                    <!-- <a href="{{ project.project_url }}"> -->
-                        <div class="image-overlay"></div>
-                        <!-- REMOTE VS LOCAL -->
-                        <img class="content-image" src="{{ site.baseurl }}{{ project.spotlight_image_url }}">
-                        <!-- <img class="content-image" src="{{ project.spotlight_image_url }}"> -->
-                        <div class="content-details fadeIn-bottom">
-                            <h3 class="content-title">{{ project.title }}</h3>
-                            <p class="content-text">({{ project.year }})</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <a class="project-source"
+           data-category="{{ project.category | default: 'textile' }}"
+           data-title="{{ project.title }}"
+           data-year="{{ project.year }}"
+           data-image="{{ site.baseurl }}{{ project.spotlight_image_url }}"
+           href="{{ site.baseurl }}{{ project.project_url }}"></a>
         {% endfor %}
     </div>
+
+    <div class="projects-filter" id="projects-filter">
+        <button class="projects-filter__pill is-active" data-cat="all" type="button">All work</button>
+        <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
+        <button class="projects-filter__pill" data-cat="footwear" type="button">Footwear &amp; material design</button>
+    </div>
+
+    <div class="projects-checkerboard" id="projects-grid"></div>
+
+    <p class="projects-empty" id="projects-empty" hidden>More footwear &amp; material design work coming soon.</p>
 {% endif %}
+
+<script>
+  (function () {
+    var sourceEls = document.querySelectorAll('#projects-source .project-source');
+    var items = Array.prototype.map.call(sourceEls, function (el) {
+      return {
+        category: el.dataset.category,
+        title: el.dataset.title,
+        year: el.dataset.year,
+        image: el.dataset.image,
+        url: el.getAttribute('href')
+      };
+    });
+
+    var grid = document.getElementById('projects-grid');
+    var empty = document.getElementById('projects-empty');
+    var pills = document.querySelectorAll('.projects-filter__pill');
+    var currentCat = 'all';
+
+    function getCols() {
+      var w = window.innerWidth;
+      if (w < 600) return 2;
+      if (w < 900) return 3;
+      return 4;
+    }
+
+    function render(cat) {
+      currentCat = cat;
+      var filtered = items.filter(function (p) {
+        return cat === 'all' || p.category === cat;
+      });
+
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        empty.hidden = false;
+        return;
+      }
+      empty.hidden = true;
+
+      var cols = getCols();
+      grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+
+      var idx = 0;
+      var row = 0;
+      while (idx < filtered.length) {
+        for (var col = 0; col < cols && idx < filtered.length; col++) {
+          var filled = (row + col) % 2 === 0;
+          if (filled) {
+            var p = filtered[idx];
+            var tile = document.createElement('a');
+            tile.className = 'checker-tile';
+            tile.href = p.url;
+            tile.style.gridColumn = String(col + 1);
+            tile.style.gridRow = String(row + 1);
+            tile.innerHTML =
+              '<div class="checker-tile__img-wrap">' +
+                '<img class="checker-tile__img" src="' + p.image + '" loading="lazy" alt="' + p.title + '">' +
+              '</div>' +
+              '<p class="checker-tile__title">' + p.title + '</p>' +
+              '<p class="checker-tile__year">(' + p.year + ')</p>';
+            grid.appendChild(tile);
+            idx++;
+          }
+        }
+        row++;
+      }
+    }
+
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        pills.forEach(function (p) { p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        render(pill.dataset.cat);
+      });
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        render(currentCat);
+      }, 150);
+    });
+
+    render('all');
+  })();
+</script>

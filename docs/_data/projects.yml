@@ -1,5 +1,6 @@
 projects:
   - title: Kaleidoscope
+    category: textile
     project_url: "/kaleidoscope"
     year: 2020
     download_link: "/assets/images/projects/kaleidoscope/Kaleido Development.pdf"
@@ -35,6 +36,7 @@ projects:
       - url: "/assets/images/projects/kaleidoscope/kassia knit file close.PNG"
         description: Close up of Kaleidoscope knit file.
   - title: Exodus Unseen
+    category: textile
     project_url: "/exodus-unseen"
     year: 2018
     class: hero
@@ -61,6 +63,7 @@ projects:
       - url: "/assets/images/projects/exodus/fan.jpg"
       - url: "/assets/images/projects/exodus/lean.jpg"
   - title: Open Line
+    category: textile
     project_url: "/open-line"
     year: 2020
     download_link: "/assets/images/projects/open-line/GTA BOOK (1).pdf"
@@ -88,6 +91,7 @@ projects:
       - url: "/assets/images/projects/open-line/5 plexus.jpg"
         description: Plexus is a knit construction I aided in developing, working closely with our Knit Technician. The result was a breathable mesh looking fabric created by systematically tucking yarn on the knit machine that correlated with the design files.
   - title: One Piece Wonder
+    category: textile
     year: 2017
     project_url: "/one-piece-wonder"
     spotlight_image_url: "/assets/images/projects/one-piece/4b81d035-f71f-471e-bf86-772445532b8d_rw_1920.jpg"
@@ -105,6 +109,7 @@ projects:
       - url: "/assets/images/projects/one-piece/suicide-squad-margot-robbie-harley-quinn.jpg"
         description: Harley Quinn from the 2016 film Suicide Squad.
   - title: Mellow Yellow
+    category: textile
     year: 2017
     project_url: "/mellow-yellow"
     description: Whole garment knitted on Shima Seiki Mach 2x 8 gauge machine using the Apex3 software. Yarn; 3-Ply, 8/1 MT 100% COTTON, 20/1 100% COTTON, 18/1 100% COTTON, Dyed using direct dyes. Dyed twice for more rich golden color
@@ -118,6 +123,7 @@ projects:
       - url: "/assets/images/projects/mellow/599292ae-09df-4f5c-98d2-8a2cf0dea6b8_rw_3840.JPG"
       - url: "/assets/images/projects/mellow/IMG_0918.JPG"
   - title: Cyclery
+    category: textile
     project_url: "/cyclery"
     year: 2016
     spotlight_image_url: "/assets/images/projects/cyclery/small four kendras copy.png"
@@ -129,6 +135,7 @@ projects:
       - url: "/assets/images/projects/cyclery/bike K N I T2 (1).png"
       - url: "/assets/images/projects/cyclery/Kendra-Bike-Hoodies.gif"
   - title: Gestural Symmetry
+    category: textile
     year: 2015
     project_url: "/gestural-symmetry"
     spotlight_image_url: "/assets/images/projects/gestural/9616926d2b65f62c5982423c_rw_1920.jpg"
@@ -145,6 +152,7 @@ projects:
       - url: "/assets/images/projects/gestural/black side of skirt.jpg"
       - url: "/assets/images/projects/gestural/white side of skirt.jpg"
   - title: Encaustic Experimentation
+    category: textile
     year: 2016
     project_url: "/encaustic-experimentation"
     class: "encaustic-experimentation"
@@ -176,6 +184,7 @@ projects:
   #       description: The package of yarn is transferred onto a cone for easier use while knitting.
   #       type: video
   - title: Journey Lines
+    category: textile
     project_url: "/journey-lines"
     year: 2017
     spotlight_image_url: "/assets/images/projects/journey/26f6481cdeffd65419ab55ae_rw_1200.jpg"

@@ -908,3 +908,97 @@ pointer-events: none;
   75% { transform: scale(1.1) rotate(-3deg); }
   100% { transform: scale(1) rotate(0deg); }
 }
+
+.projects-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1.5em 1em 0.5em;
+}
+
+.projects-filter__pill {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  padding: 6px 16px;
+  cursor: pointer;
+  color: #444;
+  transition: all 0.2s ease-in-out;
+}
+
+.projects-filter__pill:hover {
+  border-color: #1a1a1a;
+}
+
+.projects-filter__pill.is-active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+.projects-empty {
+  text-align: center;
+  color: #888;
+  padding: 3em 1em;
+  font-style: italic;
+}
+
+.projects-checkerboard {
+  display: grid;
+  gap: 32px 20px;
+  padding: 2em;
+}
+
+.checker-tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+}
+
+.checker-tile__img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #eee;
+}
+
+.checker-tile__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center center;
+}
+
+.checker-tile:hover .checker-tile__img {
+  animation: checker-tile-wiggle 0.9s ease-in-out;
+  z-index: 5;
+  position: relative;
+}
+
+@keyframes checker-tile-wiggle {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.08) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.checker-tile__title {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 8px 0 0;
+  color: #1a1a1a;
+}
+
+.checker-tile__year {
+  font-size: 11px;
+  color: #888;
+  margin: 2px 0 0;
+}
