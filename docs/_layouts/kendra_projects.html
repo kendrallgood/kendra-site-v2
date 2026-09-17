@@ -51,41 +51,59 @@ layout: kendra_default
 
     function render(cat) {
       currentCat = cat;
-      var filtered = items.filter(function (p) {
-        return cat === 'all' || p.category === cat;
-      });
-
+      var cols = getCols();
+      grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
       grid.innerHTML = '';
 
-      if (filtered.length === 0) {
+      var textileItems = items.filter(function (p) { return p.category === 'textile'; });
+      var footwearItems = items.filter(function (p) { return p.category === 'footwear'; });
+
+      var relevantCount;
+      if (cat === 'all') {
+        relevantCount = textileItems.length + footwearItems.length;
+      } else if (cat === 'textile') {
+        relevantCount = textileItems.length;
+      } else {
+        relevantCount = footwearItems.length;
+      }
+
+      if (relevantCount === 0) {
         empty.hidden = false;
         return;
       }
       empty.hidden = true;
 
-      var cols = getCols();
-      grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+      function placeTile(p, col, row) {
+        var tile = document.createElement('a');
+        tile.className = 'checker-tile';
+        tile.href = p.url;
+        tile.style.gridColumn = String(col + 1);
+        tile.style.gridRow = String(row + 1);
+        tile.innerHTML =
+          '<div class="checker-tile__img-wrap">' +
+            '<img class="checker-tile__img" src="' + p.image + '" loading="lazy" alt="' + p.title + '">' +
+          '</div>' +
+          '<p class="checker-tile__title">' + p.title + '</p>' +
+          '<p class="checker-tile__year">(' + p.year + ')</p>';
+        grid.appendChild(tile);
+      }
 
-      var idx = 0;
+      var tIdx = 0;
+      var fIdx = 0;
+      var placed = 0;
       var row = 0;
-      while (idx < filtered.length) {
-        for (var col = 0; col < cols && idx < filtered.length; col++) {
-          var filled = (row + col) % 2 === 0;
-          if (filled) {
-            var p = filtered[idx];
-            var tile = document.createElement('a');
-            tile.className = 'checker-tile';
-            tile.href = p.url;
-            tile.style.gridColumn = String(col + 1);
-            tile.style.gridRow = String(row + 1);
-            tile.innerHTML =
-              '<div class="checker-tile__img-wrap">' +
-                '<img class="checker-tile__img" src="' + p.image + '" loading="lazy" alt="' + p.title + '">' +
-              '</div>' +
-              '<p class="checker-tile__title">' + p.title + '</p>' +
-              '<p class="checker-tile__year">(' + p.year + ')</p>';
-            grid.appendChild(tile);
-            idx++;
+
+      while (placed < relevantCount) {
+        for (var col = 0; col < cols; col++) {
+          var phase = (row + col) % 2;
+          if ((cat === 'all' || cat === 'textile') && phase === 0 && tIdx < textileItems.length) {
+            placeTile(textileItems[tIdx], col, row);
+            tIdx++;
+            placed++;
+          } else if ((cat === 'all' || cat === 'footwear') && phase === 1 && fIdx < footwearItems.length) {
+            placeTile(footwearItems[fIdx], col, row);
+            fIdx++;
+            placed++;
           }
         }
         row++;
