@@ -58,16 +58,7 @@ layout: kendra_default
       var textileItems = items.filter(function (p) { return p.category === 'textile'; });
       var footwearItems = items.filter(function (p) { return p.category === 'footwear'; });
 
-      var relevantCount;
-      if (cat === 'all') {
-        relevantCount = textileItems.length + footwearItems.length;
-      } else if (cat === 'textile') {
-        relevantCount = textileItems.length;
-      } else {
-        relevantCount = footwearItems.length;
-      }
-
-      if (relevantCount === 0) {
+      if (textileItems.length === 0 && footwearItems.length === 0) {
         empty.hidden = false;
         return;
       }
@@ -96,31 +87,33 @@ layout: kendra_default
         grid.appendChild(ph);
       }
 
+      // Board shape stays consistent across all three tabs: sized to
+      // whichever category has more items, so an empty category still
+      // shows a full board of placeholders rather than nothing.
+      var targetRows = Math.max(
+        Math.ceil((textileItems.length * 2) / cols),
+        Math.ceil((footwearItems.length * 2) / cols),
+        1
+      );
+
       var tIdx = 0;
       var fIdx = 0;
-      var placed = 0;
-      var row = 0;
 
-      while (placed < relevantCount) {
+      for (var row = 0; row < targetRows; row++) {
         for (var col = 0; col < cols; col++) {
           var phase = (row + col) % 2;
-          var didPlace = false;
-          if ((cat === 'all' || cat === 'textile') && phase === 0 && tIdx < textileItems.length) {
+          var showTextile = (cat === 'all' || cat === 'textile') && phase === 0 && tIdx < textileItems.length;
+          var showFootwear = (cat === 'all' || cat === 'footwear') && phase === 1 && fIdx < footwearItems.length;
+          if (showTextile) {
             placeTile(textileItems[tIdx], col, row);
             tIdx++;
-            placed++;
-            didPlace = true;
-          } else if ((cat === 'all' || cat === 'footwear') && phase === 1 && fIdx < footwearItems.length) {
+          } else if (showFootwear) {
             placeTile(footwearItems[fIdx], col, row);
             fIdx++;
-            placed++;
-            didPlace = true;
-          }
-          if (!didPlace) {
+          } else {
             placePlaceholder(col, row);
           }
         }
-        row++;
       }
     }
 
