@@ -1,9 +1,68 @@
 ---
 layout: kendra_default
 ---
-<div class="resume-container">
-	<a class="dl-link" href="{{ site.baseurl }}{{ page.resume_url }}" download>
-	  {{ page.download_button_text }}
-	</a>
-	 <embed class="resume-object" src="{{ site.baseurl }}{{ page.resume_url }}#view=FitH">
+<div class="resume-page">
+  <div class="resume-actions">
+    <a class="resume-download-btn" href="{{ site.baseurl }}{{ page.resume_url }}" download>
+      {{ page.download_button_text }}
+    </a>
+  </div>
+  <div class="resume-preview" id="resume-preview">
+    <p class="resume-loading">Loading preview&hellip;</p>
+  </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+  (function () {
+    var url = "{{ site.baseurl }}{{ page.resume_url }}";
+    var container = document.getElementById('resume-preview');
+    var currentPdf = null;
+    var resizeTimer = null;
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+    function renderAllPages(pdf) {
+      container.innerHTML = '';
+      var containerWidth = container.clientWidth;
+
+      var renderPage = function (pageNum) {
+        pdf.getPage(pageNum).then(function (page) {
+          var unscaledViewport = page.getViewport({ scale: 1 });
+          var scale = containerWidth / unscaledViewport.width;
+          var viewport = page.getViewport({ scale: scale });
+
+          var canvas = document.createElement('canvas');
+          canvas.className = 'resume-page-canvas';
+          var context = canvas.getContext('2d');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          container.appendChild(canvas);
+          page.render({ canvasContext: context, viewport: viewport });
+
+          if (pageNum < pdf.numPages) {
+            renderPage(pageNum + 1);
+          }
+        });
+      };
+
+      renderPage(1);
+    }
+
+    pdfjsLib.getDocument(url).promise.then(function (pdf) {
+      currentPdf = pdf;
+      renderAllPages(pdf);
+    }).catch(function () {
+      container.innerHTML = '<p class="resume-error">Preview unavailable right now &mdash; please use the download button above.</p>';
+    });
+
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (currentPdf) renderAllPages(currentPdf);
+      }, 200);
+    });
+  })();
+</script>

@@ -1096,3 +1096,55 @@ pointer-events: none;
 .quest-popup__link:hover {
   text-decoration: underline;
 }
+
+.resume-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em 1.5em 3em;
+}
+
+.resume-actions {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.resume-download-btn {
+  display: inline-block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 999px;
+  padding: 12px 28px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.resume-download-btn:hover {
+  opacity: 0.8;
+  color: #fff;
+}
+
+.resume-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.resume-page-canvas {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.resume-loading,
+.resume-error {
+  text-align: center;
+  color: #888;
+  font-family: 'Raleway', sans-serif;
+  font-style: italic;
+}
