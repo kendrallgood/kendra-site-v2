@@ -25,12 +25,12 @@ layout: kendra_default
 
     function renderAllPages(pdf) {
       container.innerHTML = '';
-      var containerWidth = container.clientWidth;
+      var targetWidth = Math.min(900, window.innerWidth - 48);
 
       var renderPage = function (pageNum) {
         pdf.getPage(pageNum).then(function (page) {
           var unscaledViewport = page.getViewport({ scale: 1 });
-          var scale = containerWidth / unscaledViewport.width;
+          var scale = targetWidth / unscaledViewport.width;
           var viewport = page.getViewport({ scale: scale });
 
           var canvas = document.createElement('canvas');
