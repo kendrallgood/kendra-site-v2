@@ -401,14 +401,14 @@ h3 {
 }
 
 .about-page {
-  max-width: 1300px;
+  max-width: 1900px;
   margin: 0 auto;
   padding: 2em 1.5em 3em;
 }
 
 .about-scrapbook {
   position: relative;
-  min-height: 1300px;
+  min-height: 2650px;
 }
 
 .about-floater {
@@ -427,44 +427,43 @@ h3 {
 
 .about-floater--hero {
   top: 0;
-  left: 3%;
-  width: 42%;
+  left: 2%;
+  width: 58%;
   aspect-ratio: 531 / 899;
   transform: rotate(-4deg);
   z-index: 3;
 }
 
 .about-floater--candid {
-  top: 40px;
-  left: 50%;
-  width: 40%;
+  top: 50px;
+  left: 48%;
+  width: 55%;
   aspect-ratio: 656 / 900;
   transform: rotate(5deg);
   z-index: 2;
 }
-
 .about-floater--swatch1 {
-  top: 960px;
+  top: 1900px;
   left: 4%;
-  width: 24%;
+  width: 34%;
   aspect-ratio: 1 / 1;
   transform: rotate(8deg);
   z-index: 4;
 }
 
 .about-floater--swatch2 {
-  top: 1000px;
+  top: 1950px;
   left: 35%;
-  width: 22%;
+  width: 32%;
   aspect-ratio: 1 / 1;
   transform: rotate(-7deg);
   z-index: 4;
 }
 
 .about-floater--swatch3 {
-  top: 955px;
-  left: 65%;
-  width: 24%;
+  top: 1895px;
+  left: 66%;
+  width: 34%;
   aspect-ratio: 1 / 1;
   transform: rotate(4deg);
   z-index: 4;
