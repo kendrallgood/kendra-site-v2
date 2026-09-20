@@ -401,9 +401,11 @@ h3 {
 }
 
 .about-page {
+  width: 100%;
   max-width: 1900px;
   margin: 0 auto;
   padding: 2em 1.5em 3em;
+  box-sizing: border-box;
 }
 
 .about-scrapbook {
