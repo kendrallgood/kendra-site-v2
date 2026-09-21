@@ -42,13 +42,13 @@ layout: kendra_default
     var pills = document.querySelectorAll('.projects-filter__pill');
     var currentCat = 'all';
     var GAP = 8;
+    var MAX_TILE = 300;
 
     function getCols() {
       var w = window.innerWidth;
-      if (w < 480) return 3;
+      if (w < 480) return 2;
       if (w < 768) return 4;
-      if (w < 1100) return 6;
-      return 8;
+      return 6;
     }
 
     function render(cat) {
@@ -56,7 +56,10 @@ layout: kendra_default
 
       // Reset any sizing from a previous render so width measurement below
       // reflects the natural full-width container, not a leftover fixed size.
+      // The auto margin must go too: on a flex-column body it stops the grid
+      // from stretching, so it would measure its shrunken previous width.
       grid.style.width = '';
+      grid.style.margin = '';
       grid.style.gridTemplateColumns = '';
       grid.style.gridAutoRows = '';
       grid.style.gap = '';
@@ -82,20 +85,18 @@ layout: kendra_default
         1
       );
 
-      // Fit the whole board within the visible viewport (no scrolling),
-      // then shrink another 25% for breathing room around tighter tiles.
-      var availableWidth = grid.clientWidth;
-      var gridTop = grid.getBoundingClientRect().top;
-      var availableHeight = window.innerHeight - gridTop - 24;
-
+      // Size tiles to fill the available width, capped so they don't get
+      // oversized on very wide screens. The page scrolls if needed.
+      var gridStyle = getComputedStyle(grid);
+      var padX = parseFloat(gridStyle.paddingLeft) + parseFloat(gridStyle.paddingRight);
+      var availableWidth = grid.clientWidth - padX;
       var widthFit = (availableWidth - (cols - 1) * GAP) / cols;
-      var heightFit = (availableHeight - (targetRows - 1) * GAP) / targetRows;
-      var tileSize = Math.max(40, Math.min(widthFit, heightFit) * 0.75);
+      var tileSize = Math.max(80, Math.min(widthFit, MAX_TILE));
 
       grid.style.gridTemplateColumns = 'repeat(' + cols + ', ' + tileSize + 'px)';
       grid.style.gridAutoRows = tileSize + 'px';
       grid.style.gap = GAP + 'px';
-      grid.style.width = (cols * tileSize + (cols - 1) * GAP) + 'px';
+      grid.style.width = (cols * tileSize + (cols - 1) * GAP + padX) + 'px';
       grid.style.margin = '0 auto';
 
       function placeTile(p, col, row) {
