@@ -153,8 +153,9 @@ projects:
       - url: "/assets/images/projects/gestural/white side of skirt.jpg"
   - title: Encaustic Experimentation
     category: textile
+    hidden: true # lives in Side Quests, not the projects grid
     year: 2016
-    project_url: "/encaustic-experimentation"
+    project_url: "/side-quests/encaustic-experimentation/"
     class: "encaustic-experimentation"
     description: Candle wax, pen and ink  
     spotlight_image_url: "/assets/images/projects/encaustic/2895151a321545f80b7ded39_rw_1920.jpg"

@@ -20,3 +20,7 @@ quests:
   - title: Pattern Draft
     color: "#639922"
     description: Unfinished repeat pattern, exploring a checkerboard motif variation.
+  - title: Encaustic
+    color: "#378ADD"
+    description: Candle wax, pen and ink experiments from 2016.
+    project_url: "/side-quests/encaustic-experimentation/"

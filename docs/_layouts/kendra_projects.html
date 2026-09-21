@@ -4,12 +4,14 @@ layout: kendra_default
 {% if site.data.projects %}
     <div id="projects-source" hidden>
         {% for project in site.data.projects.projects %}
+        {% unless project.hidden %}
         <a class="project-source"
            data-category="{{ project.category | default: 'textile' }}"
            data-title="{{ project.title }}"
            data-year="{{ project.year }}"
            data-image="{{ site.baseurl }}{{ project.spotlight_image_url }}"
            href="{{ site.baseurl }}{{ project.project_url }}"></a>
+        {% endunless %}
         {% endfor %}
     </div>
 
