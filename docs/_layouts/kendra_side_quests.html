@@ -7,7 +7,8 @@ layout: kendra_default
      data-title="{{ quest.title }}"
      data-color="{{ quest.color }}"
      data-desc="{{ quest.description }}"
-     {% if quest.project_url %}href="{{ site.baseurl }}{{ quest.project_url }}"{% endif %}></a>
+     data-link-text="{{ quest.link_text | default: 'View project' }}"
+     {% if quest.project_url %}{% if quest.project_url contains 'http' %}href="{{ quest.project_url }}"{% else %}href="{{ site.baseurl }}{{ quest.project_url }}"{% endif %}{% endif %}></a>
   {% endfor %}
 </div>
 
@@ -23,6 +24,7 @@ layout: kendra_default
         name: el.dataset.title,
         hex: el.dataset.color,
         desc: el.dataset.desc,
+        linkText: el.dataset.linkText,
         url: el.getAttribute('href')
       };
     });
@@ -92,7 +94,7 @@ layout: kendra_default
         popup.style.width = popupWidth + 'px';
 
         var linkHtml = b.data.url
-          ? '<span class="quest-popup__link">View project &rarr;</span>'
+          ? '<span class="quest-popup__link">' + b.data.linkText + ' &rarr;</span>'
           : '';
         popup.innerHTML =
           '<p class="quest-popup__title">' + b.data.name + '</p>' +

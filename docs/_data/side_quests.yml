@@ -12,9 +12,11 @@ quests:
   - title: Dye Test
     color: "#D4537E"
     description: Natural dye swatches on cotton and wool, comparing colorfastness.
-  - title: Foam Scrap
+  - title: Instagram
     color: "#BA7517"
-    description: Leftover EVA foam offcuts repurposed into a small material study.
+    description: More behind-the-scenes work, in-progress pieces, and general nonsense.
+    project_url: "https://www.instagram.com/kendrallgood/"
+    link_text: "Follow on Instagram"
   - title: Pattern Draft
     color: "#639922"
     description: Unfinished repeat pattern, exploring a checkerboard motif variation.
