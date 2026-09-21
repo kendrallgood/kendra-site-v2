@@ -151,12 +151,20 @@ layout: kendra_default
     });
 
     var resizeTimer;
-    window.addEventListener('resize', function () {
+    function scheduleRerender() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () {
         render(currentCat);
       }, 150);
-    });
+    }
+
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(scheduleRerender);
+      ro.observe(document.documentElement);
+    } else {
+      window.addEventListener('resize', scheduleRerender);
+    }
+    window.addEventListener('focus', scheduleRerender);
 
     render('all');
   })();
