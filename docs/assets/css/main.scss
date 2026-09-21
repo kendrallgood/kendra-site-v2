@@ -278,7 +278,6 @@ h3 {
     }
 
     .project-description-container {
-        height: 100%;
         right: 0;
         top: 0;
         padding: 20px;
@@ -293,6 +292,7 @@ h3 {
 
         @include breakpoint($medium) {
           position: fixed;
+          height: 100%;
           width: 20vw;
           padding: 100px 25px;
         }
