@@ -16,7 +16,7 @@ layout: kendra_default
     <div class="projects-filter" id="projects-filter">
         <button class="projects-filter__pill is-active" data-cat="all" type="button">All work</button>
         <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
-        <button class="projects-filter__pill" data-cat="footwear" type="button">FW Material Design</button>
+        <button class="projects-filter__pill" data-cat="footwear" type="button">Footwear &amp; material design</button>
     </div>
 
     <div class="projects-checkerboard" id="projects-grid"></div>
@@ -41,18 +41,25 @@ layout: kendra_default
     var empty = document.getElementById('projects-empty');
     var pills = document.querySelectorAll('.projects-filter__pill');
     var currentCat = 'all';
+    var GAP = 8;
 
     function getCols() {
       var w = window.innerWidth;
-      if (w < 600) return 2;
-      if (w < 900) return 3;
-      return 4;
+      if (w < 480) return 3;
+      if (w < 768) return 4;
+      if (w < 1100) return 6;
+      return 8;
     }
 
     function render(cat) {
       currentCat = cat;
-      var cols = getCols();
-      grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+
+      // Reset any sizing from a previous render so width measurement below
+      // reflects the natural full-width container, not a leftover fixed size.
+      grid.style.width = '';
+      grid.style.gridTemplateColumns = '';
+      grid.style.gridAutoRows = '';
+      grid.style.gap = '';
       grid.innerHTML = '';
 
       var textileItems = items.filter(function (p) { return p.category === 'textile'; });
@@ -64,6 +71,33 @@ layout: kendra_default
       }
       empty.hidden = true;
 
+      var cols = getCols();
+
+      // Board shape stays consistent across all three tabs: sized to
+      // whichever category has more items, so an empty category still
+      // shows a full board of placeholders rather than nothing.
+      var targetRows = Math.max(
+        Math.ceil((textileItems.length * 2) / cols),
+        Math.ceil((footwearItems.length * 2) / cols),
+        1
+      );
+
+      // Fit the whole board within the visible viewport (no scrolling),
+      // then shrink another 25% for breathing room around tighter tiles.
+      var availableWidth = grid.clientWidth;
+      var gridTop = grid.getBoundingClientRect().top;
+      var availableHeight = window.innerHeight - gridTop - 24;
+
+      var widthFit = (availableWidth - (cols - 1) * GAP) / cols;
+      var heightFit = (availableHeight - (targetRows - 1) * GAP) / targetRows;
+      var tileSize = Math.max(40, Math.min(widthFit, heightFit) * 0.75);
+
+      grid.style.gridTemplateColumns = 'repeat(' + cols + ', ' + tileSize + 'px)';
+      grid.style.gridAutoRows = tileSize + 'px';
+      grid.style.gap = GAP + 'px';
+      grid.style.width = (cols * tileSize + (cols - 1) * GAP) + 'px';
+      grid.style.margin = '0 auto';
+
       function placeTile(p, col, row) {
         var tile = document.createElement('a');
         tile.className = 'checker-tile';
@@ -71,11 +105,11 @@ layout: kendra_default
         tile.style.gridColumn = String(col + 1);
         tile.style.gridRow = String(row + 1);
         tile.innerHTML =
-          '<div class="checker-tile__img-wrap">' +
-            '<img class="checker-tile__img" src="' + p.image + '" loading="lazy" alt="' + p.title + '">' +
-          '</div>' +
-          '<p class="checker-tile__title">' + p.title + '</p>' +
-          '<p class="checker-tile__year">(' + p.year + ')</p>';
+          '<img class="checker-tile__img" src="' + p.image + '" loading="lazy" alt="' + p.title + '">' +
+          '<div class="checker-tile__overlay">' +
+            '<p class="checker-tile__title">' + p.title + '</p>' +
+            '<p class="checker-tile__year">(' + p.year + ')</p>' +
+          '</div>';
         grid.appendChild(tile);
       }
 
@@ -86,15 +120,6 @@ layout: kendra_default
         ph.style.gridRow = String(row + 1);
         grid.appendChild(ph);
       }
-
-      // Board shape stays consistent across all three tabs: sized to
-      // whichever category has more items, so an empty category still
-      // shows a full board of placeholders rather than nothing.
-      var targetRows = Math.max(
-        Math.ceil((textileItems.length * 2) / cols),
-        Math.ceil((footwearItems.length * 2) / cols),
-        1
-      );
 
       var tIdx = 0;
       var fIdx = 0;
