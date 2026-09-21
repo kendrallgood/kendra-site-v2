@@ -4,6 +4,7 @@ after_scripts:
   - "/assets/js/kendra_project.js"
 download_button_text: "[Download Booklet]"
 ---
+<script>document.body.classList.add('kendra-project-page');</script>
 {% for project in site.data.projects.projects %}
   {% if project.title == page.title %}
     <div class="project">
