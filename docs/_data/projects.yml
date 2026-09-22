@@ -239,7 +239,7 @@ projects:
     project_url: "/spring-summer-material-trend"
     cutout_image_url: "/assets/images/cutouts/spring-summer-material-trend.png"
     hover_color: "#f0c4d1"
-    float_position: "0.35, 0.4, 0.25"
+    float_position: "0.489, 0.062, 0.205"
     year: "SS27 + SS28"
     spotlight_image_url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
     images:
@@ -256,7 +256,7 @@ projects:
     project_url: "/fall-winter-material-trend"
     cutout_image_url: "/assets/images/cutouts/fall-winter-material-trend.png"
     hover_color: "#d4a574"
-    float_position: "0.65, 0.4, 0.25"
+    float_position: "0.496, 0.296, 0.207"
     year: "FW26 + FW27"
     spotlight_image_url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
     images:
