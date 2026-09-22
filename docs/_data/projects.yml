@@ -243,14 +243,14 @@ projects:
     year: "SS27 + SS28"
     spotlight_image_url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
     images:
-      - url: "/assets/images/projects/spring-summer-material-trend/crafted-biomimicry.jpg"
-      - url: "/assets/images/projects/spring-summer-material-trend/ghosted-lightweight.jpg"
-      - url: "/assets/images/projects/spring-summer-material-trend/breathability-durability.jpg"
-      - url: "/assets/images/projects/spring-summer-material-trend/rockin-rolled-goods.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/tactician.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/dreamy-industrial.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/dopamine.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/crafted-biomimicry.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/ghosted-lightweight.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/breathability-durability.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/rockin-rolled-goods.jpg"
   - title: FALL/WINTER Material Trend
     category: footwear
     project_url: "/fall-winter-material-trend"
