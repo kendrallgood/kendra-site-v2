@@ -1,6 +1,7 @@
 ---
-layout: full-image-background
+layout: default
 permalink: /kintentional-material-concepts/
-image_url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
 title: Kintentional Material Concepts
 ---
+
+<img src="/assets/images/projects/fall-winter-material-trend/kintentional.jpg" alt="Kintentional Material Concepts" style="width: 100%; height: auto; display: block;">
