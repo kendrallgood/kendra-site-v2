@@ -234,16 +234,37 @@ projects:
       - url: "/assets/images/projects/journey/b27ab710111f7aaaec926291_rw_1920.jpg"
         description:  >-
           Loom Specs: AVL Computer Dobby, 16 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
-  - title: Seasonal Trend Palettes
+  - title: SPRING/SUMMER Material Trend
     category: footwear
-    project_url: "/seasonal-trend-palettes"
-    cutout_image_url: "/assets/images/cutouts/seasonal-trend-palettes.png"
+    project_url: "/spring-summer-material-trend"
+    cutout_image_url: "/assets/images/cutouts/spring-summer-material-trend.png"
     hover_color: "#f0c4d1"
-    float_position: "0.5, 0.5, 0.25"
+    float_position: "0.35, 0.4, 0.25"
     year: "SS27 + SS28"
-    spotlight_image_url: "/assets/images/projects/seasonal-trend-palettes/vintage-remix.jpg"
+    spotlight_image_url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
     images:
-      - url: "/assets/images/projects/seasonal-trend-palettes/vintage-remix.jpg"
-      - url: "/assets/images/projects/seasonal-trend-palettes/tactician.jpg"
-      - url: "/assets/images/projects/seasonal-trend-palettes/dreamy-industrial.jpg"
-      - url: "/assets/images/projects/seasonal-trend-palettes/dopamine.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/crafted-biomimicry.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/ghosted-lightweight.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/breathability-durability.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/rockin-rolled-goods.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/tactician.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/dreamy-industrial.jpg"
+      - url: "/assets/images/projects/spring-summer-material-trend/dopamine.jpg"
+  - title: FALL/WINTER Material Trend
+    category: footwear
+    project_url: "/fall-winter-material-trend"
+    cutout_image_url: "/assets/images/cutouts/fall-winter-material-trend.png"
+    hover_color: "#d4a574"
+    float_position: "0.65, 0.4, 0.25"
+    year: "FW26 + FW27"
+    spotlight_image_url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
+    images:
+      - url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/simplified-organics.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/technical-opulence.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/soft-serenity.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/warm-weatherized.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/durability-visibility.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/breathability-lightweight.jpg"
+      - url: "/assets/images/projects/fall-winter-material-trend/rockin-rolled-goods.jpg"

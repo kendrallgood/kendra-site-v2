@@ -1424,12 +1424,13 @@ body.backdrop--bloom {
 .seasonal-trend-images {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 0;
   width: 100%;
 }
 
 .seasonal-trend-image {
-  flex: 1;
+  flex: 0 0 25%;
   width: 25%;
   height: auto;
   display: block;
