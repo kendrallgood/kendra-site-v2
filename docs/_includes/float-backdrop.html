@@ -1,0 +1,106 @@
+<script>
+  document.body.classList.add('float-page');
+  {% if include.theme %}document.body.classList.add('backdrop--{{ include.theme }}');{% endif %}
+</script>
+
+<!-- Fixed grainy gradient backdrop: stays put while the page scrolls over
+     it. Pass theme="bloom" for the pink and green version. -->
+<div class="float-backdrop" aria-hidden="true">
+  <div class="float-backdrop__base"></div>
+  <div class="float-backdrop__tint" id="float-tint"></div>
+  <div class="float-backdrop__grain"></div>
+</div>
+
+<script>
+  // Backdrop tuning panel: local preview only, opened with ?tune.
+  (function () {
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    if (!local || !/[?&]tune\b/.test(location.search)) return;
+
+    var theme = '{{ include.theme | default: "default" }}';
+    var KEY = 'backdrop-tune-v1-' + theme;
+    var root = document.body;
+    var CONTROLS = [
+      ['Base gradient'],
+      ['--bd-color-1', 'Color 1', 'color'],
+      ['--bd-color-2', 'Color 2', 'color'],
+      ['--bd-color-3', 'Color 3', 'color'],
+      ['--bd-color-4', 'Color 4', 'color'],
+      ['--bd-angle', 'Angle', 'range', 0, 360, 1, 'deg'],
+      ['Light glow'],
+      ['--bd-glow-x', 'Left–right', 'range', 0, 100, 1, '%'],
+      ['--bd-glow-y', 'Up–down', 'range', 0, 100, 1, '%'],
+      ['--bd-glow-size', 'Size', 'range', 5, 120, 1, '%'],
+      ['--bd-glow-strength', 'Brightness', 'range', 0, 1, 0.01, ''],
+      ['Dark shadow'],
+      ['--bd-shadow-color', 'Color', 'color'],
+      ['--bd-shadow-x', 'Left–right', 'range', 0, 100, 1, '%'],
+      ['--bd-shadow-y', 'Up–down', 'range', 0, 100, 1, '%'],
+      ['--bd-shadow-size', 'Size', 'range', 5, 120, 1, '%'],
+      ['Grain'],
+      ['--bd-grain', 'Amount', 'range', 0, 1, 0.01, '']
+    ];
+
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+    Object.keys(saved).forEach(function (k) { root.style.setProperty(k, saved[k]); });
+
+    function current(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+    function store() { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} }
+
+    var panel = document.createElement('div');
+    panel.className = 'tune-panel';
+    CONTROLS.forEach(function (c) {
+      if (c.length === 1) {
+        var h = document.createElement('h4'); h.textContent = c[0]; panel.appendChild(h); return;
+      }
+      var name = c[0], unit = c[6] || '';
+      var label = document.createElement('label');
+      var input = document.createElement('input');
+      var out = document.createElement('output');
+      input.type = c[2];
+      var value = current(name);
+      if (c[2] === 'range') {
+        input.min = c[3]; input.max = c[4]; input.step = c[5];
+        input.value = parseFloat(value);
+        out.textContent = input.value + unit;
+      } else {
+        input.value = value;
+      }
+      input.addEventListener('input', function () {
+        var v = input.value + (c[2] === 'range' ? unit : '');
+        root.style.setProperty(name, v);
+        saved[name] = v; store();
+        if (c[2] === 'range') out.textContent = v;
+      });
+      label.appendChild(document.createTextNode(c[1]));
+      label.appendChild(input);
+      label.appendChild(out);
+      panel.appendChild(label);
+    });
+
+    var actions = document.createElement('div');
+    actions.className = 'tune-actions';
+    actions.innerHTML = '<button type="button" data-act="copy">Copy settings</button>' +
+      '<button type="button" data-act="reset">Reset</button>';
+    panel.appendChild(actions);
+    actions.querySelector('[data-act=copy]').onclick = function () {
+      var all = {};
+      CONTROLS.forEach(function (c) { if (c.length > 1) all[c[0]] = current(c[0]); });
+      var text = 'Backdrop settings: ' + JSON.stringify(all);
+      var btn = this;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied!';
+      }, function () { window.prompt('Copy this and paste it to Claude:', text); });
+    };
+    actions.querySelector('[data-act=reset]').onclick = function () {
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      location.href = location.pathname + '?tune';
+    };
+
+    // Hover tint off while tuning, so the base colours are what you see.
+    var tint = document.getElementById('float-tint');
+    if (tint) tint.style.display = 'none';
+    document.body.appendChild(panel);
+  })();
+</script>

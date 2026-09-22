@@ -1,14 +1,7 @@
 ---
 layout: kendra_default
 ---
-<script>document.body.classList.add('float-page');</script>
-
-<!-- Fixed backdrop: stays put while the project cutouts scroll over it. -->
-<div class="float-backdrop" aria-hidden="true">
-  <div class="float-backdrop__base"></div>
-  <div class="float-backdrop__tint" id="float-tint"></div>
-  <div class="float-backdrop__grain"></div>
-</div>
+{% include float-backdrop.html %}
 
 {% if site.data.projects %}
   <div class="projects-filter" id="projects-filter">
@@ -145,14 +138,19 @@ layout: kendra_default
       return boxes;
     }
 
+    // A short grace period before fading out, so moving from one piece to
+    // the next blends colours instead of dipping back to the base first.
+    var tintOffTimer;
     items.forEach(function (el) {
       el.addEventListener('mouseenter', function () {
         if (arranging) return;
+        clearTimeout(tintOffTimer);
         tint.style.setProperty('--tint', el.dataset.color);
         tint.classList.add('is-on');
       });
       el.addEventListener('mouseleave', function () {
-        tint.classList.remove('is-on');
+        clearTimeout(tintOffTimer);
+        tintOffTimer = setTimeout(function () { tint.classList.remove('is-on'); }, 350);
       });
     });
 
