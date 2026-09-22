@@ -4,7 +4,7 @@ projects:
     project_url: "/kaleidoscope"
     cutout_image_url: "/assets/images/cutouts/kaleidoscope.png"
     hover_color: "#7fb3c8" # background tint when this project is hovered
-    float_position: "0.5388, 0.4021, 0.3201" # left, top, size as fractions of page width (set in arrange mode)
+    float_position: "0.5398, 0.3558, 0.2602" # left, top, size as fractions of page width (set in arrange mode)
     year: 2020
     download_link: "/assets/images/projects/kaleidoscope/Kaleido Development.pdf"
     spotlight_image_url: "/assets/images/projects/kaleidoscope/dude blanket clean.jpg"
@@ -43,7 +43,7 @@ projects:
     project_url: "/exodus-unseen"
     cutout_image_url: "/assets/images/cutouts/exodus-unseen.png"
     hover_color: "#4fb3a9" # background tint when this project is hovered
-    float_position: "0, 0, 0.3427" # left, top, size as fractions of page width (set in arrange mode)
+    float_position: "0.0639, 0.0671, 0.45" # left, top, size as fractions of page width (set in arrange mode)
     year: 2018
     class: hero
     download_link: "/assets/images/projects/exodus/EXODUS UNSEEN.pdf"
@@ -142,7 +142,7 @@ projects:
     project_url: "/cyclery"
     cutout_image_url: "/assets/images/cutouts/cyclery.png"
     hover_color: "#c9b79c" # background tint when this project is hovered
-    float_position: "0.0277, 1.4107, 0.2185" # left, top, size as fractions of page width (set in arrange mode)
+    float_position: "0.0347, 1.3437, 0.2185" # left, top, size as fractions of page width (set in arrange mode)
     year: 2016
     spotlight_image_url: "/assets/images/projects/cyclery/small four kendras copy.png"
     images:
@@ -158,7 +158,7 @@ projects:
     project_url: "/gestural-symmetry"
     cutout_image_url: "/assets/images/cutouts/gestural-symmetry.png"
     hover_color: "#4a6fa5" # background tint when this project is hovered
-    float_position: "0.3402, 1.067, 0.4115" # left, top, size as fractions of page width (set in arrange mode)
+    float_position: "0.0773, 0.8637, 0.4115" # left, top, size as fractions of page width (set in arrange mode)
     spotlight_image_url: "/assets/images/projects/gestural/9616926d2b65f62c5982423c_rw_1920.jpg"
     images:
       - url: "/assets/images/projects/gestural/9616926d2b65f62c5982423c_rw_1920.jpg"
