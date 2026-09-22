@@ -1036,57 +1036,171 @@ pointer-events: none;
   font-style: italic;
 }
 
-.projects-checkerboard {
-  display: grid;
-  padding: 1.5em;
+// PROJECTS PAGE: floating cutouts over a fixed, grainy backdrop
+body.float-page {
+  background: transparent;
+
+  .masthead,
+  #footer {
+    background: transparent;
+    position: relative;
+    z-index: 2;
+  }
+
+  .masthead__inner-wrap,
+  #site-nav,
+  .greedy-nav {
+    background: transparent;
+  }
 }
 
-.checker-tile {
-  display: block;
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  background: #eee;
+.float-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
-.checker-tile__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.checker-tile__overlay {
+.float-backdrop__base,
+.float-backdrop__tint,
+.float-backdrop__grain {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 6px 8px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+  inset: 0;
 }
 
-.checker-tile__title {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  margin: 0;
-  line-height: 1.25;
-  color: #fff;
+.float-backdrop__base {
+  background:
+    radial-gradient(ellipse 45% 70% at 72% 20%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(ellipse 60% 60% at 85% 85%, #2a2a2a, transparent 75%),
+    linear-gradient(115deg, #b8b8b8 0%, #d2d2d2 45%, #eeeeee 70%, #6e6e6e 100%);
 }
 
-.checker-tile__year {
-  font-size: 10px;
-  color: #fff;
-  opacity: 0.85;
-  margin: 1px 0 0;
+.float-backdrop__tint {
+  --tint: #9fb8cf;
+  background:
+    radial-gradient(ellipse 55% 65% at 30% 35%, var(--tint), transparent 75%),
+    radial-gradient(ellipse 50% 60% at 80% 75%, var(--tint), transparent 70%),
+    linear-gradient(160deg, var(--tint), rgba(255, 255, 255, 0.35));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+
+  &.is-on {
+    opacity: 0.85;
+  }
 }
 
-.checker-placeholder {
+// Film grain: an SVG noise texture laid over the gradient.
+.float-backdrop__grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+.float-page .projects-filter {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.float-page .projects-filter__pill {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #1a1a1a;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    border-color: #1a1a1a;
+  }
+
+  &.is-active {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #fff;
+  }
+}
+
+.float-field {
+  position: relative;
   width: 100%;
-  height: 100%;
-  border: 1px dashed #ccc;
-  opacity: 0.5;
+  max-width: 1400px;
+  margin: 0 auto 4em;
+}
+
+.float-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #1a1a1a;
+  opacity: 1;
+
+  .float-field.is-ready & {
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+  }
+
+  &.is-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.float-item__img {
+  max-width: 100%;
+  max-height: calc(100% - 28px); // leave room for the label underneath
+  min-height: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(20, 35, 55, 0.18));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+
+.float-item:hover .float-item__img,
+.float-item:focus-visible .float-item__img {
+  transform: scale(1.06);
+}
+
+.float-item__label {
+  margin-top: 10px;
+  transform: translateY(6px);
+  white-space: nowrap;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.float-item__year {
+  margin-left: 0.6em;
+  opacity: 0.7;
+}
+
+.float-item:hover .float-item__label,
+.float-item:focus-visible .float-item__label {
+  opacity: 1;
+  transform: none;
+}
+
+// Touch screens have no hover, so always show the label there.
+@media (hover: none) {
+  .float-item__label {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-field.is-ready .float-item,
+  .float-item__img,
+  .float-backdrop__tint {
+    transition: none;
+  }
 }
 
 .quest-heading {
@@ -1225,4 +1339,65 @@ pointer-events: none;
   color: #888;
   font-family: 'Raleway', sans-serif;
   font-style: italic;
+}
+
+// Arrange mode (local preview only, /projects/?arrange)
+.is-arranging {
+  overflow-anchor: none; // stop the browser nudging the scroll while pieces move
+
+  .float-item {
+    cursor: grab;
+    outline: 1px dashed rgba(0, 0, 0, 0.35);
+    // Pieces must track the pointer exactly while being dragged.
+    transition: none !important;
+  }
+
+  .float-item.is-dragging {
+    cursor: grabbing;
+    z-index: 5;
+    outline-style: solid;
+  }
+
+  .float-item__label {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.arrange-handle {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  width: 16px;
+  height: 16px;
+  background: #1a1a1a;
+  border: 2px solid #fff;
+  cursor: nwse-resize;
+}
+
+.arrange-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  max-width: calc(100% - 32px);
+  padding: 10px 14px;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+
+  button {
+    font: inherit;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 4px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
 }
