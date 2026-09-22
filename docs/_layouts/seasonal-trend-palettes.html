@@ -17,3 +17,64 @@ layout: kendra_default
     {% endfor %}
   </div>
 </div>
+
+<div class="image-modal" id="imageModal">
+  <span class="image-modal-close">&times;</span>
+  <img class="image-modal-content" id="modalImage">
+  <div class="image-modal-nav">
+    <button class="image-modal-prev">&#10094;</button>
+    <button class="image-modal-next">&#10095;</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var modal = document.getElementById('imageModal');
+    var modalImg = document.getElementById('modalImage');
+    var closeBtn = document.querySelector('.image-modal-close');
+    var prevBtn = document.querySelector('.image-modal-prev');
+    var nextBtn = document.querySelector('.image-modal-next');
+    var images = document.querySelectorAll('.seasonal-trend-image');
+    var currentIndex = 0;
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', function() {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+        currentIndex = index;
+      });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    prevBtn.addEventListener('click', function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      modalImg.src = images[currentIndex].src;
+    });
+
+    nextBtn.addEventListener('click', function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      modalImg.src = images[currentIndex].src;
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (modal.style.display === 'flex') {
+        if (e.key === 'Escape') {
+          modal.style.display = 'none';
+        } else if (e.key === 'ArrowLeft') {
+          prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+          nextBtn.click();
+        }
+      }
+    });
+  })();
+</script>
