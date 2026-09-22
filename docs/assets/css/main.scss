@@ -1408,6 +1408,44 @@ body.backdrop--bloom {
     0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
+.seasonal-trend-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.seasonal-trend-intro {
+  margin-bottom: 40px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.seasonal-trend-images {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+}
+
+.seasonal-trend-image {
+  flex: 1;
+  width: 25%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .seasonal-trend-images {
+    flex-direction: column;
+  }
+
+  .seasonal-trend-image {
+    width: 100%;
+  }
+}
+
 .resume-preview {
   display: flex;
   flex-direction: column;

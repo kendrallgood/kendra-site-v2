@@ -234,3 +234,16 @@ projects:
       - url: "/assets/images/projects/journey/b27ab710111f7aaaec926291_rw_1920.jpg"
         description:  >-
           Loom Specs: AVL Computer Dobby, 16 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
+  - title: Seasonal Trend Palettes
+    category: footwear
+    project_url: "/seasonal-trend-palettes"
+    cutout_image_url: "/assets/images/cutouts/seasonal-trend-palettes.png"
+    hover_color: "#f0c4d1"
+    float_position: "0.5, 0.5, 0.25"
+    year: "SS27 + SS28"
+    spotlight_image_url: "/assets/images/projects/seasonal-trend-palettes/vintage-remix.jpg"
+    images:
+      - url: "/assets/images/projects/seasonal-trend-palettes/vintage-remix.jpg"
+      - url: "/assets/images/projects/seasonal-trend-palettes/tactician.jpg"
+      - url: "/assets/images/projects/seasonal-trend-palettes/dreamy-industrial.jpg"
+      - url: "/assets/images/projects/seasonal-trend-palettes/dopamine.jpg"

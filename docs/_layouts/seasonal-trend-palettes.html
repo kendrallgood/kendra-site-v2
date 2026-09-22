@@ -1,0 +1,19 @@
+---
+layout: kendra_default
+---
+{% include float-backdrop.html %}
+<div class="seasonal-trend-page">
+  <div class="seasonal-trend-intro">
+    {{ content }}
+  </div>
+
+  <div class="seasonal-trend-images">
+    {% for project in site.data.projects.projects %}
+      {% if project.title == "Seasonal Trend Palettes" %}
+        {% for image in project.images %}
+          <img class="seasonal-trend-image" src="{{ site.baseurl }}{{ image.url }}" alt="Seasonal trend concept board">
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
