@@ -24,3 +24,7 @@ quests:
     color: "#378ADD"
     description: Candle wax, pen and ink experiments from 2016.
     project_url: "/side-quests/encaustic-experimentation/"
+  - title: Kintentional Material Concepts
+    color: "#5A9D6F"
+    description: Material concept board exploring sustainable fabrics and colorways for footwear.
+    project_url: "/kintentional-material-concepts/"
