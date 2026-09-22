@@ -702,7 +702,7 @@ pointer-events: none;
     display: grid;
     grid-template-columns: repeat(3, auto);
     justify-content: center;
-    column-gap: clamp(30px, 4vw, 80px);
+    column-gap: clamp(80px, 10vw, 200px);
     row-gap: clamp(0px, 0.3vh, 6px);
     align-content: center;
     justify-items: center;
