@@ -1026,6 +1026,10 @@ pointer-events: none;
   border-color: #1a1a1a;
 }
 
+.projects-filter__pill:focus {
+  outline: none;
+}
+
 .projects-filter__pill.is-active {
   background: #1a1a1a;
   border-color: #1a1a1a;
