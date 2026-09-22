@@ -116,6 +116,13 @@ h3 {
 }
 
 // HOMEPAGE STYLING
+.word-grid .word {
+  font-family: 'acumin-variable', sans-serif;
+  font-variation-settings: 'wght' 900, 'wdth' 125, 'slnt' 0;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
 .layout--kendra_home {
     a.site-title.kendra-link {
       &:before {
