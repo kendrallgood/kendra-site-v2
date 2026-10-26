@@ -1,0 +1,10 @@
+works:
+  - title: Encaustic Experimentation
+    color: "#378ADD"
+    description: Candle wax, pen and ink experiments from 2016.
+    project_url: "/other-works/encaustic-experimentation/"
+  - title: Instagram
+    color: "#BA7517"
+    description: More behind-the-scenes work, in-progress pieces, and general nonsense.
+    project_url: "https://www.instagram.com/kendrallgood/"
+    link_text: "Follow on Instagram"

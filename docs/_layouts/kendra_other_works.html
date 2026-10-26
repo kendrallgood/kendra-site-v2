@@ -1,0 +1,22 @@
+---
+layout: kendra_default
+---
+{% include float-backdrop.html theme="bloom" %}
+<div class="other-works">
+  <h1 class="other-works__heading">Other Works</h1>
+  <div class="other-works__grid">
+    {% for work in site.data.other_works.works %}
+    {% assign href = work.project_url %}
+    {% unless href contains 'http' %}{% assign href = site.baseurl | append: work.project_url %}{% endunless %}
+    <article class="other-works__card" style="--accent: {{ work.color }}">
+      <h2 class="other-works__title">
+        {% if work.project_url %}<a href="{{ href }}">{{ work.title }}</a>{% else %}{{ work.title }}{% endif %}
+      </h2>
+      <p class="other-works__desc">{{ work.description }}</p>
+      {% if work.project_url %}
+      <a class="other-works__link" href="{{ href }}">{{ work.link_text | default: 'View project' }} &rarr;</a>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</div>
