@@ -146,6 +146,16 @@ h3 {
   color: rgba(0, 0, 0, 0.5); // half-transparent text only, so the bar stays solid
 }
 
+// The homepage does not scroll, up, down, or sideways.
+html:has(#hero-canvas),
+body:has(#hero-canvas) {
+  height: 100%;
+  overflow: hidden;
+}
+body:has(#hero-canvas) #hero-canvas {
+  height: 100vh; // the word grid fills the screen, since the fabric no longer sizes it
+}
+
 // Homepage background: the yellow with the canvas weave multiplied over it.
 body:has(#hero-canvas) {
   background-color: #efef98;

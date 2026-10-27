@@ -4,5 +4,5 @@
 
 layout: kendra_home
 title: Kendra Allgood
-webgl_script: "/assets/js/fabric.js"
+# webgl_script: "/assets/js/fabric.js" # fabric rendering paused; uncomment to bring it back
 ---

@@ -40,5 +40,5 @@ layout: kendra_default
 </div>
 {{ content }}
 <!-- REMOTE VS LOCAL -->
-<script src="{{ site.baseurl }}{{ page.webgl_script }}" type="module"></script>
+{% if page.webgl_script %}<script src="{{ site.baseurl }}{{ page.webgl_script }}" type="module"></script>{% endif %}
 <!-- <script src="{{ page.webgl_script }}" type="module"></script> -->
