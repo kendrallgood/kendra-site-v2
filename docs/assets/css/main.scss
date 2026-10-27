@@ -348,13 +348,24 @@ body:has(#float-field) .float-backdrop__grain {
   justify-content: safe center; // centered when the photos fit, still scrollable when they don't
   min-height: calc(66vh + 110px); // tall enough for the largest photo and its two-paragraph caption
   margin-top: calc(-54px - 13vh); // pulls the row up under the text; enlarged photos may cover it
-  gap: 14px;
+  gap: 0; // photos sit flush against each other
   padding: 110px 24px 0; // room above the photos for their captions
   overflow-x: auto;
   scrollbar-width: none;
 }
 .filmstrip-track::-webkit-scrollbar {
   display: none;
+}
+
+// The two footwear and material trend pages use square photo corners.
+body:has(.square-photos) .filmstrip-img,
+body:has(.square-photos) .filmstrip-item {
+  border-radius: 0;
+}
+
+// A second row sits below the first, not pulled up over it.
+.filmstrip-track + .filmstrip-track {
+  margin-top: 0;
 }
 
 .filmstrip-item {
@@ -433,6 +444,34 @@ body:has(#float-field) .float-backdrop__grain {
 }
 .filmstrip-description p + p {
   margin-top: 1em;
+}
+
+
+// Booklet pages shown in place on the page, one under another.
+.booklet-inline {
+  margin: 24px auto 40px;
+}
+
+// Other Works tiles: every photo fills its tile the same way.
+.other-works-page .float-item__img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center top; // keeps the top of each photo, such as the cover title, in the frame
+}
+
+// Other Works: a text link under the tiles for entries without a photo.
+.other-works__link-only {
+  padding: 24px;
+  text-align: center;
+  font-family: 'acumin-variable', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.other-works__link-only a {
+  color: #1a1a1a;
 }
 
 // Booklet viewer: a flipbook of the PDF's pages, opened over the page.

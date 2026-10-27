@@ -1,5 +1,5 @@
 ---
-layout: kendra_project
+layout: kendra_project_filmstrip
 title: Encaustic Experimentation
 permalink: /other-works/encaustic-experimentation/
 project_description_text_color: white

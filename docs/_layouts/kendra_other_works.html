@@ -2,21 +2,82 @@
 layout: kendra_default
 ---
 {% include float-backdrop.html theme="bloom" %}
-<div class="other-works">
+<div class="other-works-page">
   <h1 class="other-works__heading">Other Works</h1>
-  <div class="other-works__grid">
+
+  <div class="float-field" id="float-field">
     {% for work in site.data.other_works.works %}
-    {% assign href = work.project_url %}
-    {% unless href contains 'http' %}{% assign href = site.baseurl | append: work.project_url %}{% endunless %}
-    <article class="other-works__card" style="--accent: {{ work.color }}">
-      <h2 class="other-works__title">
-        {% if work.project_url %}<a href="{{ href }}">{{ work.title }}</a>{% else %}{{ work.title }}{% endif %}
-      </h2>
-      <p class="other-works__desc">{{ work.description }}</p>
-      {% if work.project_url %}
-      <a class="other-works__link" href="{{ href }}">{{ work.link_text | default: 'View project' }} &rarr;</a>
+      {% if work.image_url %}
+        <a class="float-item"
+           href="{% if work.project_url contains 'http' %}{{ work.project_url }}{% else %}{{ site.baseurl }}{{ work.project_url }}{% endif %}"
+           data-color="{{ work.color | default: '#9fb8cf' }}">
+          <img class="float-item__img" src="{{ site.baseurl }}{{ work.image_url }}" alt="{{ work.title }}" loading="lazy" draggable="false">
+          <span class="float-item__label">
+            <span class="float-item__title">{{ work.title }}</span>
+            {% if work.year %}<span class="float-item__year">{{ work.year }}</span>{% endif %}
+          </span>
+        </a>
       {% endif %}
-    </article>
     {% endfor %}
   </div>
+
+  {% for work in site.data.other_works.works %}
+    {% unless work.image_url %}
+      <p class="other-works__link-only">
+        <a href="{% if work.project_url contains 'http' %}{{ work.project_url }}{% else %}{{ site.baseurl }}{{ work.project_url }}{% endif %}">{{ work.link_text | default: work.title }}</a>
+      </p>
+    {% endunless %}
+  {% endfor %}
 </div>
+
+<script>
+  (function () {
+    var field = document.getElementById('float-field');
+    if (!field) return;
+    var items = Array.prototype.slice.call(field.querySelectorAll('.float-item'));
+    var tint = document.getElementById('float-tint');
+    var GAP = 24;
+    var INSET = 24;
+
+    function columnsFor(width) {
+      return width >= 1100 ? 4 : width >= 768 ? 3 : 2;
+    }
+
+    function layout() {
+      var width = field.clientWidth;
+      var cols = columnsFor(width);
+      var size = (width - 2 * INSET - GAP * (cols - 1)) / cols;
+      items.forEach(function (el, i) {
+        var x = INSET + (i % cols) * (size + GAP);
+        var y = Math.floor(i / cols) * (size + GAP);
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.transform = 'translate(' + Math.round(x) + 'px, ' + Math.round(y) + 'px)';
+      });
+      var rows = Math.ceil(items.length / cols);
+      field.style.height = rows ? rows * (size + GAP) - GAP + 24 + 'px' : '0px';
+    }
+
+    var tintOffTimer;
+    items.forEach(function (el) {
+      el.addEventListener('mouseenter', function () {
+        clearTimeout(tintOffTimer);
+        tint.style.setProperty('--tint', el.dataset.color);
+        tint.classList.add('is-on');
+      });
+      el.addEventListener('mouseleave', function () {
+        clearTimeout(tintOffTimer);
+        tintOffTimer = setTimeout(function () { tint.classList.remove('is-on'); }, 350);
+      });
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(layout, 120);
+    });
+
+    layout();
+    requestAnimationFrame(function () { field.classList.add('is-ready'); });
+  })();
+</script>

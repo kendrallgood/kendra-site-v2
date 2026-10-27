@@ -2,6 +2,7 @@
 layout: kendra_default_no_footer
 ---
 <script>document.body.classList.add('kendra-project-page', 'filmstrip-page');</script>
+{% if page.square_photos %}<span class="square-photos" hidden></span>{% endif %}
 {% for project in site.data.projects.projects %}
   {% if project.title == page.title %}
     <div class="filmstrip-project">
@@ -17,8 +18,20 @@ layout: kendra_default_no_footer
         {% endif %}
       </div>
 
+      {% assign rows = page.filmstrip_rows | default: 1 %}
+      {% assign half = project.images.size | divided_by: 2 %}
+      {% for row in (1..rows) %}
       <div class="filmstrip-track">
         {% for image_url in project.images %}
+          {% assign keep = false %}
+          {% if rows == 1 %}
+            {% assign keep = true %}
+          {% elsif row == 1 %}
+            {% if forloop.index0 < half %}{% assign keep = true %}{% endif %}
+          {% else %}
+            {% if forloop.index0 >= half %}{% assign keep = true %}{% endif %}
+          {% endif %}
+          {% if keep %}
           <figure class="filmstrip-item">
             {% if image_url.type == "video" %}
               <video class="filmstrip-img" controls>
@@ -31,8 +44,10 @@ layout: kendra_default_no_footer
               <figcaption class="filmstrip-caption">{{ image_url.description }}</figcaption>
             {% endif %}
           </figure>
+          {% endif %}
         {% endfor %}
       </div>
+      {% endfor %}
     </div>
 
     {% if page.booklet_pages %}

@@ -1,8 +1,16 @@
 works:
   - title: Encaustic Experimentation
+    year: 2016
     color: "#378ADD"
     description: Candle wax, pen and ink experiments from 2016.
     project_url: "/other-works/encaustic-experimentation/"
+    image_url: "/assets/images/projects/encaustic/2895151a321545f80b7ded39_rw_1920.jpg"
+  - title: Modern Jazzercise
+    year: 2018
+    color: "#F27C8C"
+    description: Spring/Summer 2018 intimate apparel booklet.
+    project_url: "/other-works/modern-jazzercise/"
+    image_url: "/assets/images/projects/modern-jazzercise/cover-tile.jpg"
   - title: Instagram
     color: "#BA7517"
     description: More behind-the-scenes work, in-progress pieces, and general nonsense.

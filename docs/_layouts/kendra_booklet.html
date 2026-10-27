@@ -1,0 +1,22 @@
+---
+layout: kendra_default_no_footer
+---
+<script>document.body.classList.add('kendra-project-page', 'filmstrip-page');</script>
+<div class="filmstrip-project">
+  <div class="filmstrip-info">
+    <p class="filmstrip-title">{{ page.title }}{% if page.year %} <span class="filmstrip-year">{{ page.year }}</span>{% endif %}</p>
+    {% if content %}
+      <div class="filmstrip-description">{{ content }}</div>
+    {% endif %}
+  </div>
+
+  {% if page.booklet_pages %}
+    <div class="filmstrip-track">
+      {% for i in (1..page.booklet_pages) %}
+        <figure class="filmstrip-item">
+          <img class="filmstrip-img" src="{{ page.booklet_path | relative_url }}{% if i < 10 %}0{% endif %}{{ i }}.jpg" alt="{{ page.title }}, page {{ i }}" loading="lazy">
+        </figure>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
