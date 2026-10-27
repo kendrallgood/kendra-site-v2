@@ -140,6 +140,26 @@ h3 {
   opacity: 0.5;
 }
 
+// Homepage background: the yellow with the canvas weave multiplied over it.
+body:has(#hero-canvas) {
+  background-color: #efef98;
+  background-image: url('/assets/images/textures/canvas_weave.webp');
+  background-blend-mode: multiply;
+  background-size: 320px 320px;
+}
+
+// The canvas weave inside the words: the word's own color with the weave
+// softly blended over it, so the color stays close to the original. Clipped
+// to the letters.
+.word-grid .word {
+  background-color: currentColor;
+  background-image: url('/assets/images/textures/weave_shade.png');
+  background-size: 320px 320px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 // HOMEPAGE STYLING
 .word-grid .word {
   font-family: 'acumin-variable', sans-serif;
@@ -751,22 +771,52 @@ pointer-events: none;
   .word-grid .word:nth-child(3n+2) { color: #98A24A; } // Projects — yellow green from the fabric
   .word-grid .word:nth-child(3n)   { color: #F27C8C; } // Resume — pink from the fabric
 
-  .word-grid .word::before {
+  // Both layers share the same geometry, fade and hover animation.
+  .word-grid .word::before,
+  .word-grid .word::after {
     content: "";
     position: absolute;
-    left: 0; top: 50%;
-    width: 100%; height: 3px;
-    margin-top: calc(-1.5px + 0.035em); // lined up with the middle bar of the E, scales with the word
-    background: color-mix(in srgb, currentColor 80%, black); // 20% darker than the word
+    left: -25%; top: 50%;
+    width: 150%; height: 1.25em;
+    margin-top: calc(-0.625em + 0.035em); // lined up with the middle bar of the E, scales with the word
+    // Fades out toward both ends of the line.
+    // Fades out toward both ends and toward the top and bottom edges.
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+    mask-composite: intersect;
     mix-blend-mode: normal;
     transform: scaleX(0) translate3d(0,0,0);
-    transform-origin: left center;
+    transform-origin: center;
+    z-index: -1;
     transition: transform .22s ease-in-out;
   }
-  .word-grid .word:hover::before {
+  // Base layer: the word's own color, showing through the cut-outs.
+  // Light base: the full width and height of the bar, with no fade, behind
+  // the dark design.
+  .word-grid .word::before {
+    background: currentColor;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  // Pattern layer: a darker shade, cut by the woven repeat (dark areas are
+  // see-through, luminance mask).
+  .word-grid .word::after {
+    background: color-mix(in srgb, currentColor 80%, black); // 20% darker than the word
+    z-index: 1; // the dark design sits in front of the text
+    // The darker pattern stays fully opaque, with no fade at either end.
+    -webkit-mask-image: url('/assets/images/textures/bar_pattern.png');
+    -webkit-mask-size: 147.66px auto;
+    -webkit-mask-repeat: repeat;
+    mask-image: url('/assets/images/textures/bar_pattern.png');
+    mask-size: 147.66px auto;
+    mask-repeat: repeat;
+    mask-mode: luminance;
+  }
+  .word-grid .word:hover::before,
+  .word-grid .word:hover::after {
     transform: scaleX(1) translate3d(0,0,0);
   }
-
 // ============================================
 // EXODUS UNSEEN — scrapbook project page
 // ============================================
