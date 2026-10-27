@@ -75,17 +75,24 @@ h3 {
 .masthead {
     border-bottom: none;
 }
-// The whole header sits in one debossed bar, like the filter buttons.
-.masthead__inner-wrap {
-  margin: 12px 16px 0;
-  padding: 8px 18px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.14);
-  box-shadow:
-    inset 2px 2px 4px rgba(0, 0, 0, 0.45),
-    inset -1px -1px 2px rgba(255, 255, 255, 0.18),
-    0 1px 0 rgba(255, 255, 255, 0.14);
+// The nav sits on the debossed header bar, so it has no background of its own.
+.masthead #site-nav,
+.masthead .greedy-nav {
+    background: transparent;
+}
 
+// The nav links use the same header bar design as the name, not the theme's
+// red underline.
+.greedy-nav .visible-links a.kendra-link:before {
+    top: 50%;
+    bottom: auto;
+    height: 1.25em !important;
+    margin-top: -0.625em;
+    background: url('/assets/images/textures/header_bar.png') repeat;
+    background-size: 3.19em auto;
+    z-index: 1;
+}
+.masthead__inner-wrap {
   @include breakpoint($medium) {
     // padding: 1em 0;
   }
@@ -146,6 +153,49 @@ body:has(#hero-canvas) {
   background-image: url('/assets/images/textures/canvas_weave.webp');
   background-blend-mode: multiply;
   background-size: 320px 320px;
+}
+
+// On the Projects page the yellow canvas sits in the backdrop, and the
+// black and white gradient multiplies over it, with no grain.
+// Project pages: the same stretched background, fixed to the screen.
+body.kendra-project-page {
+  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+// Resume page: the same stretched background, on the backdrop.
+body:has(.resume-page) .float-backdrop {
+  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+body:has(.resume-page) .float-backdrop__base,
+body:has(.resume-page) .float-backdrop__grain {
+  display: none;
+}
+
+// Seasonal trend pages sit on the backdrop, so the image goes there.
+body:has(.seasonal-trend-page) .float-backdrop {
+  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+body:has(.seasonal-trend-page) .float-backdrop__base,
+body:has(.seasonal-trend-page) .float-backdrop__grain {
+  display: none;
+}
+
+// The Projects page background: one image stretched to fill the page.
+body:has(#float-field) .float-backdrop {
+  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+body:has(#float-field) .float-backdrop__base,
+body:has(#float-field) .float-backdrop__grain {
+  display: none;
 }
 
 // The canvas weave inside the words: the word's own color with the weave
@@ -587,12 +637,16 @@ h2.kendra-h2 {
     font-weight: 150 !important;
     color: #333;
 
+    // The current-page mark: the landing page's two-tone bar design, sized to
+    // the header text and centered on it, in front of the text.
     &:before {
       top: 50%;
-      bottom: 50%;
-      height: 2px !important;
-      background: teal !important;
-      z-index: -1;
+      bottom: auto;
+      height: 1.25em !important;
+      margin-top: -0.625em;
+      background: url('/assets/images/textures/header_bar.png') repeat;
+      background-size: 3.19em auto;
+      z-index: 1;
     }
 
     &:hover {

@@ -40,7 +40,7 @@ projects:
   - title: Exodus Unseen
     category: textile
     project_url: "/exodus-unseen"
-    cutout_image_url: "/assets/images/cutouts/exodus-unseen.png"
+    cutout_image_url: "/assets/images/cutouts/exodus-unseen-torso.png"
     hover_color: "#4fb3a9" # background tint when this project is hovered
     year: 2018
     class: hero
@@ -100,7 +100,7 @@ projects:
     category: textile
     year: 2017
     project_url: "/one-piece-wonder"
-    cutout_image_url: "/assets/images/cutouts/one-piece-wonder.png"
+    cutout_image_url: "/assets/images/cutouts/one-piece-wonder-torso.png"
     hover_color: "#c8553d" # background tint when this project is hovered
     spotlight_image_url: "/assets/images/projects/one-piece/4b81d035-f71f-471e-bf86-772445532b8d_rw_1920.jpg"
     images:
@@ -136,7 +136,7 @@ projects:
     category: textile
     year: 2015
     project_url: "/gestural-symmetry"
-    cutout_image_url: "/assets/images/cutouts/gestural-symmetry.png"
+    cutout_image_url: "/assets/images/cutouts/gestural-symmetry-torso.png"
     hover_color: "#4a6fa5" # background tint when this project is hovered
     spotlight_image_url: "/assets/images/projects/gestural/9616926d2b65f62c5982423c_rw_1920.jpg"
     images:
