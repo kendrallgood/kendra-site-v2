@@ -75,7 +75,17 @@ h3 {
 .masthead {
     border-bottom: none;
 }
+// The whole header sits in one debossed bar, like the filter buttons.
 .masthead__inner-wrap {
+  margin: 12px 16px 0;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.14);
+  box-shadow:
+    inset 2px 2px 4px rgba(0, 0, 0, 0.45),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.14);
+
   @include breakpoint($medium) {
     // padding: 1em 0;
   }
@@ -113,6 +123,21 @@ h3 {
       text-decoration: none;
     }
   }
+}
+
+// Header text uses the same font as the project labels, a step bolder,
+// in capitals.
+.masthead .kendra-link,
+.masthead .site-title {
+  font-family: 'acumin-variable', sans-serif;
+  font-variation-settings: 'wght' 700, 'wdth' 100, 'slnt' 0;
+  font-weight: 700 !important; // overrides the thin weight set on .kendra-link
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0 6px;
+  font-size: 12px;
+  color: #000;
+  opacity: 0.5;
 }
 
 // HOMEPAGE STYLING
@@ -1170,7 +1195,7 @@ body.backdrop--bloom {
   font-family: 'acumin-variable', sans-serif; // loaded from Adobe Fonts
   font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 7px 18px;
@@ -1203,7 +1228,7 @@ body.backdrop--bloom {
   position: relative;
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto 4em;
+  margin: 3em auto 4em;
 }
 
 .float-item {
@@ -1230,47 +1255,63 @@ body.backdrop--bloom {
 
 .float-item__img {
   max-width: 100%;
-  max-height: calc(100% - 28px); // leave room for the label underneath
+  max-height: 100%;
   min-height: 0;
   object-fit: contain;
   filter: drop-shadow(0 18px 24px rgba(20, 35, 55, 0.18));
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
   user-select: none;
 }
 
 .float-item:hover .float-item__img,
 .float-item:focus-visible .float-item__img {
   transform: scale(1.06);
+  opacity: 0.45;
 }
 
 .float-item__label {
-  margin-top: 10px;
-  transform: translateY(6px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 6px));
   white-space: nowrap;
-  font-family: 'Raleway', sans-serif;
-  font-size: 12px;
+  font-family: acumin-variable, sans-serif;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-decoration: none;
+  color: #1a1a1a;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.float-item__title,
 .float-item__year {
-  margin-left: 0.6em;
+  display: block;
+}
+
+.float-item__title {
+  font-weight: 600;
+}
+
+.float-item__year {
   opacity: 0.7;
 }
 
 .float-item:hover .float-item__label,
 .float-item:focus-visible .float-item__label {
   opacity: 1;
-  transform: none;
+  transform: translate(-50%, -50%);
 }
 
 // Touch screens have no hover, so always show the label there.
 @media (hover: none) {
   .float-item__label {
     opacity: 1;
-    transform: none;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -1562,67 +1603,6 @@ body.backdrop--bloom {
   color: #888;
   font-family: 'Raleway', sans-serif;
   font-style: italic;
-}
-
-// Arrange mode (local preview only, /projects/?arrange)
-.is-arranging {
-  overflow-anchor: none; // stop the browser nudging the scroll while pieces move
-
-  .float-item {
-    cursor: grab;
-    outline: 1px dashed rgba(0, 0, 0, 0.35);
-    // Pieces must track the pointer exactly while being dragged.
-    transition: none !important;
-  }
-
-  .float-item.is-dragging {
-    cursor: grabbing;
-    z-index: 5;
-    outline-style: solid;
-  }
-
-  .float-item__label {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.arrange-handle {
-  position: absolute;
-  right: -7px;
-  bottom: -7px;
-  width: 16px;
-  height: 16px;
-  background: #1a1a1a;
-  border: 2px solid #fff;
-  cursor: nwse-resize;
-}
-
-.arrange-bar {
-  position: fixed;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  z-index: 20;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  max-width: calc(100% - 32px);
-  padding: 10px 14px;
-  background: #1a1a1a;
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-  font-size: 13px;
-
-  button {
-    font: inherit;
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 4px 10px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
 }
 
 // Backdrop tuning panel (local preview only, ?tune)

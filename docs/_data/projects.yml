@@ -4,7 +4,6 @@ projects:
     project_url: "/kaleidoscope"
     cutout_image_url: "/assets/images/cutouts/kaleidoscope.png"
     hover_color: "#7fb3c8" # background tint when this project is hovered
-    float_position: "0.5398, 0.3558, 0.2602" # left, top, size as fractions of page width (set in arrange mode)
     year: 2020
     download_link: "/assets/images/projects/kaleidoscope/Kaleido Development.pdf"
     spotlight_image_url: "/assets/images/projects/kaleidoscope/dude blanket clean.jpg"
@@ -43,7 +42,6 @@ projects:
     project_url: "/exodus-unseen"
     cutout_image_url: "/assets/images/cutouts/exodus-unseen.png"
     hover_color: "#4fb3a9" # background tint when this project is hovered
-    float_position: "0.0639, 0.0671, 0.45" # left, top, size as fractions of page width (set in arrange mode)
     year: 2018
     class: hero
     download_link: "/assets/images/projects/exodus/EXODUS UNSEEN.pdf"
@@ -73,7 +71,6 @@ projects:
     project_url: "/open-line"
     cutout_image_url: "/assets/images/cutouts/open-line.png"
     hover_color: "#a9b0b8" # background tint when this project is hovered
-    float_position: "0.7176, 0.0859, 0.2546" # left, top, size as fractions of page width (set in arrange mode)
     year: 2020
     download_link: "/assets/images/projects/open-line/GTA BOOK (1).pdf"
     spotlight_image_url: "/assets/images/projects/open-line/AK16140 Shibori CLR (4 of 8).jpg"
@@ -105,7 +102,6 @@ projects:
     project_url: "/one-piece-wonder"
     cutout_image_url: "/assets/images/cutouts/one-piece-wonder.png"
     hover_color: "#c8553d" # background tint when this project is hovered
-    float_position: "0.2636, 0.548, 0.2785" # left, top, size as fractions of page width (set in arrange mode)
     spotlight_image_url: "/assets/images/projects/one-piece/4b81d035-f71f-471e-bf86-772445532b8d_rw_1920.jpg"
     images:
       - url: "/assets/images/projects/one-piece/e508c0cd-e443-45a1-97b3-6df38dd3ac91_rw_3840.jpg"
@@ -126,7 +122,6 @@ projects:
     project_url: "/mellow-yellow"
     cutout_image_url: "/assets/images/cutouts/mellow-yellow.png"
     hover_color: "#e9b823" # background tint when this project is hovered
-    float_position: "0.7101, 0.961, 0.2108" # left, top, size as fractions of page width (set in arrange mode)
     description: Whole garment knitted on Shima Seiki Mach 2x 8 gauge machine using the Apex3 software. Yarn; 3-Ply, 8/1 MT 100% COTTON, 20/1 100% COTTON, 18/1 100% COTTON, Dyed using direct dyes. Dyed twice for more rich golden color
     spotlight_image_url: "/assets/images/projects/mellow/2eb01e73-1d73-474a-9605-e2aa22478b26_rw_3840.jpg"
     images:
@@ -137,28 +132,12 @@ projects:
       - url: "/assets/images/projects/mellow/1d3bf0bb-9fab-4238-bb37-7a65574b4d51_rw_3840.jpg"
       - url: "/assets/images/projects/mellow/599292ae-09df-4f5c-98d2-8a2cf0dea6b8_rw_3840.JPG"
       - url: "/assets/images/projects/mellow/IMG_0918.JPG"
-  - title: Cyclery
-    category: textile
-    project_url: "/cyclery"
-    cutout_image_url: "/assets/images/cutouts/cyclery.png"
-    hover_color: "#c9b79c" # background tint when this project is hovered
-    float_position: "0.0347, 1.3437, 0.2185" # left, top, size as fractions of page width (set in arrange mode)
-    year: 2016
-    spotlight_image_url: "/assets/images/projects/cyclery/small four kendras copy.png"
-    images:
-      - url: "/assets/images/projects/cyclery/bike logo.png"
-      - url: "/assets/images/projects/cyclery/small four kendras copy.png"
-      - url: "/assets/images/projects/cyclery/bike N I T2 (1).png"
-        description: Bitmap file with engineered hoodie body and hood along with swatches of each texture created in Lectra Kaledo design software.
-      - url: "/assets/images/projects/cyclery/bike K N I T2 (1).png"
-      - url: "/assets/images/projects/cyclery/Kendra-Bike-Hoodies.gif"
   - title: Gestural Symmetry
     category: textile
     year: 2015
     project_url: "/gestural-symmetry"
     cutout_image_url: "/assets/images/cutouts/gestural-symmetry.png"
     hover_color: "#4a6fa5" # background tint when this project is hovered
-    float_position: "0.0773, 0.8637, 0.4115" # left, top, size as fractions of page width (set in arrange mode)
     spotlight_image_url: "/assets/images/projects/gestural/9616926d2b65f62c5982423c_rw_1920.jpg"
     images:
       - url: "/assets/images/projects/gestural/9616926d2b65f62c5982423c_rw_1920.jpg"
@@ -205,41 +184,11 @@ projects:
   #     - url: "/assets/images/projects/yarn/IMG_2601.m4v"
   #       description: The package of yarn is transferred onto a cone for easier use while knitting.
   #       type: video
-  - title: Journey Lines
-    category: textile
-    project_url: "/journey-lines"
-    cutout_image_url: "/assets/images/cutouts/journey-lines.png"
-    hover_color: "#d9735f" # background tint when this project is hovered
-    float_position: "0.6802, 1.473, 0.2577" # left, top, size as fractions of page width (set in arrange mode)
-    year: 2017
-    spotlight_image_url: "/assets/images/projects/journey/26f6481cdeffd65419ab55ae_rw_1200.jpg"
-    images:
-      - url: "/assets/images/projects/journey/26f6481cdeffd65419ab55ae_rw_1200.jpg"
-      - url: "/assets/images/projects/journey/5d263bf2d200b1ff06a0aa99_rw_1920.jpg"
-      - url: "/assets/images/projects/journey/811622897f3493cf6f27058d_rw_1200.jpg"
-        description: >-
-          Loom Specs: AVL Computer Dobby, 8 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
-      - url: "/assets/images/projects/journey/6c1251ca5025f40ff12f935e_rw_1920.jpg"
-        description:  >-
-          Loom Specs: AVL Computer Dobby, 8 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
-      - url: "/assets/images/projects/journey/fd5a6978b37d12aa4dfc4bbc_rw_1920.jpg"
-        description:  >-
-          Loom Specs: AVL Computer Dobby, 8 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
-      - url: "/assets/images/projects/journey/ab0fca5baebb04cb7b982faf_rw_1920.jpg"
-        description:  >-
-          Loom Specs: AVL Computer Dobby, 8 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
-      - url: "/assets/images/projects/journey/a4aa4f6f076ae61115f63d79_rw_1200.jpg"
-        description:  >-
-          Loom Specs: AVL Computer Dobby, 16 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
-      - url: "/assets/images/projects/journey/b27ab710111f7aaaec926291_rw_1920.jpg"
-        description:  >-
-          Loom Specs: AVL Computer Dobby, 16 Harnesses,12 dents/inch, 1end/dent, 12 ends/inch
   - title: SPRING/SUMMER Material Trend
     category: footwear
     project_url: "/spring-summer-material-trend"
     cutout_image_url: "/assets/images/cutouts/fall-winter-material-trend.png"
     hover_color: "#f0c4d1"
-    float_position: "0.7744, 0.7301, 0.2070"
     year: "SS27 + SS28"
     spotlight_image_url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
     images:
@@ -256,7 +205,6 @@ projects:
     project_url: "/fall-winter-material-trend"
     cutout_image_url: "/assets/images/cutouts/spring-summer-material-trend.png"
     hover_color: "#d4a574"
-    float_position: "0.4594, 0.0493, 0.2049"
     year: "FW26 + FW27"
     spotlight_image_url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
     images:

@@ -5,8 +5,7 @@ layout: kendra_default
 
 {% if site.data.projects %}
   <div class="projects-filter" id="projects-filter">
-    <button class="projects-filter__pill is-active" data-cat="all" type="button">All work</button>
-    <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
+    <button class="projects-filter__pill is-active" data-cat="textile" type="button">Textile design</button>
     <button class="projects-filter__pill" data-cat="footwear" type="button">Footwear &amp; material design</button>
   </div>
 
@@ -16,8 +15,7 @@ layout: kendra_default
     <a class="float-item"
        href="{{ site.baseurl }}{{ project.project_url }}"
        data-category="{{ project.category | default: 'textile' }}"
-       data-color="{{ project.hover_color | default: '#9fb8cf' }}"
-       data-pos="{{ project.float_position }}">
+       data-color="{{ project.hover_color | default: '#9fb8cf' }}">
       <img class="float-item__img"
            src="{{ site.baseurl }}{{ project.cutout_image_url | default: project.spotlight_image_url }}"
            alt="{{ project.title }}" loading="lazy" draggable="false">
@@ -41,101 +39,38 @@ layout: kendra_default
     var empty = document.getElementById('projects-empty');
     var tint = document.getElementById('float-tint');
     var pills = document.querySelectorAll('.projects-filter__pill');
-    var currentCat = 'all';
-    var MOBILE_BELOW = 768;
+    var currentCat = 'textile';
+    var GAP = 24;
+    var INSET = 24;
 
-    // Arrange mode: only on the local preview, opened with ?arrange.
-    var ARRANGE_KEY = 'float-arrangement-v1';
-    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-    var arranging = local && /[?&]arrange\b/.test(location.search);
-
-    function title(el) { return el.querySelector('.float-item__title').textContent.trim(); }
-
-    // Saved positions are fractions of the field width: [left, top, size].
-    // Storing everything relative to width keeps the arrangement's shape
-    // at any desktop screen size.
-    function parsePos(str) {
-      if (!str) return null;
-      var n = str.split(',').map(parseFloat);
-      return n.length === 3 && n.every(isFinite) ? n : null;
-    }
-    var positions = {};
-    items.forEach(function (el) { positions[title(el)] = parsePos(el.dataset.pos); });
-    if (arranging) {
-      try {
-        var saved = JSON.parse(localStorage.getItem(ARRANGE_KEY) || 'null');
-        if (saved) Object.keys(saved).forEach(function (k) { positions[k] = saved[k]; });
-      } catch (e) {}
-    }
-
-    // Stable pseudo-random number per project, so the automatic scatter
-    // doesn't reshuffle on every visit or resize.
-    function seeded(str, salt) {
-      var h = 2166136261 ^ salt;
-      for (var i = 0; i < str.length; i++) {
-        h = Math.imul(h ^ str.charCodeAt(i), 16777619);
-      }
-      return ((h >>> 0) % 1000) / 1000;
-    }
-
-    // Lane order zig-zags across the page so neighbours never stack.
-    var LANE_ORDER = { 4: [0, 2, 1, 3, 0, 3, 1, 2], 3: [0, 2, 1, 2, 0, 1] };
-
-    function autoPositions(visible, width) {
-      var mobile = width < MOBILE_BELOW;
-      var lanes = width >= 1100 ? 4 : 3;
-      var size = mobile ? Math.min(width * 0.8, 420) : Math.min(300, width / lanes * 0.9);
-      var laneWidth = width / lanes;
-      var step = mobile ? size * 1.05 : size * 0.72;
-      return visible.map(function (el, i) {
-        var t = title(el), x, y;
-        if (mobile) {
-          x = (width - size) / 2 + (seeded(t, 1) - 0.5) * width * 0.12;
-          y = i * step;
-        } else {
-          var order = LANE_ORDER[lanes];
-          x = order[i % order.length] * laneWidth + (laneWidth - size) / 2 + (seeded(t, 1) - 0.5) * laneWidth * 0.35;
-          y = i * step + (seeded(t, 2) - 0.5) * step * 0.4 + step * 0.2;
-        }
-        return [Math.max(0, Math.min(width - size, x)), Math.max(0, y), size];
-      });
-    }
-
-    function place(el, x, y, size) {
-      el.style.width = size + 'px';
-      el.style.height = size + 'px';
-      el.style.transform = 'translate(' + Math.round(x) + 'px, ' + Math.round(y) + 'px)';
+    // Every piece is the same size and sits in a regular grid.
+    // Columns drop as the window narrows.
+    function columnsFor(width) {
+      return width >= 1100 ? 4 : width >= 768 ? 3 : 2;
     }
 
     function layout() {
       var width = field.clientWidth;
       var visible = items.filter(function (el) {
-        return currentCat === 'all' || el.dataset.category === currentCat;
+        return el.dataset.category === currentCat;
       });
       items.forEach(function (el) {
         el.classList.toggle('is-out', visible.indexOf(el) === -1);
       });
       empty.hidden = visible.length > 0;
 
-      // Use the hand-made arrangement on desktop when every visible piece
-      // has one; otherwise fall back to the automatic scatter.
-      var manual = width >= MOBILE_BELOW && visible.length &&
-        visible.every(function (el) { return positions[title(el)]; });
-      var boxes = manual
-        ? visible.map(function (el) {
-            var p = positions[title(el)];
-            return [p[0] * width, p[1] * width, p[2] * width];
-          })
-        : autoPositions(visible, width);
-
-      var bottom = 0;
+      var cols = columnsFor(width);
+      var size = (width - 2 * INSET - GAP * (cols - 1)) / cols;
       visible.forEach(function (el, i) {
-        var b = boxes[i];
-        place(el, b[0], b[1], b[2]);
-        bottom = Math.max(bottom, b[1] + b[2]);
+        var x = INSET + (i % cols) * (size + GAP);
+        var y = Math.floor(i / cols) * (size + GAP);
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.transform = 'translate(' + Math.round(x) + 'px, ' + Math.round(y) + 'px)';
       });
-      field.style.height = visible.length ? bottom + 80 + 'px' : '0px';
-      return boxes;
+
+      var rows = Math.ceil(visible.length / cols);
+      field.style.height = rows ? rows * (size + GAP) - GAP + 80 + 'px' : '0px';
     }
 
     // A short grace period before fading out, so moving from one piece to
@@ -143,7 +78,6 @@ layout: kendra_default
     var tintOffTimer;
     items.forEach(function (el) {
       el.addEventListener('mouseenter', function () {
-        if (arranging) return;
         clearTimeout(tintOffTimer);
         tint.style.setProperty('--tint', el.dataset.color);
         tint.classList.add('is-on');
@@ -169,93 +103,7 @@ layout: kendra_default
       resizeTimer = setTimeout(layout, 120);
     });
 
-    var initialBoxes = layout();
+    layout();
     requestAnimationFrame(function () { field.classList.add('is-ready'); });
-
-    if (arranging) setUpArranging(initialBoxes);
-
-    function setUpArranging(boxes) {
-      var width = field.clientWidth;
-      // Start from whatever is on screen, so nothing jumps.
-      items.forEach(function (el, i) {
-        var t = title(el);
-        if (!positions[t] && boxes[i]) {
-          positions[t] = [boxes[i][0] / width, boxes[i][1] / width, boxes[i][2] / width];
-        }
-      });
-      document.body.classList.add('is-arranging');
-      field.classList.remove('is-ready');
-
-      var bar = document.createElement('div');
-      bar.className = 'arrange-bar';
-      bar.innerHTML =
-        '<span><strong>Arrange mode</strong> · drag a piece to move it, drag its corner to resize. ' +
-        'Changes save automatically. Tell Claude when you are happy.</span>' +
-        '<button type="button" data-act="copy">Copy layout</button>' +
-        '<button type="button" data-act="reset">Reset to automatic</button>';
-      document.body.appendChild(bar);
-      bar.querySelector('[data-act=copy]').onclick = function () {
-        var text = 'Projects layout: ' + JSON.stringify(positions);
-        var btn = this;
-        navigator.clipboard.writeText(text).then(function () {
-          btn.textContent = 'Copied! Paste it to Claude';
-        }, function () {
-          window.prompt('Copy this and paste it to Claude:', text);
-        });
-      };
-      bar.querySelector('[data-act=reset]').onclick = function () {
-        try { localStorage.removeItem(ARRANGE_KEY); } catch (e) {}
-        location.reload();
-      };
-
-      function save() {
-        try { localStorage.setItem(ARRANGE_KEY, JSON.stringify(positions)); } catch (e) {}
-      }
-      save();
-
-      items.forEach(function (el) {
-        el.addEventListener('click', function (e) { e.preventDefault(); });
-        var handle = document.createElement('span');
-        handle.className = 'arrange-handle';
-        handle.title = 'Drag to resize';
-        el.appendChild(handle);
-
-        el.addEventListener('pointerdown', function (e) {
-          e.preventDefault();
-          var w = field.clientWidth;
-          var p = positions[title(el)].slice();
-          var startX = e.clientX, startY = e.clientY;
-          var resizing = e.target === handle;
-          el.setPointerCapture(e.pointerId);
-          el.classList.add('is-dragging');
-
-          function move(ev) {
-            var dx = (ev.clientX - startX) / w, dy = (ev.clientY - startY) / w;
-            var next = resizing
-              ? [p[0], p[1], Math.max(0.06, p[2] + Math.max(dx, dy))]
-              : [Math.max(0, Math.min(1 - p[2], p[0] + dx)), Math.max(0, p[1] + dy), p[2]];
-            positions[title(el)] = next;
-            place(el, next[0] * w, next[1] * w, next[2] * w);
-          }
-          function up() {
-            el.removeEventListener('pointermove', move);
-            el.removeEventListener('pointerup', up);
-            el.classList.remove('is-dragging');
-            save();
-            // Only grow the field if needed; a full re-layout here could
-            // shift the page under the pointer.
-            var w2 = field.clientWidth, bottom = 0;
-            Object.keys(positions).forEach(function (k) {
-              var q = positions[k];
-              if (q) bottom = Math.max(bottom, (q[1] + q[2]) * w2);
-            });
-            field.style.height = Math.max(field.offsetHeight, bottom + 80) + 'px';
-          }
-          el.addEventListener('pointermove', move);
-          el.addEventListener('pointerup', up);
-        });
-      });
-      layout();
-    }
   })();
 </script>
