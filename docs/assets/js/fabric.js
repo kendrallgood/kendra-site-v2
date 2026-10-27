@@ -48,7 +48,7 @@ var tmpForce = new THREE.Vector3();
 var backgroundColor = 0xffffff; 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
-var clothPath = 'assets/images/textures/memphis_72_ppi_4_rpt.jpg';
+var clothPath = 'assets/images/textures/custom_fabric_texture.jpg';
 var clothPathNormalMap = 'assets/images/textures/memphis_72_ppi_4_rpt_normal.jpg';
 
 var clothPathNormalMap = 'assets/images/textures/memphis_72_ppi_4_rpt_norm_4.jpg';
@@ -56,6 +56,90 @@ var floorPosition = - window.innerHeight / 2;
 var ceilingPosition = window.innerHeight / 2 + window.innerHeight;
 
 var theta = 0;
+
+// Multiplies the canvas weave over the fabric photo, so the weave shows
+// through the printed pattern. The texture is filled in once both images load.
+function blendCanvasWeave( texture, fabricSrc, weaveSrc ) {
+    var fabric = new Image();
+    var weave = new Image();
+    var loaded = 0;
+
+    function onLoad() {
+        if ( ++loaded < 2 ) return;
+        var canvas = document.createElement( 'canvas' );
+        canvas.width = fabric.naturalWidth;
+        canvas.height = fabric.naturalHeight;
+        var ctx = canvas.getContext( '2d' );
+        ctx.drawImage( fabric, 0, 0 );
+
+        var pattern = ctx.createPattern( weave, 'repeat' );
+        pattern.setTransform( new DOMMatrix().scale( 0.25 ) ); // finer weave
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.fillStyle = pattern;
+        ctx.fillRect( 0, 0, canvas.width, canvas.height );
+
+        texture.image = canvas;
+        texture.needsUpdate = true;
+    }
+
+    fabric.onload = onLoad;
+    weave.onload = onLoad;
+    fabric.src = fabricSrc;
+    weave.src = weaveSrc;
+}
+
+// Frayed edges: an alpha map that cuts loose threads in from each border.
+// White keeps the cloth, black lets the background show through.
+function frayedAlphaMap( patternSrc ) {
+    var size = 1024;
+    var canvas = document.createElement( 'canvas' );
+    canvas.width = size;
+    canvas.height = size;
+    var ctx = canvas.getContext( '2d' );
+    ctx.fillStyle = '#fff';
+    ctx.fillRect( 0, 0, size, size );
+    var texture = new THREE.CanvasTexture( canvas );
+    // No mipmaps, so the cut-out edges stay crisp instead of blurring.
+    texture.generateMipmaps = false;
+    texture.minFilter = THREE.LinearFilter;
+
+    // The pattern loads after the first frame, so the cut-outs are drawn
+    // once it is ready.
+    var pattern = new Image();
+    pattern.onload = function () {
+        var tile = ctx.createPattern( pattern, 'repeat' );
+        tile.setTransform( new DOMMatrix().scale( 1.8 ) );
+        ctx.fillStyle = tile;
+        ctx.fillRect( 0, 0, size, size );
+
+        // The lace is drawn flipped, so it sits on the bottom edge of the
+        // cloth on screen.
+        ctx.save();
+        ctx.translate( 0, size );
+        ctx.scale( 1, -1 );
+
+        // Lace: scalloped cut-outs along the outer edge, with a staggered
+        // row of openwork holes just inside them.
+        ctx.fillStyle = '#000';
+        for ( var sx = 0; sx < size; sx += 36 ) {
+            ctx.beginPath();
+            ctx.arc( sx, size, 12, Math.PI, 0 );
+            ctx.fill();
+        }
+        for ( var hx = 0; hx < size; hx += 22 ) {
+            var holeY = size - 36;
+            var offset = Math.floor( hx / 22 ) % 2 ? 11 : 0;
+            ctx.beginPath();
+            ctx.arc( hx + offset, holeY, 5, 0, Math.PI * 2 );
+            ctx.fill();
+        }
+
+        ctx.restore();
+        texture.needsUpdate = true;
+    };
+    pattern.src = patternSrc;
+    return texture;
+}
 
 function plane( width, height ) {
 
@@ -411,8 +495,10 @@ function init() {
     // x: 201.21656221334072, y: 909.328513842752, z: 1993.845696252871
 
     // lights
-    scene.add( new THREE.AmbientLight( 0x666666 ) );
-    var light = new THREE.DirectionalLight( 0xdfebff, 1 );
+    // Ambient and directional light add up to 1, so the print shows at its
+    // true color where it faces the light and only darkens in the folds.
+    scene.add( new THREE.AmbientLight( 0xa0a0a0 ) );
+    var light = new THREE.DirectionalLight( 0xffffff, 0.37 );
     light.position.set( 50, 200, 100 );
     light.position.multiplyScalar( 1.3 );
 
@@ -433,16 +519,19 @@ function init() {
     scene.add( light );
 
     // cloth material
-    var clothTexture = loader.load(clothPath);
+    var clothTexture = new THREE.Texture();
+    blendCanvasWeave( clothTexture, clothPath, 'assets/images/textures/canvas_weave.webp' );
     clothTexture.anisotropy = 1;
-
-    var normalMap = loader.load(clothPathNormalMap);
 
     var clothMaterial = new THREE.MeshPhongMaterial( {
         map: clothTexture,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.7
+        opacity: 1,
+        specular: 0x111111,
+        shininess: 5,
+        alphaMap: frayedAlphaMap( 'assets/images/textures/weave_pattern.png' ),
+        alphaTest: 0.5
     } );
 
     clothMaterial.map.wrapS = clothMaterial.map.wrapT = THREE.RepeatWrapping;
@@ -450,11 +539,6 @@ function init() {
     // Now we only need to set a new map.repeat
     clothMaterial.map.repeat.set( 1, 1 );
 
-    clothMaterial.normalMap = normalMap;
-
-    clothMaterial.normalMap.wrapS = clothMaterial.normalMap.wrapT = THREE.ClampToEdgeWrapping;
-    clothMaterial.normalMap.repeat.set( 1, 1 );
-    
     // cloth geometry
     clothGeometry = new THREE.ParametricBufferGeometry( clothFunction, cloth.w, cloth.h );
 

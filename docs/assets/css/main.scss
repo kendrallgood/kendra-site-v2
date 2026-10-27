@@ -747,24 +747,24 @@ pointer-events: none;
     text-decoration: none;
     text-transform: uppercase;
   }
-  .word-grid .word:nth-child(3n+1) { color: #1B6C64; } // About — teal
-  .word-grid .word:nth-child(3n+2) { color: #8B5E82; } // Projects — purple
-  .word-grid .word:nth-child(3n)   { color: #E77E96; } // Resume — pink
+  .word-grid .word:nth-child(3n+1) { color: #1A7E80; } // About — teal from the fabric
+  .word-grid .word:nth-child(3n+2) { color: #98A24A; } // Projects — yellow green from the fabric
+  .word-grid .word:nth-child(3n)   { color: #F27C8C; } // Resume — pink from the fabric
 
   .word-grid .word::before {
     content: "";
     position: absolute;
     left: 0; top: 50%;
-    width: 100%; height: 6px;
-    margin-top: -3px;
-    background: black;
+    width: 100%; height: 3px;
+    margin-top: calc(-1.5px + 0.035em); // lined up with the middle bar of the E, scales with the word
+    background: color-mix(in srgb, currentColor 80%, black); // 20% darker than the word
     mix-blend-mode: normal;
     transform: scaleX(0) translate3d(0,0,0);
     transform-origin: left center;
     transition: transform .22s ease-in-out;
   }
   .word-grid .word:hover::before {
-    transform: scaleX(1) rotate(-0.6deg) translate3d(0,0,0);
+    transform: scaleX(1) translate3d(0,0,0);
   }
 
 // ============================================
