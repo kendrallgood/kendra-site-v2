@@ -32,6 +32,7 @@ projects:
       - url: "/assets/images/projects/kaleidoscope/kassia knit file close.PNG"
         description: Close up of Kaleidoscope knit file.
   - title: Exodus Unseen
+    fade_bottom: true
     category: textile
     project_url: "/exodus-unseen"
     cutout_image_url: "/assets/images/cutouts/exodus-unseen-torso.png"
@@ -87,6 +88,7 @@ projects:
       - url: "/assets/images/projects/open-line/5 plexus.jpg"
         description: Plexus is a knit construction I aided in developing, working closely with our Knit Technician. The result was a breathable mesh looking fabric created by systematically tucking yarn on the knit machine that correlated with the design files.
   - title: One Piece Wonder
+    fade_bottom: true
     category: textile
     year: 2017
     project_url: "/one-piece-wonder"
@@ -102,6 +104,7 @@ projects:
       - url: "/assets/images/projects/one-piece/a3057e45-74a7-4779-85ce-949c685d8f27_rw_1920.jpg"
       - url: "/assets/images/projects/one-piece/c0477401-bcdc-4c1b-bfb6-406afbaac22a_rw_1920.jpg"
   - title: Mellow Yellow
+    fade_bottom: true
     category: textile
     year: 2017
     project_url: "/mellow-yellow"
@@ -119,6 +122,7 @@ projects:
       - url: "/assets/images/projects/mellow/IMG_0918.JPG"
         description: Result of fabric after second dye bath.
   - title: Gestural Symmetry
+    fade_bottom: true
     category: textile
     year: 2015
     project_url: "/gestural-symmetry"

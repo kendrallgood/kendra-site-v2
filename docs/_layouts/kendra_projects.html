@@ -12,7 +12,7 @@ layout: kendra_default
   <div class="float-field" id="float-field">
     {% for project in site.data.projects.projects %}
     {% unless project.hidden %}
-    <a class="float-item"
+    <a class="float-item{% if project.fade_bottom %} fade-bottom{% endif %}"
        href="{{ site.baseurl }}{{ project.project_url }}"
        data-category="{{ project.category | default: 'textile' }}"
        data-color="{{ project.hover_color | default: '#9fb8cf' }}">
