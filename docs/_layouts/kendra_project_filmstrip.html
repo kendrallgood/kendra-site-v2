@@ -1,0 +1,67 @@
+---
+layout: kendra_default_no_footer
+---
+<script>document.body.classList.add('kendra-project-page', 'filmstrip-page');</script>
+{% for project in site.data.projects.projects %}
+  {% if project.title == page.title %}
+    <div class="filmstrip-project">
+      <div class="filmstrip-info">
+        <p class="filmstrip-title">
+          {{ project.title }}{% if project.year %} <span class="filmstrip-year">{{ project.year }}</span>{% endif %}
+        </p>
+        {% if content %}
+          <div class="filmstrip-description">{{ content }}</div>
+        {% endif %}
+        {% if page.booklet_pages %}
+          <button class="booklet-open" type="button" id="booklet-open-btn">View booklet</button>
+        {% endif %}
+      </div>
+
+      <div class="filmstrip-track">
+        {% for image_url in project.images %}
+          <figure class="filmstrip-item">
+            {% if image_url.type == "video" %}
+              <video class="filmstrip-img" controls>
+                <source src="{{ site.baseurl }}{{ image_url.url }}" type="video/mp4">
+              </video>
+            {% else %}
+              <img class="filmstrip-img" src="{{ site.baseurl }}{{ image_url.url }}" alt="{{ project.title }}">
+            {% endif %}
+            {% if image_url.description %}
+              <figcaption class="filmstrip-caption">{{ image_url.description }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if page.booklet_pages %}
+      <div class="booklet-wrap" id="booklet-wrap" hidden>
+        <button class="booklet-close" type="button" id="booklet-close-btn">&times; close</button>
+        <div class="booklet-pages">
+          {% for i in (1..page.booklet_pages) %}
+            <img src="{{ page.booklet_path | relative_url }}{% if i < 10 %}0{% endif %}{{ i }}.jpg" alt="{{ project.title }} booklet, page {{ i }}" loading="lazy">
+          {% endfor %}
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var openBtn = document.getElementById('booklet-open-btn');
+          var closeBtn = document.getElementById('booklet-close-btn');
+          var wrap = document.getElementById('booklet-wrap');
+
+          openBtn.addEventListener('click', function () {
+            wrap.hidden = false;
+            wrap.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+          });
+
+          closeBtn.addEventListener('click', function () {
+            wrap.hidden = true;
+            document.body.style.overflow = '';
+          });
+        });
+      </script>
+    {% endif %}
+  {% endif %}
+{% endfor %}

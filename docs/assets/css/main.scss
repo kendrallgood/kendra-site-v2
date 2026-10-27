@@ -143,8 +143,7 @@ h3 {
   letter-spacing: 0.04em;
   padding: 0 6px;
   font-size: 12px;
-  color: #000;
-  opacity: 0.5;
+  color: rgba(0, 0, 0, 0.5); // half-transparent text only, so the bar stays solid
 }
 
 // Homepage background: the yellow with the canvas weave multiplied over it.
@@ -324,6 +323,196 @@ body:has(#float-field) .float-backdrop__grain {
   }
 }
     
+// FILMSTRIP PROJECT PAGE (Gestural Symmetry): a row of photos that grow on
+// hover, with the caption over the photo and the text below.
+.filmstrip-project {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 40px;
+}
+
+.filmstrip-track {
+  display: flex;
+  align-items: center; // photos grow out from their middle
+  justify-content: safe center; // centered when the photos fit, still scrollable when they don't
+  min-height: calc(66vh + 110px); // tall enough for the largest photo and its two-paragraph caption
+  margin-top: calc(-54px - 13vh); // pulls the row up under the text; enlarged photos may cover it
+  gap: 14px;
+  padding: 110px 24px 0; // room above the photos for their captions
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filmstrip-track::-webkit-scrollbar {
+  display: none;
+}
+
+.filmstrip-item {
+  position: relative;
+  flex: 0 0 auto;
+  height: 40vh;
+  margin: 0;
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.filmstrip-item:hover {
+  height: 66vh;
+}
+
+.filmstrip-img {
+  display: block;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.filmstrip-caption {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 10px;
+  max-width: 760px;
+  line-height: 1.4;
+  white-space: pre-line; // keeps the paragraph breaks in a caption
+  color: #1a1a1a;
+  font-family: 'acumin-variable', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  font-variation-settings: 'wght' 900, 'wdth' 100, 'slnt' 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.filmstrip-item:hover .filmstrip-caption {
+  opacity: 1;
+}
+
+.filmstrip-info {
+  max-width: 720px;
+  margin: 0;
+  padding: 16px 24px 0 24px; // starts just below the header, lined up with the first photo
+  color: #1a1a1a;
+}
+
+// While a photo is enlarged, the text above fades back to 25%.
+.filmstrip-info {
+  transition: opacity 0.3s ease;
+}
+.filmstrip-project:has(.filmstrip-item:hover) .filmstrip-info {
+  opacity: 0.25;
+}
+
+.filmstrip-title {
+  font-family: 'acumin-variable', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.filmstrip-year {
+  opacity: 0.7;
+}
+
+.filmstrip-description {
+  margin-top: 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.filmstrip-description p + p {
+  margin-top: 1em;
+}
+
+// Booklet viewer: a flipbook of the PDF's pages, opened over the page.
+.booklet-open {
+  position: relative;
+  z-index: 3; // above the photo row, which is pulled up over the text
+  margin-left: 0;
+  margin-top: 18px;
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid #1a1a1a;
+  color: #1a1a1a;
+  font-family: 'acumin-variable', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.booklet-open:hover {
+  background: url('/assets/images/textures/header_bar.png') repeat;
+  background-size: 3.19em auto; // same scale as the header bar
+}
+
+.booklet-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  background: rgba(26, 26, 26, 0.92);
+}
+
+// The PDF pages, one under another, each at full width so the text is readable.
+.booklet-pages {
+  width: min(92vw, 900px);
+  margin: 70px auto 40px;
+}
+.booklet-pages img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 24px;
+  background: #fff;
+}
+.booklet-wrap[hidden] {
+  display: none;
+}
+
+.booklet-close {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  font-family: 'acumin-variable', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+// Sized to a two-page spread (each page is 1210 x 935), so the pages are not stretched.
+.booklet-flipbook {
+  width: min(92vw, calc(min(80vh, 700px) * 2.59));
+  aspect-ratio: 2.59 / 1;
+}
+@media (max-width: 700px) {
+  .booklet-flipbook {
+    width: 92vw;
+    aspect-ratio: 1.294 / 1;
+  }
+}
+
+// The download button sits on the gray background, so it is dark, not white.
+.kendra-project-page .filmstrip-info .dl-link {
+  position: relative;
+  z-index: 3; // above the photo row, which is pulled up over the text
+  display: inline-block;
+  margin-top: 18px;
+  color: #1a1a1a;
+  font-family: 'acumin-variable', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.kendra-project-page .filmstrip-info .dl-link:hover {
+  color: #14686a;
+}
+
 // PROJECT PAGE STYLING
 .kendra-project-page {
     .project-images {

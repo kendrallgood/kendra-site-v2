@@ -1,5 +1,5 @@
 ---
-layout: kendra_project
+layout: kendra_project_filmstrip
 title: Gestural Symmetry
 permalink: /gestural-symmetry/
 project_description_text_color: white
