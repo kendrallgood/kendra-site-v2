@@ -166,9 +166,10 @@ body:has(#hero-canvas) {
 
 // On the Projects page the yellow canvas sits in the backdrop, and the
 // black and white gradient multiplies over it, with no grain.
-// Project pages: the same stretched background, fixed to the screen.
+// Project pages: the same stretched background, fixed to the screen, with a
+// white wash over it to lighten it.
 body.kendra-project-page {
-  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -185,9 +186,10 @@ body:has(.resume-page) .float-backdrop__grain {
   display: none;
 }
 
-// Seasonal trend pages sit on the backdrop, so the image goes there.
+// Seasonal trend pages sit on the backdrop, so the image goes there, with the
+// same white wash as the other project pages.
 body:has(.seasonal-trend-page) .float-backdrop {
-  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
