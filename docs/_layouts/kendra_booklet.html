@@ -11,6 +11,25 @@ layout: kendra_default_no_footer
   </div>
 
   {% if page.booklet_pages %}
+    {% comment %} Pages listed in top_row go first, in that order; the rest follow in a second row. {% endcomment %}
+    {% if page.top_row %}
+    <div class="filmstrip-track">
+      {% for i in page.top_row %}
+        <figure class="filmstrip-item">
+          <img class="filmstrip-img" src="{{ page.booklet_path | relative_url }}{% if i < 10 %}0{% endif %}{{ i }}.jpg" alt="{{ page.title }}, page {{ i }}" loading="lazy">
+        </figure>
+      {% endfor %}
+    </div>
+    <div class="filmstrip-track">
+      {% for i in (1..page.booklet_pages) %}
+        {% unless page.top_row contains i %}
+        <figure class="filmstrip-item">
+          <img class="filmstrip-img" src="{{ page.booklet_path | relative_url }}{% if i < 10 %}0{% endif %}{{ i }}.jpg" alt="{{ page.title }}, page {{ i }}" loading="lazy">
+        </figure>
+        {% endunless %}
+      {% endfor %}
+    </div>
+    {% else %}
     <div class="filmstrip-track">
       {% for i in (1..page.booklet_pages) %}
         <figure class="filmstrip-item">
@@ -18,5 +37,6 @@ layout: kendra_default_no_footer
         </figure>
       {% endfor %}
     </div>
+    {% endif %}
   {% endif %}
 </div>

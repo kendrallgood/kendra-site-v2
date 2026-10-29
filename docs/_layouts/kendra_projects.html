@@ -5,8 +5,8 @@ layout: kendra_default
 
 {% if site.data.projects %}
   <div class="projects-filter" id="projects-filter">
-    <button class="projects-filter__pill is-active" data-cat="textile" type="button">Textile design</button>
-    <button class="projects-filter__pill" data-cat="footwear" type="button">Footwear &amp; material design</button>
+    <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
+    <button class="projects-filter__pill is-active" data-cat="footwear" type="button">Footwear &amp; material design</button>
   </div>
 
   <div class="float-field" id="float-field">
@@ -39,7 +39,7 @@ layout: kendra_default
     var empty = document.getElementById('projects-empty');
     var tint = document.getElementById('float-tint');
     var pills = document.querySelectorAll('.projects-filter__pill');
-    var currentCat = 'textile';
+    var currentCat = 'footwear';
     var GAP = 24;
     var INSET = 24;
 

@@ -90,6 +90,7 @@ projects:
   - title: One Piece Wonder
     fade_bottom: true
     category: textile
+    hidden: true # taken off the projects grid; page still reachable by URL
     year: 2017
     project_url: "/one-piece-wonder"
     cutout_image_url: "/assets/images/cutouts/one-piece-wonder-torso.png"
@@ -106,6 +107,7 @@ projects:
   - title: Mellow Yellow
     fade_bottom: true
     category: textile
+    hidden: true # taken off the projects grid; page still reachable by URL
     year: 2017
     project_url: "/mellow-yellow"
     cutout_image_url: "/assets/images/cutouts/mellow-yellow.png"
@@ -138,8 +140,6 @@ projects:
       - url: "/assets/images/projects/gestural/planetoid.jpg"
       - url: "/assets/images/projects/gestural/outline printing layout.jpg"
         description: "The scanned in patterns pieced together in order to understand the layout of the textile design.\n\nDrawn design placed and planned out onto outlines of pattern pieces."
-      - url: "/assets/images/projects/gestural/black side of skirt.jpg"
-      - url: "/assets/images/projects/gestural/white side of skirt.jpg"
   - title: Encaustic Experimentation
     category: textile
     hidden: true # lives in Other Works, not the projects grid
@@ -205,3 +205,18 @@ projects:
       - url: "/assets/images/projects/fall-winter-material-trend/durability-visibility.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/breathability-lightweight.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/rockin-rolled-goods.jpg"
+  - title: Velociti Elite
+    category: footwear
+    year: 2026
+    project_url: "/velociti-elite-mockup"
+    hover_color: "#a0522d"
+    spotlight_image_url: "/assets/images/projects/velociti-elite/upper.webp"
+    images:
+      - url: "/assets/images/projects/velociti-elite/upper.webp"
+        description: "Upper"
+      - url: "/assets/images/projects/velociti-elite/medial-side.webp"
+        description: "Medial side"
+      - url: "/assets/images/projects/velociti-elite/color-cad.webp"
+        description: "Colorway CAD"
+      - url: "/assets/images/projects/velociti-elite/material-map.webp"
+        description: "Material map"

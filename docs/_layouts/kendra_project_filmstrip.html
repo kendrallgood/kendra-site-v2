@@ -78,5 +78,29 @@ layout: kendra_default_no_footer
         });
       </script>
     {% endif %}
+
+    <div class="photo-zoom" id="photo-zoom" hidden>
+      <img src="" alt="">
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var zoom = document.getElementById('photo-zoom');
+        var zoomImg = zoom.querySelector('img');
+
+        // Clicking a photo opens it full screen; clicking anywhere or Escape closes it.
+        document.querySelectorAll('.filmstrip-img').forEach(function (img) {
+          if (img.tagName !== 'IMG') return;
+          img.addEventListener('click', function () {
+            zoomImg.src = img.src;
+            zoomImg.alt = img.alt;
+            zoom.hidden = false;
+          });
+        });
+        zoom.addEventListener('click', function () { zoom.hidden = true; });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') zoom.hidden = true;
+        });
+      });
+    </script>
   {% endif %}
 {% endfor %}
