@@ -162,10 +162,10 @@ body:has(#hero-canvas) #hero-canvas {
 
 // Homepage background: the yellow with the canvas weave multiplied over it.
 body:has(#hero-canvas) {
-  background-color: #efef98;
-  background-image: url('/assets/images/textures/canvas_weave.webp');
-  background-blend-mode: multiply;
-  background-size: 320px 320px;
+  background-color: #b8b8b8;
+  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-blend-mode: normal;
+  background-size: 100% 100%;
 }
 
 // On the Projects page the yellow canvas sits in the backdrop, and the
@@ -1165,6 +1165,19 @@ body{
   #hero-canvas {
     position: relative;
   }
+  // A blur that is strongest at the top and fades out toward the bottom. Half
+  // of the strength falls at your name, so the top half of the name is blurred.
+  #hero-canvas::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 90%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 90%);
+  }
   #hero-canvas canvas {
     position: relative;
     z-index: 2;
@@ -1198,18 +1211,27 @@ pointer-events: none;
     text-decoration: none;
     text-transform: uppercase;
   }
-  .word-grid .word:nth-child(3n+1) { color: #1A7E80; } // About — teal from the fabric
-  .word-grid .word:nth-child(3n+2) { color: #98A24A; } // Projects — yellow green from the fabric
-  .word-grid .word:nth-child(3n)   { color: #F27C8C; } // Resume — pink from the fabric
+  // Your name fills a whole row, in the same font as the words.
+  .word-grid .word--name {
+    grid-column: 1 / -1;
+  }
+
+  // Black and white background, with a different shade of red for each word.
+  .word-grid .word { color: #ff0000; }
+  // Each colour follows the page the word links to, so every copy matches.
+  .word-grid .word[href="/about/"] { color: #ff0000; } // About and the name: pure red
+  .word-grid .word[href="/projects/"] { color: #e9ffae; } // Projects: pale green (its bar follows the word colour)
+  .word-grid .word[href="/resume/"] { color: #ff0000; } // Resume: the same red as About
+  .word-grid .word[href="/about/"].word--name { color: #004cf4; } // your name: blue
 
   // Both layers share the same geometry, fade and hover animation.
   .word-grid .word::before,
   .word-grid .word::after {
     content: "";
     position: absolute;
-    left: -25%; top: 50%;
-    width: 150%; height: 1.25em;
-    margin-top: calc(-0.625em + 0.035em); // lined up with the middle bar of the E, scales with the word
+    left: 0; top: 50%;
+    width: 100%; height: calc(1.25em - 2px); // 2px thinner, with the texture at its original size
+    margin-top: calc(-0.625em + 0.035em + 1px); // lined up with the middle bar of the E, scales with the word
     // Fades out toward both ends of the line.
     // Fades out toward both ends and toward the top and bottom edges.
     -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
@@ -1226,14 +1248,14 @@ pointer-events: none;
   // Light base: the full width and height of the bar, with no fade, behind
   // the dark design.
   .word-grid .word::before {
-    background: currentColor;
+    background: transparent; // no solid base, so only the textured part shows
     -webkit-mask-image: none;
     mask-image: none;
   }
   // Pattern layer: a darker shade, cut by the woven repeat (dark areas are
   // see-through, luminance mask).
   .word-grid .word::after {
-    background: color-mix(in srgb, currentColor 80%, black); // 20% darker than the word
+    background: var(--bar, currentColor); // the woven texture, in a random colour set on load
     z-index: 1; // the dark design sits in front of the text
     // The darker pattern stays fully opaque, with no fade at either end.
     -webkit-mask-image: url('/assets/images/textures/bar_pattern.png');
@@ -1243,6 +1265,10 @@ pointer-events: none;
     mask-size: 147.66px auto;
     mask-repeat: repeat;
     mask-mode: luminance;
+  }
+  // The bar is black, with the woven texture drawn over it in a dark grey.
+  .word-grid .word::after {
+    display: block;
   }
   .word-grid .word:hover::before,
   .word-grid .word:hover::after {

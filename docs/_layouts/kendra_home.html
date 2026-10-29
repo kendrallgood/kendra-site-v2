@@ -15,12 +15,7 @@ layout: kendra_default
     <a class="word" href="/about/">About</a>
     <a class="word" href="/projects/">Projects</a>
     <a class="word" href="/resume/">Resume</a>
-    <a class="word" href="/about/">About</a>
-    <a class="word" href="/projects/">Projects</a>
-    <a class="word" href="/resume/">Resume</a>
-    <a class="word" href="/about/">About</a>
-    <a class="word" href="/projects/">Projects</a>
-    <a class="word" href="/resume/">Resume</a>
+    <a class="word word--name" href="/about/">Kendra Allgood</a>
     <a class="word" href="/about/">About</a>
     <a class="word" href="/projects/">Projects</a>
     <a class="word" href="/resume/">Resume</a>
@@ -42,3 +37,10 @@ layout: kendra_default
 <!-- REMOTE VS LOCAL -->
 {% if page.webgl_script %}<script src="{{ site.baseurl }}{{ page.webgl_script }}" type="module"></script>{% endif %}
 <!-- <script src="{{ page.webgl_script }}" type="module"></script> -->
+<script>
+  // Each bar gets a random colour every time the page loads.
+  document.querySelectorAll('.word-grid .word').forEach(function (word) {
+    var hue = Math.floor(Math.random() * 360);
+    word.style.setProperty('--bar', 'hsl(' + hue + ', 90%, 55%)');
+  });
+</script>
