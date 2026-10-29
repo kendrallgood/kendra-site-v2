@@ -5,8 +5,8 @@ layout: kendra_default
 
 {% if site.data.projects %}
   <div class="projects-filter" id="projects-filter">
-    <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
     <button class="projects-filter__pill is-active" data-cat="footwear" type="button">Footwear &amp; material design</button>
+    <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
   </div>
 
   <div class="float-field" id="float-field">
@@ -50,6 +50,7 @@ layout: kendra_default
     }
 
     function layout() {
+      document.body.classList.toggle('footwear-active', currentCat === 'footwear');
       var width = field.clientWidth;
       var visible = items.filter(function (el) {
         return el.dataset.category === currentCat;
@@ -85,6 +86,16 @@ layout: kendra_default
       el.addEventListener('mouseleave', function () {
         clearTimeout(tintOffTimer);
         tintOffTimer = setTimeout(function () { tint.classList.remove('is-on'); }, 350);
+      });
+    });
+
+    // Pressing a tile fades this page out, then opens the project.
+    items.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.classList.add('is-leaving');
+        var href = el.href;
+        setTimeout(function () { window.location.href = href; }, 450);
       });
     });
 

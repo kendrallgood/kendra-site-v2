@@ -92,6 +92,10 @@ h3 {
     background-size: 3.19em auto;
     z-index: 1;
 }
+// The bar behind the header links is clear on every page, so only the text shows.
+.masthead a:before {
+  background: none !important;
+}
 .masthead__inner-wrap {
   @include breakpoint($medium) {
     // padding: 1em 0;
@@ -605,6 +609,36 @@ body:has(.square-photos) .filmstrip-item {
 }
 .kendra-project-page .filmstrip-info .dl-link:hover {
   color: #14686a;
+}
+
+// Leaving the Projects page: it blurs and fades out before the project opens.
+body.is-leaving {
+  filter: blur(3px);
+  opacity: 0.4;
+  transition: filter 0.45s ease-out, opacity 0.45s ease-out;
+}
+
+// A project page starts blurred and clears, the way a tile clears on hover.
+@keyframes project-in {
+  from {
+    filter: blur(3px);
+    opacity: 0.4;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+body.kendra-project-page {
+  animation: project-in 0.8s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  body.kendra-project-page {
+    animation: none;
+  }
+  body.is-leaving {
+    transition: none;
+  }
 }
 
 // PROJECT PAGE STYLING
@@ -1415,9 +1449,9 @@ pointer-events: none;
 
 .projects-filter {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column; // the two buttons stack
+  gap: 0; // the two buttons touch
+  align-items: flex-start; // lined up with the site name in the header
   padding: 1.5em 1em 0.5em;
 }
 
@@ -1544,6 +1578,17 @@ body.backdrop--bloom {
   initial-value: #9fb8cf;
 }
 
+// The Projects page has no colour wash when you hover over a tile.
+body:has(#float-field) .float-backdrop__tint {
+  display: none;
+}
+
+// The Projects page has no footer text at the bottom.
+body:has(#float-field) .page__footer-follow,
+body:has(#float-field) .page__footer-copyright {
+  display: none;
+}
+
 .float-backdrop__tint {
   --tint: #9fb8cf;
   background:
@@ -1555,7 +1600,7 @@ body.backdrop--bloom {
 
   // Fading in uses its own (quicker) timing; fading out uses the one above.
   &.is-on {
-    opacity: 0.85;
+    opacity: 1;
     transition: opacity 1s cubic-bezier(0.45, 0, 0.25, 1), --tint 1s cubic-bezier(0.45, 0, 0.25, 1);
   }
 }
@@ -1580,35 +1625,30 @@ body.backdrop--bloom {
 // selected one sits deeper.
 .float-page .projects-filter__pill {
   font-family: 'acumin-variable', sans-serif; // loaded from Adobe Fonts
-  font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0;
-  font-weight: 400;
-  font-size: 14px;
+  font-variation-settings: 'wght' 800, 'wdth' 100, 'slnt' 0; // very thick
+  font-weight: 800;
+  font-size: 23px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 7px 18px;
-  background: rgba(0, 0, 0, 0.14);
-  border-color: transparent;
-  color: rgba(20, 20, 20, 0.85);
-  box-shadow:
-    inset 2px 2px 4px rgba(0, 0, 0, 0.45),
-    inset -1px -1px 2px rgba(255, 255, 255, 0.18),
-    0 1px 0 rgba(255, 255, 255, 0.14);
+  padding: 3.5px 18px; // 7px of space between the two buttons
+  margin-left: -18px; // lines the words up with the site name
+  background: transparent;
+  border: 0; // no button shape; the underline marks the selection
+  color: #ff0000;
+  box-shadow: none;
   transition: box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
 
-  &:hover {
-    border-color: transparent;
-    background: rgba(0, 0, 0, 0.2);
+  &:hover,
+  &.is-active {
+    background: transparent;
+    color: #ff0000;
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-color: #ff0000;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 3px;
   }
 
-  &.is-active {
-    background: rgba(0, 0, 0, 0.38);
-    border-color: transparent;
-    color: rgba(255, 255, 255, 0.92);
-    box-shadow:
-      inset 3px 3px 7px rgba(0, 0, 0, 0.7),
-      inset -1px -1px 2px rgba(255, 255, 255, 0.12),
-      0 1px 0 rgba(255, 255, 255, 0.16);
-  }
 }
 
 .float-field {
@@ -1660,6 +1700,90 @@ body.backdrop--bloom {
 .float-item:focus-visible .float-item__img {
   transform: scale(1.06);
   opacity: 0.45;
+}
+
+// The footwear tiles have rounded corners, and the corners also fade out.
+// The middle of each tile stays solid.
+// Tiles: blurred and grayscale at rest, with a bottom fade.
+.float-item .float-item__img {
+  // All four edges fade out, as on the footwear tiles.
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  mask-composite: intersect;
+  filter: blur(2px) grayscale(1) contrast(1.3) brightness(0.95); // blurred at rest, sharp on hover
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out, filter 0.8s ease-out;
+}
+// Footwear tiles fill a square with rounded corners, so the image reaches the corner.
+.float-item[data-category="footwear"] .float-item__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // the image fills the whole tile
+  border-radius: 30%; // matches the rounded corner of the cutouts, so the image reaches the corner
+  // All four edges fade out: each edge mask is intersected with the others.
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  mask-composite: intersect;
+}
+
+// Footwear tiles start blurred and foggy, then clear up on hover.
+.float-item:hover .float-item__img {
+  filter: grayscale(1) contrast(1.3) brightness(0.95);
+  opacity: 1;
+  transform: none; // no enlarge on hover
+}
+
+// Footwear mist: a fog layer over each tile, under its label so the label stays clear.
+.float-item[data-category="footwear"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 30%;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  mask-composite: intersect;
+  transition: opacity 0.8s ease-out;
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(90% 70% at 80% 100%, rgba(255, 255, 255, 0.35), transparent 70%);
+  mix-blend-mode: screen;
+}
+.float-item .float-item__label {
+  z-index: 2;
+  color: #ff0000;
+  font-weight: 300; // thinner than the regular weight
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.45); // shadow behind the text
+}
+.float-item[data-category="footwear"]:hover::before {
+  opacity: 0;
+}
+
+// On the Footwear tab, the header, the filter buttons, and the footer text are
+// blurred too. Each one clears when you hover over it.
+body.footwear-active .page__footer a,
+body.footwear-active .page__footer-copyright {
+  filter: blur(0.87px);
+  transition: filter 0.8s ease-out;
+}
+body.footwear-active .page__footer a:hover,
+body.footwear-active .page__footer-copyright:hover {
+  filter: none;
+}
+
+// On the Footwear tab, the page background is under a fog layer. It sits behind
+// the tiles and the text, so the text stays clear.
+body.footwear-active .float-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1; // under the hover tint, so the tint shows its full color
+  display: none; // the footwear background is at full opacity, with no fog or darkening over it
+  pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
 }
 
 .float-item__label {
@@ -1722,15 +1846,24 @@ body.backdrop--bloom {
   padding: 2em 1.5em 3em;
 }
 
+// Matches the Projects filter buttons: left-aligned, thick, red, and starting
+// at the same left edge as the button text.
 .other-works__heading {
-  font-family: 'Raleway', sans-serif;
-  font-size: 22px;
-  font-weight: 500;
+  font-family: 'acumin-variable', sans-serif;
+  font-variation-settings: 'wght' 800, 'wdth' 100, 'slnt' 0;
+  font-size: 23px;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #1a1a1a;
-  margin: 0 0 1.5em;
-  text-align: center;
+  color: #ff0000;
+  margin: 0 0 3em; // the same gap above the tiles as the Projects page
+  padding: 1.5em 1em 0.5em; // the same spacing as the Projects buttons
+  text-align: left;
+  text-decoration: underline; // the same underline as the selected Projects button
+  text-decoration-color: #ff0000;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 3px;
+  font-style: normal; // the site sets h1 to italic; the Projects text is upright
 }
 
 .other-works__grid {
@@ -1790,37 +1923,34 @@ body.backdrop--bloom {
 }
 
 .resume-actions {
-  text-align: center;
+  text-align: left; // the button sits on the left, like the Projects buttons
+  padding: 1.5em 1em 0.5em; // the same spacing as the Projects buttons
   margin-bottom: 2em;
 }
 
 .resume-download-btn {
   display: inline-block;
   font-family: 'acumin-variable', sans-serif;
-  font-variation-settings: 'wght' 400, 'wdth' 100, 'slnt' 0;
-  font-weight: 400;
-  font-size: 12px;
+  font-variation-settings: 'wght' 800, 'wdth' 100, 'slnt' 0; // the same weight as the Projects text
+  font-weight: 800;
+  font-size: 23px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.38);
-  color: rgba(255, 255, 255, 0.92);
+  background: transparent; // flat, no debossed look
+  color: #ff0000;
   border: none;
-  border-radius: 999px;
-  padding: 8px 18px;
+  border-radius: 0;
+  padding: 3.5px 18px; // the same spacing as the Projects buttons
+  margin-left: -18px; // lines the words up with the site name
   text-decoration: none;
-  box-shadow:
-    inset 3px 3px 7px rgba(0, 0, 0, 0.7),
-    inset -1px -1px 2px rgba(255, 255, 255, 0.12),
-    0 1px 0 rgba(255, 255, 255, 0.16);
+  box-shadow: none;
   transition: box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .resume-download-btn:hover {
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow:
-    inset 3px 3px 7px rgba(0, 0, 0, 0.8),
-    inset -1px -1px 2px rgba(255, 255, 255, 0.12),
-    0 1px 0 rgba(255, 255, 255, 0.16);
+  background: transparent;
+  box-shadow: none;
+  color: #ffffff;
 }
 
 .seasonal-trend-page {
