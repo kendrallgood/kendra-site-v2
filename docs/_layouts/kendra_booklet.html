@@ -2,6 +2,7 @@
 layout: kendra_default_no_footer
 ---
 <script>document.body.classList.add('kendra-project-page', 'filmstrip-page');</script>
+{% if page.square_photos %}<span class="square-photos" hidden></span>{% endif %}
 <div class="filmstrip-project">
   <div class="filmstrip-info">
     <p class="filmstrip-title">{{ page.title }}{% if page.year %} <span class="filmstrip-year">{{ page.year }}</span>{% endif %}</p>
@@ -13,14 +14,14 @@ layout: kendra_default_no_footer
   {% if page.booklet_pages %}
     {% comment %} Pages listed in top_row go first, in that order; the rest follow in a second row. {% endcomment %}
     {% if page.top_row %}
-    <div class="filmstrip-track">
+    <div class="filmstrip-track booklet-track">
       {% for i in page.top_row %}
         <figure class="filmstrip-item">
           <img class="filmstrip-img" src="{{ page.booklet_path | relative_url }}{% if i < 10 %}0{% endif %}{{ i }}.jpg" alt="{{ page.title }}, page {{ i }}" loading="lazy">
         </figure>
       {% endfor %}
     </div>
-    <div class="filmstrip-track">
+    <div class="filmstrip-track booklet-track">
       {% for i in (1..page.booklet_pages) %}
         {% unless page.top_row contains i %}
         <figure class="filmstrip-item">

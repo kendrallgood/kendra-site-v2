@@ -370,6 +370,25 @@ body:has(.square-photos) .filmstrip-item {
   margin-top: 0;
 }
 
+// Booklet rows have no captions. Each row reserves 13vh above and below its
+// photos, so an enlarged photo grows into that space instead of pushing the
+// next row down. The negative margins cancel that space in the layout.
+.booklet-track {
+  height: 66vh; // the photo height plus the padding above and below it
+  min-height: 0;
+  padding-block: 13vh;
+  align-items: center;
+  margin-top: calc(24px - 13vh); // top row starts 24px below the description
+  margin-bottom: -13vh;
+}
+.booklet-track + .booklet-track {
+  margin-top: calc(30px - 13vh); // 30px between the top row and the bottom row
+}
+// An enlarged photo sits over both rows, not behind the one below it.
+.booklet-track .filmstrip-item:hover {
+  z-index: 5;
+}
+
 .filmstrip-item {
   position: relative;
   flex: 0 0 auto;
