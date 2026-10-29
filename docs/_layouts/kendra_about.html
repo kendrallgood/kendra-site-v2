@@ -3,14 +3,17 @@ layout: kendra_default
 ---
 {% include float-backdrop.html %}
 <div class="about-page">
+  {% if content %}
+    <div class="filmstrip-info">
+      <p class="filmstrip-title">About</p>
+      <div class="filmstrip-description">
+        {{ content }}
+      </div>
+    </div>
+  {% endif %}
+
   <div class="about-scrapbook">
     <img class="about-floater about-floater--hero" src="{{ site.baseurl }}/assets/images/about/about-hero.jpg" alt="Kendra Allgood">
     <img class="about-floater about-floater--candid" src="{{ site.baseurl }}/assets/images/about/about-candid.jpg" alt="Kendra Allgood">
   </div>
-
-  {% if content %}
-    <div class="about-text-container">
-      {{ content }}
-    </div>
-  {% endif %}
 </div>

@@ -611,6 +611,20 @@ body:has(.square-photos) .filmstrip-item {
   color: #14686a;
 }
 
+// About page: the same background as the project pages, and black-and-white photos.
+body:has(.about-page) .float-backdrop {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+body:has(.about-page) .float-backdrop__base,
+body:has(.about-page) .float-backdrop__grain {
+  display: none;
+}
+.about-floater {
+  filter: grayscale(1);
+}
+
 // No box appears around anything when it is clicked or focused.
 *:focus,
 *:focus-visible {
@@ -834,13 +848,54 @@ body.kendra-project-page {
   width: 100%;
   max-width: 1150px;
   margin: 0 auto;
-  padding: 2em 1.5em 3em;
+  padding: 0 20px 3em; // the text lines up with the start of the site name, past its padding
   box-sizing: border-box;
 }
+.about-page .filmstrip-info {
+  padding-left: 0;
+  padding-right: 0;
+}
 
+// The two photos sit side by side, and the bio text is laid over them in red.
 .about-scrapbook {
   position: relative;
-  min-height: 980px;
+  display: flex;
+  gap: 24px;
+  min-height: 0;
+}
+.about-floater--hero,
+.about-floater--candid {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 48% !important;
+  max-width: none !important;
+  transform: none !important;
+}
+.about-floater--swatch1,
+.about-floater--swatch2,
+.about-floater--swatch3 {
+  display: none !important;
+}
+.about-text-container {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: none;
+  margin: 0;
+  padding: 0 1.5em;
+  text-align: center;
+  font-family: 'acumin-variable', sans-serif;
+  font-variation-settings: 'wght' 800, 'wdth' 100, 'slnt' 0;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff0000;
 }
 
 .about-floater {
@@ -928,12 +983,6 @@ body.kendra-project-page {
 }
 
 .about-text-container {
-  font-family: 'Raleway', sans-serif;
-  line-height: 1.8;
-  color: #333;
-  max-width: 700px;
-  margin: 0 auto;
-
   p {
     margin-bottom: 1.2em;
   }
@@ -1594,9 +1643,9 @@ body:has(#float-field) .float-backdrop__tint {
   display: none;
 }
 
-// The Projects page has no footer text at the bottom.
-body:has(#float-field) .page__footer-follow,
-body:has(#float-field) .page__footer-copyright {
+// The footer text (follow icon and copyright) is hidden on every page.
+.page__footer-follow,
+.page__footer-copyright {
   display: none;
 }
 
