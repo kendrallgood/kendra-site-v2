@@ -611,6 +611,17 @@ body:has(.square-photos) .filmstrip-item {
   color: #14686a;
 }
 
+// No box appears around anything when it is clicked or focused.
+*:focus,
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.float-item,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 // Leaving the Projects page: it blurs and fades out before the project opens.
 body.is-leaving {
   filter: blur(3px);
