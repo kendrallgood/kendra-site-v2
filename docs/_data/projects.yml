@@ -220,3 +220,10 @@ projects:
         description: "Colorway CAD"
       - url: "/assets/images/projects/velociti-elite/material-map.webp"
         description: "Material map"
+  - title: Shadow Elite Lenticular
+    category: footwear
+    year: 2026
+    project_url: "/shadow-elite-lenticular/"
+    hover_color: "#4a6fa5"
+    cutout_image_url: "/assets/images/process/shadow-elite/shoe.webp"
+    spotlight_image_url: "/assets/images/process/shadow-elite/shoe.webp"
