@@ -1,0 +1,139 @@
+# Positions come from the Illustrator file (1189 x 1400 units).
+# x, y, w, h are in those units. z sets stacking order.
+# key is a unique name for each item.
+# Images: src is a path under the site root. Set kind: video with src
+# to swap the blue placeholder for a real video.
+canvas_width: 1189
+canvas_height: 1400
+items:
+  - key: shoe
+    kind: image
+    src: /assets/images/process/shadow-elite/shoe.webp
+    alt: Shadow Elite lenticular shoe
+    x: 5
+    y: 43
+    w: 656
+    z: 8
+  - key: scale
+    kind: image
+    src: /assets/images/process/shadow-elite/scale.webp
+    alt: Lenticular scale texture
+    x: 755
+    y: 0
+    w: 407
+    z: 1
+  - key: street
+    kind: image
+    src: /assets/images/process/shadow-elite/street.webp
+    alt: Night street reference
+    x: 361
+    y: 0
+    w: 258
+    z: 2
+  - key: beach
+    kind: image
+    src: /assets/images/process/shadow-elite/beach.webp
+    alt: Beach reference
+    x: 579
+    y: 43
+    w: 287
+    z: 3
+  - key: video
+    kind: video
+    src: /assets/video/shadow-elite-lenticular.mp4
+    x: 405
+    y: 428
+    w: 219
+    h: 347
+    z: 4
+  - key: material
+    kind: image
+    src: /assets/images/process/shadow-elite/material.webp
+    alt: Material swatch
+    x: 51
+    y: 566
+    w: 179
+    z: 3
+  - key: label-pick
+    kind: label
+    text: Pick a material
+    x: 51
+    y: 684
+    w: 120
+    z: 20
+  - key: label-crazy
+    kind: label
+    text: especially a crazy one
+    x: 51
+    y: 725
+    w: 180
+    z: 20
+  - key: swatch
+    kind: image
+    src: /assets/images/process/shadow-elite/swatch.webp
+    alt: Lenticular swatch close-up
+    x: 51
+    y: 749
+    w: 211
+    z: 3
+  - key: yellow
+    kind: image
+    src: /assets/images/process/shadow-elite/yellow.webp
+    alt: Yellow lenticular sample detail
+    x: 67
+    y: 1088
+    w: 80
+    z: 4
+  - key: sample
+    kind: image
+    src: /assets/images/process/shadow-elite/sample.webp
+    alt: First round lenticular sample
+    x: 216
+    y: 993
+    w: 207
+    z: 5
+  - key: label-sided
+    kind: label
+    text: three sided lenticular<br>(most are only two)
+    x: 325
+    y: 828
+    w: 180
+    z: 20
+  - key: label-gotta
+    kind: label
+    text: but you gotta make sure<br>it works
+    x: 362
+    y: 951
+    w: 210
+    z: 20
+  - key: label-melted
+    kind: label
+    text: lenticular got melted,<br>still pretty, but need<br>to re-work
+    x: 38
+    y: 1175
+    w: 185
+    z: 20
+  - key: shoestrip
+    kind: image
+    src: /assets/images/process/shadow-elite/shoestrip.webp
+    alt: Shoe renders on the lenticular sample
+    x: 363
+    y: 1197
+    w: 256
+    z: 6
+  - key: sketches
+    kind: image
+    src: /assets/images/process/shadow-elite/sketches.webp
+    alt: Development sketches and color callouts
+    x: 708
+    y: 452
+    w: 481
+    z: 3
+  - key: spec
+    kind: image
+    src: /assets/images/process/shadow-elite/spec.webp
+    alt: Color and material spec sheet with finished shoes
+    x: 708
+    y: 1078
+    w: 481
+    z: 3

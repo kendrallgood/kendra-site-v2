@@ -1,0 +1,100 @@
+---
+---
+// Freeform collage for the Shadow Elite lenticular page.
+// Items are placed in the mockup's own units (1189 x 1398), so the
+// layout scales with the canvas width.
+
+.process-page {
+  background: #fff;
+  padding: 2em 20px 4em;
+  min-height: 100vh;
+}
+
+.process-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 1189px;
+  margin: 0 auto;
+  aspect-ratio: 1189 / 1400;
+  container-type: inline-size;
+  // Background sampled from the Illustrator gradient, top to bottom.
+  background: linear-gradient(to bottom,
+    #253349 0%, #343f56 12.5%, #365674 25%, #2a79a6 37.5%,
+    #1f9cd7 50%, #56b2e0 62.5%, #88c5e9 75%, #b1d6f0 87.5%, #ffffff 100%);
+}
+
+.process-item {
+  position: absolute;
+  left: calc(var(--x) / 1189 * 100%);
+  top: calc(var(--y) / 1400 * 100%);
+  width: calc(var(--w) / 1189 * 100%);
+  z-index: var(--z);
+  margin: 0;
+  user-select: none;
+}
+
+.process-item--image {
+  display: block;
+  height: auto;
+}
+
+.process-item--video {
+  height: calc(var(--h) / 1400 * 100%);
+  background: #8fb0d4;
+}
+
+.process-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.process-video__placeholder {
+  position: absolute;
+  left: 6.85%;
+  top: 65.1%;
+  width: 88%;
+  margin: 0;
+  font-size: calc(21.5 / 1189 * 100cqw);
+  line-height: 1.12;
+  white-space: nowrap;
+  color: #000;
+}
+
+.process-label {
+  font-size: calc(21.5 / 1189 * 100cqw);
+  line-height: 1.12;
+  white-space: nowrap;
+  color: #000;
+}
+
+@media (max-width: 760px) {
+  .process-canvas {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .process-item {
+    position: static;
+    width: 100%;
+    height: auto;
+    z-index: auto;
+  }
+
+  .process-item--video {
+    height: 260px;
+  }
+
+  .process-video__placeholder {
+    position: static;
+    padding: 16px;
+    font-size: 1rem;
+  }
+
+  .process-label {
+    font-size: 1rem;
+  }
+}

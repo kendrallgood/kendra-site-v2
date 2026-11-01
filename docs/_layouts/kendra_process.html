@@ -1,0 +1,24 @@
+---
+layout: kendra_default_no_footer
+---
+{% assign board = site.data[page.board] %}
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/process.css">
+<div class="process-page">
+  <div class="process-canvas">
+    {% for item in board.items %}
+      {% if item.kind == "image" %}
+        <img class="process-item process-item--image" data-key="{{ item.key }}" src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --z: {{ item.z }};">
+      {% elsif item.kind == "video" %}
+        <div class="process-item process-item--video" data-key="{{ item.key }}" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --h: {{ item.h }}; --z: {{ item.z }};">
+          {% if item.src != "" %}
+            <video class="process-video" src="{{ site.baseurl }}{{ item.src }}" autoplay muted loop playsinline></video>
+          {% elsif item.label %}
+            <p class="process-video__placeholder">{{ item.label }}</p>
+          {% endif %}
+        </div>
+      {% elsif item.kind == "label" %}
+        <p class="process-item process-label" data-key="{{ item.key }}" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --z: {{ item.z }};">{{ item.text }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
