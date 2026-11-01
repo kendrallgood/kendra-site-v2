@@ -1,0 +1,107 @@
+---
+layout: kendra_default_no_footer
+---
+{% assign board = site.data[page.board] %}
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/process.css">
+<div class="process-page">
+  <div class="process-canvas">
+    {% for item in board.items %}
+      {% if item.kind == "image" %}
+        <img class="process-item process-item--image process-item--zoomable{% if item.outline %} process-item--outlined{% endif %}" data-key="{{ item.key }}" src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --z: {{ item.z }};">
+      {% elsif item.kind == "video" %}
+        <div class="process-item process-item--video{% if item.src != "" %} process-item--zoomable{% endif %}" data-key="{{ item.key }}" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --h: {{ item.h }}; --z: {{ item.z }};">
+          {% if item.src != "" %}
+            <video class="process-video" src="{{ site.baseurl }}{{ item.src }}" autoplay muted loop playsinline></video>
+          {% elsif item.label %}
+            <p class="process-video__placeholder">{{ item.label }}</p>
+          {% endif %}
+        </div>
+      {% elsif item.kind == "label" %}
+        <p class="process-item process-label" data-key="{{ item.key }}" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --z: {{ item.z }};">{{ item.text }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="process-lightbox" aria-hidden="true">
+  <button class="process-lightbox__close" type="button" aria-label="Close enlarged view">&times;</button>
+  <div class="process-lightbox__content"></div>
+</div>
+<script>
+(function () {
+  var box = document.querySelector('.process-lightbox');
+  var content = box.querySelector('.process-lightbox__content');
+  var closeButton = box.querySelector('.process-lightbox__close');
+  var lastFocus = null;
+  var clearTimer = null;
+
+  // Make images and videos keyboard reachable.
+  document.querySelectorAll('.process-item--zoomable').forEach(function (item) {
+    var img = item.tagName === 'IMG' ? item : null;
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-label', img ? 'Enlarge ' + img.alt : 'Enlarge video');
+  });
+
+  function open(item) {
+    var media;
+    if (item.tagName === 'IMG') {
+      media = document.createElement('img');
+      media.src = item.getAttribute('src');
+      media.alt = item.alt;
+    } else {
+      var source = item.querySelector('video');
+      media = document.createElement('video');
+      media.src = source.getAttribute('src');
+      media.controls = true;
+      media.autoplay = true;
+      media.loop = true;
+      media.muted = true;
+      media.playsInline = true;
+    }
+    clearTimeout(clearTimer);
+    content.replaceChildren(media);
+    lastFocus = item;
+    box.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('process-lightbox-open');
+    // Force a reflow so the fade-in transition runs.
+    void box.offsetWidth;
+    box.classList.add('is-open');
+    closeButton.focus();
+  }
+
+  function close() {
+    if (!box.classList.contains('is-open')) return;
+    box.classList.remove('is-open');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('process-lightbox-open');
+    // Wait for the fade-out before removing the media, so the video stops after it fades.
+    clearTimer = setTimeout(function () { content.replaceChildren(); }, 300);
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelector('.process-page').addEventListener('click', function (event) {
+    var item = event.target.closest('.process-item--zoomable');
+    if (item) open(item);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      close();
+      return;
+    }
+    var item = event.target.closest && event.target.closest('.process-item--zoomable');
+    if (item && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      open(item);
+    }
+  });
+
+  box.addEventListener('click', function (event) {
+    // Let the video's own controls work without closing the view.
+    if (event.target.tagName === 'VIDEO') return;
+    close();
+  });
+  closeButton.addEventListener('click', close);
+})();
+</script>

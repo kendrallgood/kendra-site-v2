@@ -147,7 +147,15 @@ h3 {
   letter-spacing: 0.04em;
   padding: 0 6px;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.5); // half-transparent text only, so the bar stays solid
+  color: #ff0000; // the same red as the project section headings
+}
+.masthead .masthead__menu-item a {
+  color: #ff0000;
+}
+.masthead .masthead__menu-item a:hover,
+.masthead .kendra-link:hover,
+.masthead .site-title:hover {
+  color: #fff !important;
 }
 
 // The homepage does not scroll, up, down, or sideways.
@@ -210,6 +218,27 @@ body:has(#float-field) .float-backdrop {
 }
 body:has(#float-field) .float-backdrop__base,
 body:has(#float-field) .float-backdrop__grain {
+  display: none;
+}
+
+// Forest photo background on every page except the landing page and the resume.
+// Those two keep their own backgrounds above.
+body:not(:has(#hero-canvas)):not(:has(.resume-page)) {
+  background-color: #cfd8dc;
+  background-image: url('/assets/images/textures/forest-log.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body:not(:has(#hero-canvas)):not(:has(.resume-page)) .float-backdrop {
+  background-image: url('/assets/images/textures/forest-log.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+body:not(:has(#hero-canvas)):not(:has(.resume-page)) .float-backdrop__base,
+body:not(:has(#hero-canvas)):not(:has(.resume-page)) .float-backdrop__grain {
   display: none;
 }
 
@@ -1797,7 +1826,7 @@ body:has(#float-field) .float-backdrop__tint {
   -webkit-mask-composite: source-in;
   mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
   mask-composite: intersect;
-  filter: blur(2px) grayscale(1) contrast(1.3) brightness(0.95); // blurred at rest, sharp on hover
+  filter: blur(1px) grayscale(1) contrast(1.3) brightness(0.95); // blurred at rest, sharp on hover
   transition: transform 0.8s ease-out, opacity 0.8s ease-out, filter 0.8s ease-out;
 }
 // Footwear tiles fill a square with rounded corners, so the image reaches the corner.

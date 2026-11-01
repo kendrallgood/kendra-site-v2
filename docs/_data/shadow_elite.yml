@@ -1,0 +1,219 @@
+# Positions come from the Illustrator file (1189 x 2798 units).
+# x, y, w, h are in those units. z sets stacking order.
+# key is a unique name for each item.
+# Images: src is a path under the site root. Set kind: video with src
+# to swap the blue placeholder for a real video.
+canvas_width: 1189
+canvas_height: 2798
+items:
+  - key: shoe
+    kind: image
+    src: /assets/images/process/shadow-elite/shoe.webp
+    alt: Shadow Elite lenticular shoe
+    x: 5
+    y: 43
+    w: 656
+    z: 8
+  - key: scale
+    kind: image
+    src: /assets/images/process/shadow-elite/scale.webp
+    alt: Lenticular scale texture
+    x: 755
+    y: 0
+    w: 407
+    z: 1
+  - key: street
+    kind: image
+    src: /assets/images/process/shadow-elite/street.webp
+    alt: Night street reference
+    x: 361
+    y: 0
+    w: 258
+    z: 4
+  - key: beach
+    kind: image
+    src: /assets/images/process/shadow-elite/beach.webp
+    alt: Beach reference
+    x: 579
+    y: 43
+    w: 287
+    z: 3
+  - key: video
+    kind: video
+    src: /assets/video/shadow-elite-lenticular.mp4
+    x: 405
+    y: 428
+    w: 219
+    h: 347
+    z: 4
+  - key: material
+    kind: image
+    src: /assets/images/process/shadow-elite/material.webp
+    alt: Material swatch
+    x: 46
+    y: 433
+    w: 179
+    z: 3
+  - key: label-pick
+    kind: label
+    text: pick a material
+    x: 46
+    y: 552
+    w: 120
+    z: 20
+  - key: swatch
+    kind: image
+    src: /assets/images/process/shadow-elite/swatch.webp
+    alt: Lenticular swatch close-up
+    x: 46
+    y: 655
+    w: 245
+    z: 3
+  - key: label-crazy
+    kind: label
+    text: especially a crazy one
+    x: 48
+    y: 630
+    w: 180
+    z: 20
+  - key: sample
+    kind: image
+    src: /assets/images/process/shadow-elite/sample.webp
+    alt: First round lenticular sample
+    x: 216
+    y: 960
+    w: 239
+    z: 5
+  - key: yellow
+    kind: image
+    src: /assets/images/process/shadow-elite/yellow.webp
+    alt: Yellow lenticular sample detail
+    x: 185
+    y: 1026
+    w: 80
+    z: 9
+    outline: true
+  - key: label-sided
+    kind: label
+    text: three sided lenticular<br>(most are only two)
+    x: 315
+    y: 845
+    w: 180
+    z: 20
+  - key: label-gotta
+    kind: label
+    text: but you gotta make sure<br>it works
+    x: 46
+    y: 993
+    w: 210
+    z: 20
+  - key: label-melted
+    kind: label
+    text: lenticular got melted,<br>still pretty, but need<br>to re-work
+    x: 46
+    y: 1178
+    w: 185
+    z: 20
+  - key: shoestrip
+    kind: image
+    src: /assets/images/process/shadow-elite/shoestrip.webp
+    alt: Shoe renders on the lenticular sample
+    x: 364
+    y: 1190
+    w: 319
+    z: 6
+    outline: true
+  - key: sketches
+    kind: image
+    src: /assets/images/process/shadow-elite/sketches.webp
+    alt: Development sketches and color callouts
+    x: 708
+    y: 452
+    w: 481
+    z: 3
+  - key: spec
+    kind: image
+    src: /assets/images/process/shadow-elite/spec.webp
+    alt: Color and material spec sheet with finished shoes
+    x: 708
+    y: 1078
+    w: 481
+    z: 3
+  - key: green-panel
+    kind: image
+    src: /assets/images/process/shadow-elite/green-panel.webp
+    alt: Green material sketches and callouts
+    x: 0
+    y: 1855
+    w: 480
+    z: 2
+  - key: vac-back
+    kind: image
+    src: /assets/images/process/shadow-elite/vac-back.webp
+    alt: Back view of the vacuum molded shoe
+    x: 838
+    y: 1473
+    w: 336
+    z: 3
+  - key: vac-side
+    kind: image
+    src: /assets/images/process/shadow-elite/vac-side.webp
+    alt: Close up of the vacuum molded mesh
+    x: 417
+    y: 1442
+    w: 412
+    z: 3
+  - key: vac-left
+    kind: image
+    src: /assets/images/process/shadow-elite/vac-left.webp
+    alt: Vacuum molded shoe, side view
+    x: 42
+    y: 1442
+    w: 534
+    z: 3
+  - key: label-vacuum
+    kind: label
+    text: vacuum molded upper
+    x: 49
+    y: 1458
+    w: 220
+    z: 20
+  - key: label-highs
+    kind: label
+    text: you can see the highs<br>and lows of mesh through<br>the film
+    x: 757
+    y: 1709
+    w: 260
+    z: 20
+  - key: vac-hero
+    kind: image
+    src: /assets/images/process/shadow-elite/vac-hero.webp
+    alt: Green lenticular shoe
+    x: 484
+    y: 1892
+    w: 705
+    z: 5
+  - key: heel
+    kind: image
+    src: /assets/images/process/shadow-elite/heel.webp
+    alt: Heel detail photo
+    x: 889
+    y: 2278
+    w: 265
+    z: 4
+  - key: fringe
+    kind: image
+    src: /assets/images/process/shadow-elite/fringe.webp
+    alt: Perforated fringe detail
+    x: 792
+    y: 2517
+    w: 194
+    z: 6
+  - key: video2
+    kind: video
+    src: /assets/video/shadow-elite-lenticular-2.mp4
+    x: 529
+    y: 2339
+    w: 219
+    h: 347
+    z: 4

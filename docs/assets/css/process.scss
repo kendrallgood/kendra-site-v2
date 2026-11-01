@@ -1,0 +1,194 @@
+---
+---
+// Freeform collage for the Shadow Elite lenticular page.
+// Items are placed in the mockup's own units (1189 x 1398), so the
+// layout scales with the canvas width.
+
+.process-page {
+  background: transparent;
+  padding: 2em 20px 4em;
+  min-height: 100vh;
+}
+
+.process-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 1189px;
+  margin: 0 auto;
+  aspect-ratio: 1189 / 2798;
+  container-type: inline-size;
+  // Background sampled from the Illustrator gradient, top to bottom.
+  background: linear-gradient(to bottom,
+    #253349 0%, #343f56 6.3%, #365674 12.5%, #2a79a6 18.8%,
+    #1f9cd7 25%, #56b2e0 31.3%, #88c5e9 37.5%, #b1d6f0 43.8%,
+    #e5f4ff 50%, #c1e2e5 57.2%, #9cd9c9 64.3%, #71cea8 71.5%,
+    #6ccb8d 78.6%, #91d17b 85.8%, #8cc26e 92.9%, #408e69 100%);
+}
+
+.process-item {
+  position: absolute;
+  left: calc(var(--x) / 1189 * 100%);
+  top: calc(var(--y) / 2798 * 100%);
+  width: calc(var(--w) / 1189 * 100%);
+  z-index: var(--z);
+  margin: 0;
+  user-select: none;
+}
+
+.process-item--image {
+  display: block;
+  height: auto;
+}
+
+// Thin black frame on photos that have one in the Illustrator file.
+.process-item--outlined {
+  outline: 1px solid #000;
+}
+
+.process-item--video {
+  height: calc(var(--h) / 2798 * 100%);
+  background: #8fb0d4;
+}
+
+.process-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.process-video__placeholder {
+  position: absolute;
+  left: 6.85%;
+  top: 65.1%;
+  width: 88%;
+  margin: 0;
+  font-size: calc(21.5 / 1189 * 100cqw);
+  line-height: 1.12;
+  white-space: nowrap;
+  color: #000;
+}
+
+.process-label {
+  font-weight: 500;
+  font-size: calc(21.5 / 1189 * 100cqw);
+  line-height: 1.12;
+  white-space: nowrap;
+  color: #000;
+}
+
+.process-item--zoomable {
+  cursor: zoom-in;
+}
+
+.process-item--zoomable:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+// Full-screen view. The page behind fades to black while it is open.
+.process-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  visibility: hidden;
+  cursor: zoom-out;
+  transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.process-lightbox.is-open {
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 1;
+  visibility: visible;
+  transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0s;
+}
+
+.process-lightbox__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.process-lightbox__content img,
+.process-lightbox__content video {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 96px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.process-lightbox__content video {
+  cursor: default;
+}
+
+.process-lightbox__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.process-lightbox__close:hover,
+.process-lightbox__close:focus-visible {
+  opacity: 1;
+}
+
+body.process-lightbox-open {
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .process-page {
+    padding: 1.5em 16px 3em;
+  }
+
+  .process-canvas {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .process-item {
+    position: static;
+    width: 100%;
+    height: auto;
+    z-index: auto;
+  }
+
+  .process-item--video {
+    height: 260px;
+  }
+
+  .process-video__placeholder {
+    position: static;
+    padding: 16px;
+    font-size: 1.6rem;
+    white-space: normal;
+  }
+
+  // Captions read as text on a phone, so they wrap instead of running off the edge.
+  .process-label {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    white-space: normal;
+    padding: 0 12px;
+  }
+}
