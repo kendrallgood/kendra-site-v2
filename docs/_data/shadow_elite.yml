@@ -178,6 +178,13 @@ items:
     y: 1458
     w: 220
     z: 20
+  - key: label-highs
+    kind: label
+    text: you can see the highs<br>and lows of mesh through<br>the film
+    x: 757
+    y: 1709
+    w: 260
+    z: 20
   - key: vac-hero
     kind: image
     src: /assets/images/process/shadow-elite/vac-hero.webp
@@ -202,13 +209,6 @@ items:
     y: 2517
     w: 194
     z: 6
-  - key: label-highs
-    kind: label
-    text: you can see the highs<br>and lows of mesh through<br>the film
-    x: 757
-    y: 1709
-    w: 260
-    z: 20
   - key: video2
     kind: video
     src: /assets/video/shadow-elite-lenticular-2.mp4
