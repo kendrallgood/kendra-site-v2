@@ -202,6 +202,7 @@ projects:
     spotlight_image_url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
     images:
       - url: "/assets/images/projects/spring-summer-material-trend/trend-map.webp"
+      - url: "/assets/images/projects/spring-summer-material-trend/ss28-concept-stories.webp"
       - url: "/assets/images/projects/spring-summer-material-trend/vintage-remix.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/tactician.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/dreamy-industrial.jpg"
