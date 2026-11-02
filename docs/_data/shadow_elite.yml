@@ -71,7 +71,7 @@ items:
     z: 3
   - key: label-crazy
     kind: label
-    text: especially a crazy one
+    text: the crazier the better
     x: 48
     y: 630
     w: 180
