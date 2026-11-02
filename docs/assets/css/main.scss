@@ -106,7 +106,7 @@ h3 {
 .navicon,
 .navicon:before,
 .navicon:after {
-    background: #ff0000;
+    background: #fff;
 }
 
 .greedy-nav__toggle:not(.close):hover .navicon,
@@ -1617,6 +1617,11 @@ body.float-page {
     background: transparent;
     position: relative;
     z-index: 2;
+  }
+
+  // Above the sticky Projects buttons (z-index 3), so the open menu drops over them.
+  .masthead {
+    z-index: 4;
   }
 
   .masthead__inner-wrap,
