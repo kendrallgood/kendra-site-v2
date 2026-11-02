@@ -23,6 +23,24 @@ items:
     y: 0
     w: 1189
     z: 1
+  - key: intended-visual
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/intended-visual.webp
+    alt: Intended final visual
+    x: 102
+    y: 1719
+    w: 989
+    z: 2
+  - key: structure-map
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/structure-map.webp
+    alt: Structure map
+    x: 102
+    y: 2290
+    w: 989
+    z: 2
   - key: sketch-sheet
     kind: image
     hit: true
