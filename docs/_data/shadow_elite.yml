@@ -102,7 +102,7 @@ items:
     z: 20
   - key: label-gotta
     kind: label
-    text: but you gotta make sure<br>it works
+    text: but you have to make sure<br>it can execute
     x: 46
     y: 993
     w: 210
