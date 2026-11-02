@@ -109,7 +109,7 @@ items:
     z: 20
   - key: label-melted
     kind: label
-    text: lenticular got melted,<br>still pretty, but need<br>to re-work
+    text: the lenticular was melted<br>in the heat press, still pretty,<br>but not quite
     x: 46
     y: 1178
     w: 185
