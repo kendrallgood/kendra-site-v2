@@ -1,0 +1,79 @@
+# The Velociti Elite 3 spec sheet, shown as one image in the same 1189 x 2798
+# units as the Illustrator file. Each photo has a transparent "hit" item on top
+# of its place in the artboard, so clicking it opens the photo full screen.
+# x, y, w are in those units. z sets stacking order.
+overlay: true
+canvas_width: 1189
+canvas_height: 2798
+items:
+  - key: artboard
+    kind: image
+    src: /assets/images/process/velociti-elite/artboard.webp
+    alt: Velociti Elite 3 spec sheet
+    x: 0
+    y: 0
+    w: 1189
+    z: 0
+  - key: metallic-texture
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/metallic-texture.webp
+    alt: Copper metallic texture
+    x: 0
+    y: 0
+    w: 1189
+    z: 1
+  - key: face-piece
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/face-piece.webp
+    alt: New Top face material sample
+    x: 71
+    y: 1654
+    w: 251
+    z: 2
+  - key: hero-shoe
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/hero-shoe.webp
+    alt: Velociti Elite 3 shoe, side view
+    x: 90
+    y: 213
+    w: 1062
+    z: 3
+  - key: shoe-side
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/shoe-side.webp
+    alt: Velociti Elite 3 shoe, close up side view
+    x: 103
+    y: 1407
+    w: 329
+    z: 3
+  - key: shoe-back
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/shoe-back.webp
+    alt: Velociti Elite 3 shoe, back view
+    x: 795
+    y: 2307
+    w: 269
+    z: 3
+  - key: back-piece
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/back-piece.webp
+    alt: Back piece of the upper
+    x: 175
+    y: 2016
+    w: 115
+    z: 3
+  - key: material-label
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/material-label.webp
+    alt: Material label
+    x: 183
+    y: 1915
+    w: 60
+    z: 4

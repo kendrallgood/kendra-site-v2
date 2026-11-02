@@ -81,6 +81,11 @@
   cursor: zoom-in;
 }
 
+// Click areas over the photos in an artboard: invisible, but still zoom on click.
+.process-item--hit {
+  opacity: 0;
+}
+
 .process-item--zoomable:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
@@ -159,14 +164,15 @@ body.process-lightbox-open {
     padding: 1.5em 16px 3em;
   }
 
-  .process-canvas {
+  // Overlay pages keep their artboard and click areas in place on phones too.
+  .process-canvas:not(.process-canvas--overlay) {
     aspect-ratio: auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
-  .process-item {
+  .process-canvas:not(.process-canvas--overlay) .process-item {
     position: static;
     width: 100%;
     height: auto;

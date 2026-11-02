@@ -163,6 +163,11 @@ h3 {
 .masthead .site-title:hover {
   color: #ff0000 !important;
 }
+// The mobile menu drops down on a white panel, so its links are black.
+.greedy-nav .hidden-links a,
+.greedy-nav .hidden-links a:hover {
+  color: #000 !important;
+}
 
 // The homepage does not scroll, up, down, or sideways.
 html:has(#hero-canvas),

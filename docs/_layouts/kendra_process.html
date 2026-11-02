@@ -4,10 +4,10 @@ layout: kendra_default_no_footer
 {% assign board = site.data[page.board] %}
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/process.css">
 <div class="process-page">
-  <div class="process-canvas">
+  <div class="process-canvas{% if board.overlay %} process-canvas--overlay{% endif %}">
     {% for item in board.items %}
       {% if item.kind == "image" %}
-        <img class="process-item process-item--image process-item--zoomable{% if item.outline %} process-item--outlined{% endif %}" data-key="{{ item.key }}" src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --z: {{ item.z }};">
+        <img class="process-item process-item--image process-item--zoomable{% if item.hit %} process-item--hit{% endif %}{% if item.outline %} process-item--outlined{% endif %}" data-key="{{ item.key }}" src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --z: {{ item.z }};">
       {% elsif item.kind == "video" %}
         <div class="process-item process-item--video{% if item.src != "" %} process-item--zoomable{% endif %}" data-key="{{ item.key }}" style="--x: {{ item.x }}; --y: {{ item.y }}; --w: {{ item.w }}; --h: {{ item.h }}; --z: {{ item.z }};">
           {% if item.src != "" %}
