@@ -19,12 +19,17 @@ layout: kendra_default_no_footer
       </div>
 
       {% assign rows = page.filmstrip_rows | default: 1 %}
-      {% if page.row_split %}{% assign half = page.row_split %}{% else %}{% assign half = project.images.size | divided_by: 2 %}{% endif %}
+      {% assign half = project.images.size | divided_by: 2 %}
       {% for row in (1..rows) %}
       <div class="filmstrip-track{% if rows > 1 %} booklet-track{% endif %}">
         {% for image_url in project.images %}
           {% assign keep = false %}
-          {% if rows == 1 %}
+          {% if page.row_size %}
+            {% comment %} Fixed-size rows: each row takes row_size photos in order. {% endcomment %}
+            {% assign rowStart = row | minus: 1 | times: page.row_size %}
+            {% assign rowEnd = rowStart | plus: page.row_size %}
+            {% if forloop.index0 >= rowStart and forloop.index0 < rowEnd %}{% assign keep = true %}{% endif %}
+          {% elsif rows == 1 %}
             {% assign keep = true %}
           {% elsif row == 1 %}
             {% if forloop.index0 < half %}{% assign keep = true %}{% endif %}
