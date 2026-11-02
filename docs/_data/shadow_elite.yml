@@ -126,8 +126,8 @@ items:
   - key: label-solved
     kind: label
     text: solved by adjusting<br>heat press settings
-    x: 364
-    y: 1277
+    x: 495
+    y: 1280
     w: 319
     z: 20
   - key: sketches
