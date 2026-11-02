@@ -24,10 +24,15 @@ layout: kendra_default_no_footer
       <div class="filmstrip-track{% if rows > 1 %} booklet-track{% endif %}">
         {% for image_url in project.images %}
           {% assign keep = false %}
-          {% if page.row_size %}
-            {% comment %} Fixed-size rows: each row takes row_size photos in order. {% endcomment %}
-            {% assign rowStart = row | minus: 1 | times: page.row_size %}
-            {% assign rowEnd = rowStart | plus: page.row_size %}
+          {% if page.row_counts %}
+            {% comment %} Rows of the sizes listed in row_counts, in order (for example "4,8,2"). {% endcomment %}
+            {% assign counts = page.row_counts | split: "," %}
+            {% assign rowStart = 0 %}
+            {% assign rowEnd = 0 %}
+            {% for c in counts %}
+              {% if forloop.index < row %}{% assign rowStart = rowStart | plus: c %}{% endif %}
+              {% if forloop.index == row %}{% assign rowEnd = rowStart | plus: c %}{% endif %}
+            {% endfor %}
             {% if forloop.index0 >= rowStart and forloop.index0 < rowEnd %}{% assign keep = true %}{% endif %}
           {% elsif rows == 1 %}
             {% assign keep = true %}
