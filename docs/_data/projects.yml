@@ -171,6 +171,28 @@ projects:
   #     - url: "/assets/images/projects/yarn/IMG_2601.m4v"
   #       description: The package of yarn is transferred onto a cone for easier use while knitting.
   #       type: video
+  - title: Shadow Elite Lenticular
+    category: footwear
+    year: 2026
+    project_url: "/shadow-elite-lenticular/"
+    hover_color: "#4a6fa5"
+    cutout_image_url: "/assets/images/process/shadow-elite/shoe.webp"
+    spotlight_image_url: "/assets/images/process/shadow-elite/shoe.webp"
+  - title: Velociti Elite
+    category: footwear
+    year: 2026
+    project_url: "/velociti-elite-mockup"
+    hover_color: "#a0522d"
+    spotlight_image_url: "/assets/images/projects/velociti-elite/upper.webp"
+    images:
+      - url: "/assets/images/projects/velociti-elite/upper.webp"
+        description: "Upper"
+      - url: "/assets/images/projects/velociti-elite/medial-side.webp"
+        description: "Medial side"
+      - url: "/assets/images/projects/velociti-elite/color-cad.webp"
+        description: "Colorway CAD"
+      - url: "/assets/images/projects/velociti-elite/material-map.webp"
+        description: "Material map"
   - title: SPRING/SUMMER Material Trend
     category: footwear
     project_url: "/spring-summer-material-trend"
@@ -203,25 +225,3 @@ projects:
       - url: "/assets/images/projects/fall-winter-material-trend/durability-visibility.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/breathability-lightweight.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/rockin-rolled-goods.jpg"
-  - title: Velociti Elite
-    category: footwear
-    year: 2026
-    project_url: "/velociti-elite-mockup"
-    hover_color: "#a0522d"
-    spotlight_image_url: "/assets/images/projects/velociti-elite/upper.webp"
-    images:
-      - url: "/assets/images/projects/velociti-elite/upper.webp"
-        description: "Upper"
-      - url: "/assets/images/projects/velociti-elite/medial-side.webp"
-        description: "Medial side"
-      - url: "/assets/images/projects/velociti-elite/color-cad.webp"
-        description: "Colorway CAD"
-      - url: "/assets/images/projects/velociti-elite/material-map.webp"
-        description: "Material map"
-  - title: Shadow Elite Lenticular
-    category: footwear
-    year: 2026
-    project_url: "/shadow-elite-lenticular/"
-    hover_color: "#4a6fa5"
-    cutout_image_url: "/assets/images/process/shadow-elite/shoe.webp"
-    spotlight_image_url: "/assets/images/process/shadow-elite/shoe.webp"
