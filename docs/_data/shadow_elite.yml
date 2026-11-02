@@ -216,6 +216,13 @@ items:
     y: 2517
     w: 194
     z: 6
+  - key: label-mold
+    kind: label
+    text: example of vacuum mold<br>process
+    x: 529
+    y: 2290
+    w: 260
+    z: 20
   - key: video2
     kind: video
     src: /assets/video/shadow-elite-lenticular-2.mp4
