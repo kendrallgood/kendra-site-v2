@@ -100,6 +100,10 @@ h3 {
   @include breakpoint($medium) {
     // padding: 1em 0;
   }
+  // The header runs the full width of the page, not the centred content column.
+  max-width: none;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 // The menu button is red. It turns white when hovered or focused, and when the
 // menu is open (the bars become an X, so only the X arms change).
