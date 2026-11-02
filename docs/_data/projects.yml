@@ -88,7 +88,6 @@ projects:
       - url: "/assets/images/projects/open-line/5 plexus.jpg"
         description: Plexus is a knit construction I aided in developing, working closely with our Knit Technician. The result was a breathable mesh looking fabric created by systematically tucking yarn on the knit machine that correlated with the design files.
   - title: One Piece Wonder
-    fade_bottom: true
     category: textile
     hidden: true # taken off the projects grid; page still reachable by URL
     year: 2017
@@ -105,7 +104,6 @@ projects:
       - url: "/assets/images/projects/one-piece/a3057e45-74a7-4779-85ce-949c685d8f27_rw_1920.jpg"
       - url: "/assets/images/projects/one-piece/c0477401-bcdc-4c1b-bfb6-406afbaac22a_rw_1920.jpg"
   - title: Mellow Yellow
-    fade_bottom: true
     category: textile
     hidden: true # taken off the projects grid; page still reachable by URL
     year: 2017

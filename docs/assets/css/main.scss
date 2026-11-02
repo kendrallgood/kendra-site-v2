@@ -101,20 +101,26 @@ h3 {
     // padding: 1em 0;
   }
 }
-.navicon {
-    background: $masthead-links-hover-color;
+// The menu button is red. It turns white when hovered or focused, and when the
+// menu is open (the bars become an X, so only the X arms change).
+.navicon,
+.navicon:before,
+.navicon:after {
+    background: #ff0000;
+}
 
-    &:hover {
-        background: black;
-    }
+.greedy-nav__toggle:not(.close):hover .navicon,
+.greedy-nav__toggle:not(.close):focus-visible .navicon {
+    background: #fff;
+}
 
-    &:before, &:after {
-        background: $masthead-links-hover-color;
-
-        &:hover {
-            background: black;
-        }
-    }
+.greedy-nav__toggle:hover .navicon:before,
+.greedy-nav__toggle:hover .navicon:after,
+.greedy-nav__toggle:focus-visible .navicon:before,
+.greedy-nav__toggle:focus-visible .navicon:after,
+.greedy-nav__toggle.close .navicon:before,
+.greedy-nav__toggle.close .navicon:after {
+    background: #fff;
 }
 
 // FOOTER STYLING
@@ -147,15 +153,15 @@ h3 {
   letter-spacing: 0.04em;
   padding: 0 6px;
   font-size: 12px;
-  color: #ff0000; // the same red as the project section headings
+  color: #fff;
 }
 .masthead .masthead__menu-item a {
-  color: #ff0000;
+  color: #fff;
 }
 .masthead .masthead__menu-item a:hover,
 .masthead .kendra-link:hover,
 .masthead .site-title:hover {
-  color: #fff !important;
+  color: #ff0000 !important;
 }
 
 // The homepage does not scroll, up, down, or sideways.
@@ -166,6 +172,10 @@ body:has(#hero-canvas) {
 }
 body:has(#hero-canvas) #hero-canvas {
   height: 100vh; // the word grid fills the screen, since the fabric no longer sizes it
+}
+// The falling fabric is shown in black and white.
+body:has(#hero-canvas) #hero-canvas canvas {
+  filter: grayscale(1);
 }
 
 // Homepage background: the yellow with the canvas weave multiplied over it.
@@ -185,17 +195,6 @@ body.kendra-project-page {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
-
-// Resume page: the same stretched background, on the backdrop.
-body:has(.resume-page) .float-backdrop {
-  background-image: url('/assets/images/textures/projects_background_76.webp');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-body:has(.resume-page) .float-backdrop__base,
-body:has(.resume-page) .float-backdrop__grain {
-  display: none;
 }
 
 // Seasonal trend pages sit on the backdrop, so the image goes there, with the
@@ -221,24 +220,24 @@ body:has(#float-field) .float-backdrop__grain {
   display: none;
 }
 
-// Forest photo background on every page except the landing page and the resume.
-// Those two keep their own backgrounds above.
-body:not(:has(#hero-canvas)):not(:has(.resume-page)) {
+// Forest photo background on every page except the landing page.
+// The landing page keeps its own background above.
+body:not(:has(#hero-canvas)) {
   background-color: #cfd8dc;
-  background-image: url('/assets/images/textures/forest-log.webp');
+  background-image: url('/assets/images/textures/forest-green.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-body:not(:has(#hero-canvas)):not(:has(.resume-page)) .float-backdrop {
-  background-image: url('/assets/images/textures/forest-log.webp');
+body:not(:has(#hero-canvas)) .float-backdrop {
+  background-image: url('/assets/images/textures/forest-green.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-body:not(:has(#hero-canvas)):not(:has(.resume-page)) .float-backdrop__base,
-body:not(:has(#hero-canvas)):not(:has(.resume-page)) .float-backdrop__grain {
+body:not(:has(#hero-canvas)) .float-backdrop__base,
+body:not(:has(#hero-canvas)) .float-backdrop__grain {
   display: none;
 }
 
@@ -885,7 +884,7 @@ body.kendra-project-page {
   padding-right: 0;
 }
 
-// The two photos sit side by side, and the bio text is laid over them in red.
+// The two photos sit side by side, and the bio text is laid over them in white.
 .about-scrapbook {
   position: relative;
   display: flex;
@@ -924,7 +923,7 @@ body.kendra-project-page {
   line-height: 1.3;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #ff0000;
+  color: #fff;
 }
 
 .about-floater {
@@ -1245,13 +1244,13 @@ pointer-events: none;
     grid-column: 1 / -1;
   }
 
-  // Black and white background, with a different shade of red for each word.
-  .word-grid .word { color: #ff0000; }
+  // Black and white background, with the words in white (Projects is pale green).
+  .word-grid .word { color: #fff; }
   // Each colour follows the page the word links to, so every copy matches.
-  .word-grid .word[href="/about/"] { color: #ff0000; } // About and the name: pure red
+  .word-grid .word[href="/about/"] { color: #fff; } // About
   .word-grid .word[href="/projects/"] { color: #e9ffae; } // Projects: pale green (its bar follows the word colour)
-  .word-grid .word[href="/resume/"] { color: #ff0000; } // Resume: the same red as About
-  .word-grid .word[href="/about/"].word--name { color: #004cf4; } // your name: blue
+  .word-grid .word[href="/resume/"] { color: #fff; } // Resume
+  .word-grid .word[href="/about/"].word--name { color: #6b2d03; } // your name: brown
 
   // Both layers share the same geometry, fade and hover animation.
   .word-grid .word::before,
@@ -1749,19 +1748,24 @@ body:has(#float-field) .float-backdrop__tint {
   margin-left: -18px; // lines the words up with the site name
   background: transparent;
   border: 0; // no button shape; the underline marks the selection
-  color: #ff0000;
+  color: #fff;
   box-shadow: none;
   transition: box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
 
   &:hover,
   &.is-active {
     background: transparent;
-    color: #ff0000;
+    color: #fff;
     box-shadow: none;
     text-decoration: underline;
-    text-decoration-color: #ff0000;
+    text-decoration-color: #fff;
     text-decoration-thickness: 0.5px;
     text-underline-offset: 3px;
+  }
+
+  &:hover {
+    color: #ff0000;
+    text-decoration-color: #ff0000;
   }
 
 }
@@ -1817,16 +1821,10 @@ body:has(#float-field) .float-backdrop__tint {
   opacity: 0.45;
 }
 
-// The footwear tiles have rounded corners, and the corners also fade out.
-// The middle of each tile stays solid.
-// Tiles: blurred and grayscale at rest, with a bottom fade.
+// Tiles: grayscale at rest, with hard edges. Exodus Unseen and Gestural
+// Symmetry keep a bottom fade through .fade-bottom below.
 .float-item .float-item__img {
-  // All four edges fade out, as on the footwear tiles.
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
-  mask-composite: intersect;
-  filter: blur(1px) grayscale(1) contrast(1.3) brightness(0.95); // blurred at rest, sharp on hover
+  filter: grayscale(1) contrast(1.3) brightness(0.95);
   transition: transform 0.8s ease-out, opacity 0.8s ease-out, filter 0.8s ease-out;
 }
 // Footwear tiles fill a square with rounded corners, so the image reaches the corner.
@@ -1835,14 +1833,9 @@ body:has(#float-field) .float-backdrop__tint {
   height: 100%;
   object-fit: cover; // the image fills the whole tile
   border-radius: 30%; // matches the rounded corner of the cutouts, so the image reaches the corner
-  // All four edges fade out: each edge mask is intersected with the others.
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent), linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
-  mask-composite: intersect;
 }
 
-// Footwear tiles start blurred and foggy, then clear up on hover.
+// Footwear tiles: the hover state keeps the same sharpness as at rest.
 .float-item:hover .float-item__img {
   filter: grayscale(1) contrast(1.3) brightness(0.95);
   opacity: 1;
@@ -1869,7 +1862,7 @@ body:has(#float-field) .float-backdrop__tint {
 }
 .float-item .float-item__label {
   z-index: 2;
-  color: #ff0000;
+  color: #fff;
   font-weight: 300; // thinner than the regular weight
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.45); // shadow behind the text
 }
@@ -1955,13 +1948,38 @@ body.footwear-active .float-backdrop::after {
   }
 }
 
+// Phones: the filter buttons sit on the left edge, and the tile captions are
+// small enough that neighbouring tiles don't run into each other.
+@media (max-width: 599px) {
+  .float-page .projects-filter {
+    padding-left: 16px;
+  }
+
+  .float-page .projects-filter__pill {
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  // Captions wrap to a narrower column, so they stay on the cutout instead of
+  // running past its edges.
+  .float-item__label {
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    width: 50%;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
 .other-works {
   max-width: 960px;
   margin: 0 auto;
   padding: 2em 1.5em 3em;
 }
 
-// Matches the Projects filter buttons: left-aligned, thick, red, and starting
+// Matches the Projects filter buttons: left-aligned, thick, white, and starting
 // at the same left edge as the button text.
 .other-works__heading {
   font-family: 'acumin-variable', sans-serif;
@@ -1970,12 +1988,12 @@ body.footwear-active .float-backdrop::after {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #ff0000;
+  color: #fff;
   margin: 0 0 3em; // the same gap above the tiles as the Projects page
   padding: 1.5em 1em 0.5em; // the same spacing as the Projects buttons
   text-align: left;
   text-decoration: underline; // the same underline as the selected Projects button
-  text-decoration-color: #ff0000;
+  text-decoration-color: #fff;
   text-decoration-thickness: 0.5px;
   text-underline-offset: 3px;
   font-style: normal; // the site sets h1 to italic; the Projects text is upright
@@ -2010,6 +2028,7 @@ body.footwear-active .float-backdrop::after {
 }
 
 .other-works__title a:hover {
+  color: #ff0000;
   text-decoration: underline;
 }
 
@@ -2028,6 +2047,7 @@ body.footwear-active .float-backdrop::after {
 }
 
 .other-works__link:hover {
+  color: #ff0000;
   text-decoration: underline;
 }
 
@@ -2052,7 +2072,7 @@ body.footwear-active .float-backdrop::after {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   background: transparent; // flat, no debossed look
-  color: #ff0000;
+  color: #fff;
   border: none;
   border-radius: 0;
   padding: 3.5px 18px; // the same spacing as the Projects buttons
@@ -2065,7 +2085,7 @@ body.footwear-active .float-backdrop::after {
 .resume-download-btn:hover {
   background: transparent;
   box-shadow: none;
-  color: #ffffff;
+  color: #ff0000;
 }
 
 .seasonal-trend-page {
