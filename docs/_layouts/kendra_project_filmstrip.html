@@ -104,9 +104,51 @@ layout: kendra_default_no_footer
             zoomImg.src = img.src;
             zoomImg.alt = img.alt;
             zoom.hidden = false;
+            resetZoom();
           });
         });
-        zoom.addEventListener('click', function () { zoom.hidden = true; });
+
+        // Scroll to zoom in and out; drag to pan once zoomed in.
+        var scale = 1, panX = 0, panY = 0, dragging = false, moved = false, lastX = 0, lastY = 0;
+        function applyZoom() {
+          zoomImg.style.transform = 'translate(' + panX + 'px, ' + panY + 'px) scale(' + scale + ')';
+          zoomImg.style.cursor = scale > 1 ? (dragging ? 'grabbing' : 'grab') : 'zoom-out';
+        }
+        function resetZoom() {
+          scale = 1; panX = 0; panY = 0;
+          applyZoom();
+        }
+        zoom.addEventListener('wheel', function (e) {
+          e.preventDefault();
+          scale = Math.min(5, Math.max(1, scale * (e.deltaY < 0 ? 1.15 : 1 / 1.15)));
+          if (scale === 1) { panX = 0; panY = 0; }
+          applyZoom();
+        }, { passive: false });
+        zoomImg.addEventListener('mousedown', function (e) {
+          if (scale <= 1) return;
+          dragging = true; moved = false;
+          lastX = e.clientX; lastY = e.clientY;
+          applyZoom();
+          e.preventDefault();
+        });
+        window.addEventListener('mousemove', function (e) {
+          if (!dragging) return;
+          panX += e.clientX - lastX; panY += e.clientY - lastY;
+          lastX = e.clientX; lastY = e.clientY;
+          moved = true;
+          applyZoom();
+        });
+        window.addEventListener('mouseup', function () {
+          if (!dragging) return;
+          dragging = false;
+          applyZoom();
+        });
+
+        zoom.addEventListener('click', function () {
+          // A drag ends with a click; don't let it close the view.
+          if (moved) { moved = false; return; }
+          zoom.hidden = true;
+        });
         document.addEventListener('keydown', function (e) {
           if (e.key === 'Escape') zoom.hidden = true;
         });
