@@ -1,10 +1,10 @@
-# The Velociti Elite 3 spec sheet, shown as one image in the same 1189 x 2798
-# units as the Illustrator file. Each photo has a transparent "hit" item on top
-# of its place in the artboard, so clicking it opens the photo full screen.
+# The Velociti Elite 3 spec sheet, shown as one image in the same units as the
+# Illustrator file. Each photo has a transparent "hit" item on top of its place
+# in the artboard, so clicking it opens the photo full screen.
 # x, y, w are in those units. z sets stacking order.
 overlay: true
 canvas_width: 1189
-canvas_height: 2798
+canvas_height: 3507
 items:
   - key: artboard
     kind: image
@@ -18,28 +18,46 @@ items:
     kind: image
     hit: true
     src: /assets/images/process/velociti-elite/metallic-texture.webp
-    alt: Copper metallic texture
+    alt: Bronze metallic texture
     x: 0
     y: 0
     w: 1189
     z: 1
-  - key: face-piece
+  - key: sketch-sheet
     kind: image
     hit: true
-    src: /assets/images/process/velociti-elite/face-piece.webp
-    alt: New Top face material sample
-    x: 71
-    y: 1654
-    w: 251
+    src: /assets/images/process/velociti-elite/sketch-sheet.webp
+    alt: Pattern pieces and sketches
+    x: 148
+    y: 1385
+    w: 388
+    z: 2
+  - key: colorways
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/colorways.webp
+    alt: Colorway options
+    x: 567
+    y: 1385
+    w: 498
     z: 2
   - key: hero-shoe
     kind: image
     hit: true
     src: /assets/images/process/velociti-elite/hero-shoe.webp
     alt: Velociti Elite 3 shoe, side view
-    x: 90
+    x: 76
     y: 213
     w: 1062
+    z: 3
+  - key: shoe-second
+    kind: image
+    hit: true
+    src: /assets/images/process/velociti-elite/shoe-second.webp
+    alt: Velociti Elite 3 shoe, side view with tag
+    x: 164
+    y: 773
+    w: 886
     z: 3
   - key: shoe-side
     kind: image
@@ -47,7 +65,7 @@ items:
     src: /assets/images/process/velociti-elite/shoe-side.webp
     alt: Velociti Elite 3 shoe, close up side view
     x: 103
-    y: 1407
+    y: 2027
     w: 329
     z: 3
   - key: shoe-back
@@ -56,24 +74,24 @@ items:
     src: /assets/images/process/velociti-elite/shoe-back.webp
     alt: Velociti Elite 3 shoe, back view
     x: 795
-    y: 2307
-    w: 269
+    y: 2928
+    w: 270
     z: 3
-  - key: back-piece
+  - key: swatch-grid
     kind: image
     hit: true
-    src: /assets/images/process/velociti-elite/back-piece.webp
-    alt: Back piece of the upper
-    x: 175
-    y: 2016
-    w: 115
+    src: /assets/images/process/velociti-elite/swatch-grid.webp
+    alt: Bronze material swatches
+    x: 102
+    y: 2928
+    w: 448
     z: 3
-  - key: material-label
+  - key: yarn-circle
     kind: image
     hit: true
-    src: /assets/images/process/velociti-elite/material-label.webp
-    alt: Material label
-    x: 183
-    y: 1915
-    w: 60
+    src: /assets/images/process/velociti-elite/yarn-circle.webp
+    alt: Bronze yarn, woven in delicate, lightweight leno structure
+    x: 455
+    y: 3100
+    w: 285
     z: 4

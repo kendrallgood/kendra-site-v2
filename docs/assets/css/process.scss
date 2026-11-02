@@ -15,7 +15,7 @@
   width: 100%;
   max-width: 1189px;
   margin: 0 auto;
-  aspect-ratio: 1189 / 2798;
+  aspect-ratio: 1189 / var(--ch, 2798);
   container-type: inline-size;
   // Background sampled from the Illustrator gradient, top to bottom.
   background: linear-gradient(to bottom,
@@ -28,7 +28,7 @@
 .process-item {
   position: absolute;
   left: calc(var(--x) / 1189 * 100%);
-  top: calc(var(--y) / 2798 * 100%);
+  top: calc(var(--y) / var(--ch, 2798) * 100%);
   width: calc(var(--w) / 1189 * 100%);
   z-index: var(--z);
   margin: 0;
@@ -46,7 +46,7 @@
 }
 
 .process-item--video {
-  height: calc(var(--h) / 2798 * 100%);
+  height: calc(var(--h) / var(--ch, 2798) * 100%);
   background: #8fb0d4;
 }
 
