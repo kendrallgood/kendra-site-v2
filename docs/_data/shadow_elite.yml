@@ -119,10 +119,17 @@ items:
     src: /assets/images/process/shadow-elite/shoestrip.webp
     alt: Shoe renders on the lenticular sample
     x: 364
-    y: 1190
+    y: 1130
     w: 319
     z: 6
     outline: true
+  - key: label-solved
+    kind: label
+    text: solved by adjusting<br>heat press settings
+    x: 364
+    y: 1277
+    w: 319
+    z: 20
   - key: sketches
     kind: image
     src: /assets/images/process/shadow-elite/sketches.webp
