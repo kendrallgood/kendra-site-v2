@@ -223,6 +223,10 @@ projects:
     year: "FW26 + FW27"
     spotlight_image_url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
     images:
+      - url: "/assets/images/projects/fall-winter-material-trend/fw28-after-dark-oasis.webp"
+      - url: "/assets/images/projects/fall-winter-material-trend/fw28-brutalist-luxe.webp"
+      - url: "/assets/images/projects/fall-winter-material-trend/fw28-love-worn-denim.webp"
+      - url: "/assets/images/projects/fall-winter-material-trend/fw28-tinted-translucence.webp"
       - url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/simplified-organics.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/technical-opulence.jpg"
