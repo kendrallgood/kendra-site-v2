@@ -21,7 +21,7 @@ layout: kendra_default_no_footer
       {% assign rows = page.filmstrip_rows | default: 1 %}
       {% assign half = project.images.size | divided_by: 2 %}
       {% for row in (1..rows) %}
-      <div class="filmstrip-track">
+      <div class="filmstrip-track{% if rows > 1 %} booklet-track{% endif %}">
         {% for image_url in project.images %}
           {% assign keep = false %}
           {% if rows == 1 %}
