@@ -584,8 +584,8 @@ body:has(.square-photos) .filmstrip-item {
   cursor: pointer;
 }
 .booklet-open:hover {
-  background: url('/assets/images/textures/header_bar.png') repeat;
-  background-size: 3.19em auto; // same scale as the header bar
+  background: #ff0000;
+  border-color: #ff0000;
 }
 
 .booklet-wrap {
