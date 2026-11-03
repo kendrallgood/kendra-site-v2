@@ -250,7 +250,8 @@ body:not(:has(#hero-canvas)) .float-backdrop__grain {
   display: none;
 }
 // Project pages use the same grey background as the landing page.
-body.kendra-project-page:not(:has(#hero-canvas)) {
+body.kendra-project-page:not(:has(#hero-canvas)),
+body:has(.process-page):not(:has(#hero-canvas)) {
   background-color: #b8b8b8;
   background-image: url('/assets/images/textures/projects_background_76.webp');
   background-size: 100% 100%;
