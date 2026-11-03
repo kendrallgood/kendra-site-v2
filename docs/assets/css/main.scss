@@ -249,6 +249,13 @@ body:not(:has(#hero-canvas)) .float-backdrop__base,
 body:not(:has(#hero-canvas)) .float-backdrop__grain {
   display: none;
 }
+// Project pages use the same grey background as the landing page.
+body.kendra-project-page:not(:has(#hero-canvas)) {
+  background-color: #b8b8b8;
+  background-image: url('/assets/images/textures/projects_background_76.webp');
+  background-size: 100% 100%;
+  background-attachment: scroll;
+}
 
 // The canvas weave inside the words: the word's own color with the weave
 // softly blended over it, so the color stays close to the original. Clipped
