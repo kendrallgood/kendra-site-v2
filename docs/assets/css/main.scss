@@ -259,6 +259,11 @@ body:has(.pan-viewport):not(:has(#hero-canvas)) {
   background-attachment: scroll;
 }
 
+// The canvas page's grey is lightened by half, so the board stands out.
+body:has(.pan-viewport):not(:has(#hero-canvas)) {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/assets/images/textures/projects_background_76.webp');
+}
+
 // The canvas weave inside the words: the word's own color with the weave
 // softly blended over it, so the color stays close to the original. Clipped
 // to the letters.
