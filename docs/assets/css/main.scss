@@ -1971,6 +1971,12 @@ body.footwear-active .float-backdrop::after {
   transform: translate(-50%, -50%);
 }
 
+// Trend tiles always show their label.
+.float-item[data-category="trend"] .float-item__label {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
 // Touch screens have no hover, so always show the label there.
 @media (hover: none) {
   .float-item__label {
