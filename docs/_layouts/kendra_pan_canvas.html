@@ -47,9 +47,9 @@ layout: kendra_default_no_footer
     user-select: none;
   }
   .pan-item figcaption {
-    margin-top: 8px;
+    margin-top: 12px;
     font-family: 'acumin-variable', sans-serif;
-    font-size: 13px;
+    font-size: 26px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #1a1a1a;
@@ -62,6 +62,13 @@ layout: kendra_default_no_footer
     line-height: 1.5;
     color: #1a1a1a;
     pointer-events: none;
+  }
+  /* A plain board sits on a white page with no texture. */
+  body.pan-plain {
+    background: #fff !important;
+  }
+  body.pan-plain .pan-hint {
+    color: #1a1a1a;
   }
   .pan-hint {
     position: absolute;
@@ -82,12 +89,12 @@ layout: kendra_default_no_footer
     <div class="pan-tiles" id="pan-tiles"></div>
     {% for item in board.items %}
       {% if item.kind == "image" %}
-        <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;"{% if item.enlarge %} data-enlarge{% endif %}>
+        <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px; transform: rotate({{ item.rotate | default: 0 }}deg);"{% if item.enlarge %} data-enlarge{% endif %}>
           <img src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false">
           {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
         </figure>
       {% elsif item.kind == "text" %}
-        <p class="pan-text" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;">{{ item.text }}</p>
+        <p class="pan-text" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px; font-size: {{ item.size | default: 16 }}px;">{{ item.text }}</p>
       {% endif %}
     {% endfor %}
   </div>
@@ -100,6 +107,7 @@ layout: kendra_default_no_footer
 
 <script>
   (function () {
+    {% if board.plain %}document.body.classList.add('pan-plain');{% endif %}
     var viewport = document.getElementById('pan-viewport');
     var world = document.getElementById('pan-world');
     var WORLD_W = {{ board.world_width }};
@@ -174,10 +182,12 @@ layout: kendra_default_no_footer
     var TOP_BAND = 48;
     function fit() {
       var vw = viewport.clientWidth, vh = viewport.clientHeight - TOP_BAND;
-      scale = Math.min(vw / WORLD_W, vh / WORLD_H) * 0.95;
+      // A board much taller than the window opens at full width, so you pan down from the top.
+      var byWidth = vw / WORLD_W, byHeight = vh / WORLD_H;
+      scale = (WORLD_H > WORLD_W * 1.5 ? byWidth : Math.min(byWidth, byHeight)) * 0.95;
       minScale = scale;  // zooming out stops at this preset
       tx = (vw - WORLD_W * scale) / 2;
-      ty = TOP_BAND + (vh - WORLD_H * scale) / 2;
+      ty = TOP_BAND + Math.max(0, (vh - WORLD_H * scale) / 2);  // a tall board starts at its top
       apply();
     }
 
