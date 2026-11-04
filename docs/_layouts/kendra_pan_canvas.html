@@ -61,13 +61,14 @@ layout: kendra_default_no_footer
   }
   .pan-hint {
     position: absolute;
-    top: 12px;
+    top: 14px;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    font-size: 12px;
-    color: #1a1a1a;
-    opacity: 0.6;
+    font-family: 'acumin-variable', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: #fff;
     pointer-events: none;
   }
 </style>
@@ -159,12 +160,14 @@ layout: kendra_default_no_footer
     }
 
     // Start with the whole board visible, centred.
+    // The top band is kept clear for the hint, so the board starts below it.
+    var TOP_BAND = 48;
     function fit() {
-      var vw = viewport.clientWidth, vh = viewport.clientHeight;
+      var vw = viewport.clientWidth, vh = viewport.clientHeight - TOP_BAND;
       scale = Math.min(vw / WORLD_W, vh / WORLD_H, 1) * 0.95;
       minScale = scale;  // zooming out stops at this preset
       tx = (vw - WORLD_W * scale) / 2;
-      ty = (vh - WORLD_H * scale) / 2;
+      ty = TOP_BAND + (vh - WORLD_H * scale) / 2;
       apply();
     }
 
