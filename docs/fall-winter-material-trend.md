@@ -1,6 +1,6 @@
 ---
 layout: kendra_pan_canvas
-title: FALL/WINTER Material Trend
+title: FW28
 permalink: /fall-winter-material-trend/
 board: fw_canvas
 ---
