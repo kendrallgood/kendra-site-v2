@@ -1,0 +1,150 @@
+world_width: 2660
+world_height: 3221
+items:
+  - kind: text
+    key: title
+    x: 40
+    y: 40
+    w: 340
+    text: "FALL/WINTER MATERIAL TREND FW26 + FW27"
+  - kind: text
+    key: intro
+    x: 40
+    y: 110
+    w: 340
+    text: "Each season the materials team compiled trend analysis reports to guide material selection for the upcoming season. Materials were gathered from the latest vendor catalogues as well as scouring the NW footwear trade show and the Functional Fabric Fair for the latest and greatest."
+  - kind: image
+    key: kintentional
+    src: /assets/images/projects/fall-winter-material-trend/kintentional.jpg
+    alt: FALL/WINTER Material Trend, kintentional
+    enlarge: true
+    x: 420
+    y: 40
+    w: 500
+    h: 707
+  - kind: image
+    key: fw28-moodboards
+    src: /assets/images/projects/fall-winter-material-trend/fw28-moodboards.webp
+    alt: FALL/WINTER Material Trend, fw28-moodboards
+    enlarge: true
+    x: 960
+    y: 40
+    w: 500
+    h: 304
+  - kind: image
+    key: fw28-after-dark-oasis
+    src: /assets/images/projects/fall-winter-material-trend/fw28-after-dark-oasis.webp
+    alt: FALL/WINTER Material Trend, fw28-after-dark-oasis
+    enlarge: true
+    x: 1500
+    y: 40
+    w: 500
+    h: 706
+  - kind: image
+    key: fw28-brutalist-luxe
+    src: /assets/images/projects/fall-winter-material-trend/fw28-brutalist-luxe.webp
+    alt: FALL/WINTER Material Trend, fw28-brutalist-luxe
+    enlarge: true
+    x: 2040
+    y: 40
+    w: 500
+    h: 701
+  - kind: image
+    key: fw28-love-worn-denim
+    src: /assets/images/projects/fall-winter-material-trend/fw28-love-worn-denim.webp
+    alt: FALL/WINTER Material Trend, fw28-love-worn-denim
+    enlarge: true
+    x: 960
+    y: 414
+    w: 500
+    h: 706
+  - kind: image
+    key: fw28-tinted-translucence
+    src: /assets/images/projects/fall-winter-material-trend/fw28-tinted-translucence.webp
+    alt: FALL/WINTER Material Trend, fw28-tinted-translucence
+    enlarge: true
+    x: 2040
+    y: 811
+    w: 500
+    h: 706
+  - kind: image
+    key: kintentional
+    src: /assets/images/projects/fall-winter-material-trend/kintentional.jpg
+    alt: FALL/WINTER Material Trend, kintentional
+    enlarge: true
+    x: 1500
+    y: 816
+    w: 500
+    h: 707
+  - kind: image
+    key: simplified-organics
+    src: /assets/images/projects/fall-winter-material-trend/simplified-organics.jpg
+    alt: FALL/WINTER Material Trend, simplified-organics
+    enlarge: true
+    x: 420
+    y: 817
+    w: 500
+    h: 707
+  - kind: image
+    key: technical-opulence
+    src: /assets/images/projects/fall-winter-material-trend/technical-opulence.jpg
+    alt: FALL/WINTER Material Trend, technical-opulence
+    enlarge: true
+    x: 960
+    y: 1190
+    w: 500
+    h: 707
+  - kind: image
+    key: soft-serenity
+    src: /assets/images/projects/fall-winter-material-trend/soft-serenity.jpg
+    alt: FALL/WINTER Material Trend, soft-serenity
+    enlarge: true
+    x: 2040
+    y: 1587
+    w: 500
+    h: 707
+  - kind: image
+    key: warm-weatherized
+    src: /assets/images/projects/fall-winter-material-trend/warm-weatherized.jpg
+    alt: FALL/WINTER Material Trend, warm-weatherized
+    enlarge: true
+    x: 1500
+    y: 1593
+    w: 500
+    h: 707
+  - kind: image
+    key: durability-visibility
+    src: /assets/images/projects/fall-winter-material-trend/durability-visibility.jpg
+    alt: FALL/WINTER Material Trend, durability-visibility
+    enlarge: true
+    x: 420
+    y: 1594
+    w: 500
+    h: 707
+  - kind: image
+    key: rockin-rolled-goods
+    src: /assets/images/projects/fall-winter-material-trend/rockin-rolled-goods.jpg
+    alt: FALL/WINTER Material Trend, rockin-rolled-goods
+    enlarge: true
+    x: 960
+    y: 1967
+    w: 500
+    h: 707
+  - kind: image
+    key: breathability-lightweight
+    src: /assets/images/projects/fall-winter-material-trend/breathability-lightweight.jpg
+    alt: FALL/WINTER Material Trend, breathability-lightweight
+    enlarge: true
+    x: 2040
+    y: 2364
+    w: 500
+    h: 707
+  - kind: image
+    key: fw26-boards
+    src: /assets/images/projects/fall-winter-material-trend/fw26-boards.jpg
+    alt: FALL/WINTER Material Trend, fw26-boards
+    enlarge: true
+    x: 1500
+    y: 2370
+    w: 500
+    h: 375

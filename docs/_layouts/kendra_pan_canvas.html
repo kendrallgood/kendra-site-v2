@@ -35,6 +35,10 @@ layout: kendra_default_no_footer
     margin: 0;
     pointer-events: none;
   }
+  .pan-item[data-enlarge] {
+    pointer-events: auto;
+    cursor: zoom-in;
+  }
   .pan-item img {
     display: block;
     width: 100%;
@@ -78,7 +82,7 @@ layout: kendra_default_no_footer
     <div class="pan-tiles" id="pan-tiles"></div>
     {% for item in board.items %}
       {% if item.kind == "image" %}
-        <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;">
+        <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;"{% if item.enlarge %} data-enlarge{% endif %}>
           <img src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false">
           {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
         </figure>
@@ -90,15 +94,20 @@ layout: kendra_default_no_footer
   <p class="pan-hint">drag to move · scroll to zoom</p>
 </div>
 
+<div class="photo-zoom" id="pan-photo" hidden>
+  <img src="" alt="">
+</div>
+
 <script>
   (function () {
     var viewport = document.getElementById('pan-viewport');
     var world = document.getElementById('pan-world');
     var WORLD_W = {{ board.world_width }};
     var WORLD_H = {{ board.world_height }};
-    var TILE = {{ board.tiles.size }};
-    var LEVELS = {{ board.tiles.levels }};
-    var TILE_PATH = '{{ site.baseurl }}{{ board.tiles.path }}';
+    // Boards without tiles (only photos) leave TILE_PATH null.
+    var TILE = {{ board.tiles.size | default: 512 }};
+    var LEVELS = {{ board.tiles.levels | default: 1 }};
+    var TILE_PATH = {% if board.tiles %}'{{ site.baseurl }}{{ board.tiles.path }}'{% else %}null{% endif %};
     var MAX_SCALE = 4;
     var minScale = 0.05;  // set to the fitted scale in fit()
     var scale = 1, tx = 0, ty = 0;
@@ -111,6 +120,7 @@ layout: kendra_default_no_footer
     var tileLevel = -1;
 
     function renderTiles() {
+      if (!TILE_PATH) return;
       var L = 0;
       while (L < LEVELS - 1 && scale * Math.pow(2, L) < 0.5) L++;
       if (L !== tileLevel) {
@@ -188,9 +198,16 @@ layout: kendra_default_no_footer
       apply();
     }, { passive: false });
 
+    // Enlarged photo: a click (not a drag) on a photo opens it.
+    var photo = document.getElementById('pan-photo');
+    var photoImg = photo.querySelector('img');
+    var downX = 0, downY = 0, downTarget = null;
+
     viewport.addEventListener('pointerdown', function (e) {
       dragging = true;
       lastX = e.clientX; lastY = e.clientY;
+      downX = e.clientX; downY = e.clientY;
+      downTarget = e.target;
       viewport.classList.add('is-dragging');
       viewport.setPointerCapture(e.pointerId);
     });
@@ -204,7 +221,20 @@ layout: kendra_default_no_footer
       dragging = false;
       viewport.classList.remove('is-dragging');
     }
-    viewport.addEventListener('pointerup', stop);
+    viewport.addEventListener('pointerup', function (e) {
+      var moved = Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 6;
+      var pic = downTarget && downTarget.closest ? downTarget.closest('[data-enlarge] img') : null;
+      if (!moved && pic) {
+        photoImg.src = pic.src;
+        photoImg.alt = pic.alt;
+        photo.hidden = false;
+      }
+      stop();
+    });
+    photo.addEventListener('click', function () { photo.hidden = true; });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') photo.hidden = true;
+    });
     viewport.addEventListener('pointercancel', stop);
 
     // Images load after the layout, so fit once they are in.
