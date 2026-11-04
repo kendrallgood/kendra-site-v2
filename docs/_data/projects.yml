@@ -194,6 +194,7 @@ projects:
       - url: "/assets/images/projects/velociti-elite/material-map.webp"
         description: "Material map"
   - title: SPRING/SUMMER Material Trend
+    hidden: true
     category: trend
     project_url: "/spring-summer-material-trend"
     cutout_image_url: "/assets/images/cutouts/fall-winter-material-trend.png"
