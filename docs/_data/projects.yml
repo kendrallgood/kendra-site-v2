@@ -217,12 +217,11 @@ projects:
       - url: "/assets/images/projects/spring-summer-material-trend/board-boot.jpg"
       - url: "/assets/images/projects/spring-summer-material-trend/board-ss26-overview.webp"
       - url: "/assets/images/projects/spring-summer-material-trend/board-ss26-stands.jpg"
-  - title: FW28
+  - title: FW28 Seasonal Trend Imagery
     category: trend
     project_url: "/fall-winter-material-trend"
     cutout_image_url: "/assets/images/cutouts/spring-summer-material-trend.png"
     hover_color: "#d4a574"
-    year: "FW26 + FW27"
     spotlight_image_url: "/assets/images/projects/fall-winter-material-trend/kintentional.jpg"
     images:
       - url: "/assets/images/projects/fall-winter-material-trend/fw28-moodboards.webp"
