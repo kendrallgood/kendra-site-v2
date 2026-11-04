@@ -1791,7 +1791,7 @@ body:has(#float-field) .float-backdrop__tint {
   &.is-active {
     color: #ff6b6b;
     border-color: #ff6b6b;
-    text-decoration-color: #ff6b6b;
+    text-decoration: none;
   }
 
   &:hover {
