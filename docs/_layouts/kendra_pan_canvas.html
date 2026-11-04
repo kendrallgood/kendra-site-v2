@@ -96,8 +96,8 @@ layout: kendra_default_no_footer
     var TILE = {{ board.tiles.size }};
     var LEVELS = {{ board.tiles.levels }};
     var TILE_PATH = '{{ site.baseurl }}{{ board.tiles.path }}';
-    var MIN_SCALE = 0.05;
     var MAX_SCALE = 4;
+    var minScale = 0.05;  // set to the fitted scale in fit()
     var scale = 1, tx = 0, ty = 0;
     var dragging = false, lastX = 0, lastY = 0;
 
@@ -160,6 +160,7 @@ layout: kendra_default_no_footer
     function fit() {
       var vw = viewport.clientWidth, vh = viewport.clientHeight;
       scale = Math.min(vw / WORLD_W, vh / WORLD_H, 1) * 0.95;
+      minScale = scale;  // zooming out stops at this preset
       tx = (vw - WORLD_W * scale) / 2;
       ty = (vh - WORLD_H * scale) / 2;
       apply();
@@ -169,7 +170,12 @@ layout: kendra_default_no_footer
       e.preventDefault();
       var rect = viewport.getBoundingClientRect();
       var mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      var next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * (e.deltaY < 0 ? 1.1 : 1 / 1.1)));
+      // Scales with how far the wheel moved, so a trackpad and a mouse both feel right.
+      var next = Math.min(MAX_SCALE, scale * Math.exp(-e.deltaY * 0.0005));
+      if (next <= minScale) {
+        fit();
+        return;
+      }
       // Keep the point under the cursor fixed while zooming.
       tx = mx - (mx - tx) * (next / scale);
       ty = my - (my - ty) * (next / scale);
