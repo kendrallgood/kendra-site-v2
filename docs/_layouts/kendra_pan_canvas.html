@@ -1,0 +1,142 @@
+---
+layout: kendra_default_no_footer
+---
+{% assign board = site.data[page.board] %}
+<style>
+  .pan-viewport {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 140px);
+    min-height: 420px;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none; /* drag and zoom here, not the page scroll */
+    user-select: none;
+    background: transparent;
+  }
+  .pan-viewport.is-dragging { cursor: grabbing; }
+  .pan-world {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: {{ board.world_width }}px;
+    height: {{ board.world_height }}px;
+    transform-origin: 0 0;
+  }
+  .pan-item {
+    position: absolute;
+    margin: 0;
+    pointer-events: none;
+  }
+  .pan-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  .pan-item figcaption {
+    margin-top: 8px;
+    font-family: 'acumin-variable', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+  }
+  .pan-text {
+    position: absolute;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1a1a1a;
+    pointer-events: none;
+  }
+  .pan-hint {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    font-size: 12px;
+    color: #1a1a1a;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+</style>
+
+<div class="pan-viewport" id="pan-viewport">
+  <div class="pan-world" id="pan-world">
+    {% for item in board.items %}
+      {% if item.kind == "image" %}
+        <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;">
+          <img src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false">
+          {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
+        </figure>
+      {% elsif item.kind == "text" %}
+        <p class="pan-text" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;">{{ item.text }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <p class="pan-hint">drag to move · scroll to zoom</p>
+</div>
+
+<script>
+  (function () {
+    var viewport = document.getElementById('pan-viewport');
+    var world = document.getElementById('pan-world');
+    var WORLD_W = {{ board.world_width }};
+    var WORLD_H = {{ board.world_height }};
+    var MIN_SCALE = 0.2;
+    var MAX_SCALE = 2.5;
+    var scale = 1, tx = 0, ty = 0;
+    var dragging = false, lastX = 0, lastY = 0;
+
+    function apply() {
+      world.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
+    }
+
+    // Start with the whole board visible, centred.
+    function fit() {
+      var vw = viewport.clientWidth, vh = viewport.clientHeight;
+      scale = Math.min(vw / WORLD_W, vh / WORLD_H, 1) * 0.95;
+      tx = (vw - WORLD_W * scale) / 2;
+      ty = (vh - WORLD_H * scale) / 2;
+      apply();
+    }
+
+    viewport.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var rect = viewport.getBoundingClientRect();
+      var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      var next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale * (e.deltaY < 0 ? 1.1 : 1 / 1.1)));
+      // Keep the point under the cursor fixed while zooming.
+      tx = mx - (mx - tx) * (next / scale);
+      ty = my - (my - ty) * (next / scale);
+      scale = next;
+      apply();
+    }, { passive: false });
+
+    viewport.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      lastX = e.clientX; lastY = e.clientY;
+      viewport.classList.add('is-dragging');
+      viewport.setPointerCapture(e.pointerId);
+    });
+    viewport.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      tx += e.clientX - lastX; ty += e.clientY - lastY;
+      lastX = e.clientX; lastY = e.clientY;
+      apply();
+    });
+    function stop() {
+      dragging = false;
+      viewport.classList.remove('is-dragging');
+    }
+    viewport.addEventListener('pointerup', stop);
+    viewport.addEventListener('pointercancel', stop);
+
+    // Images load after the layout, so fit once they are in.
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    fit();
+  })();
+</script>
