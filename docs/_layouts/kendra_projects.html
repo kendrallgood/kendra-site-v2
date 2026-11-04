@@ -6,6 +6,7 @@ layout: kendra_default
 {% if site.data.projects %}
   <div class="projects-filter" id="projects-filter">
     <button class="projects-filter__pill is-active" data-cat="footwear" type="button">Footwear &amp; material design</button>
+    <button class="projects-filter__pill" data-cat="trend" type="button">Trend</button>
     <button class="projects-filter__pill" data-cat="textile" type="button">Textile design</button>
   </div>
 
@@ -50,7 +51,7 @@ layout: kendra_default
     }
 
     function layout() {
-      document.body.classList.toggle('footwear-active', currentCat === 'footwear');
+      document.body.classList.toggle('footwear-active', currentCat !== 'textile');
       var width = field.clientWidth;
       var visible = items.filter(function (el) {
         return el.dataset.category === currentCat;

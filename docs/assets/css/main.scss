@@ -1860,7 +1860,7 @@ body:has(#float-field) .float-backdrop__tint {
   transition: transform 0.8s ease-out, opacity 0.8s ease-out, filter 0.8s ease-out;
 }
 // Footwear tiles fill a square with rounded corners, so the image reaches the corner.
-.float-item[data-category="footwear"] .float-item__img {
+.float-item:not([data-category="textile"]) .float-item__img {
   width: 100%;
   height: 100%;
   object-fit: cover; // the image fills the whole tile
@@ -1875,7 +1875,7 @@ body:has(#float-field) .float-backdrop__tint {
 }
 
 // Footwear mist: a fog layer over each tile, under its label so the label stays clear.
-.float-item[data-category="footwear"]::before {
+.float-item:not([data-category="textile"])::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1898,7 +1898,7 @@ body:has(#float-field) .float-backdrop__tint {
   font-weight: 300; // thinner than the regular weight
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 0, 0, 0.45); // shadow behind the text
 }
-.float-item[data-category="footwear"]:hover::before {
+.float-item:not([data-category="textile"]):hover::before {
   opacity: 0;
 }
 
