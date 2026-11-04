@@ -23,6 +23,13 @@ layout: kendra_default_no_footer
     height: {{ board.world_height }}px;
     transform-origin: 0 0;
   }
+  .pan-tile {
+    position: absolute;
+    display: block;
+    max-width: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
   .pan-item {
     position: absolute;
     margin: 0;
@@ -65,6 +72,7 @@ layout: kendra_default_no_footer
 
 <div class="pan-viewport" id="pan-viewport">
   <div class="pan-world" id="pan-world">
+    <div class="pan-tiles" id="pan-tiles"></div>
     {% for item in board.items %}
       {% if item.kind == "image" %}
         <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;">
@@ -85,13 +93,67 @@ layout: kendra_default_no_footer
     var world = document.getElementById('pan-world');
     var WORLD_W = {{ board.world_width }};
     var WORLD_H = {{ board.world_height }};
-    var MIN_SCALE = 0.1;
+    var TILE = {{ board.tiles.size }};
+    var LEVELS = {{ board.tiles.levels }};
+    var TILE_PATH = '{{ site.baseurl }}{{ board.tiles.path }}';
+    var MIN_SCALE = 0.05;
     var MAX_SCALE = 4;
     var scale = 1, tx = 0, ty = 0;
     var dragging = false, lastX = 0, lastY = 0;
 
+    // Tiles are cut at several resolutions. Only the tiles in view are drawn,
+    // at the resolution that matches the current zoom.
+    var tilesEl = document.getElementById('pan-tiles');
+    var tiles = {};
+    var tileLevel = -1;
+
+    function renderTiles() {
+      var L = 0;
+      while (L < LEVELS - 1 && scale * Math.pow(2, L) < 0.5) L++;
+      if (L !== tileLevel) {
+        tilesEl.innerHTML = '';
+        tiles = {};
+        tileLevel = L;
+      }
+      var k = Math.pow(2, L);
+      var span = TILE * k;                           // world px per tile
+      var imgW = WORLD_W / k, imgH = WORLD_H / k;    // image px at this level
+      var cols = Math.ceil(imgW / TILE), rows = Math.ceil(imgH / TILE);
+      var x0 = -tx / scale, y0 = -ty / scale;
+      var x1 = x0 + viewport.clientWidth / scale, y1 = y0 + viewport.clientHeight / scale;
+      var c0 = Math.max(0, Math.floor(x0 / span)), c1 = Math.min(cols - 1, Math.floor(x1 / span));
+      var r0 = Math.max(0, Math.floor(y0 / span)), r1 = Math.min(rows - 1, Math.floor(y1 / span));
+      var keep = {};
+      for (var r = r0; r <= r1; r++) {
+        for (var c = c0; c <= c1; c++) {
+          var key = c + '_' + r;
+          keep[key] = true;
+          if (tiles[key]) continue;
+          var img = document.createElement('img');
+          img.className = 'pan-tile';
+          img.src = TILE_PATH + '/L' + L + '/' + key + '.webp';
+          img.alt = '';
+          img.draggable = false;
+          img.style.left = c * span + 'px';
+          img.style.top = r * span + 'px';
+          // Edge tiles are smaller than a full tile.
+          img.style.width = Math.min(TILE, imgW - c * TILE) * k + 'px';
+          img.style.height = Math.min(TILE, imgH - r * TILE) * k + 'px';
+          tilesEl.appendChild(img);
+          tiles[key] = img;
+        }
+      }
+      Object.keys(tiles).forEach(function (key) {
+        if (!keep[key]) {
+          tilesEl.removeChild(tiles[key]);
+          delete tiles[key];
+        }
+      });
+    }
+
     function apply() {
       world.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
+      renderTiles();
     }
 
     // Start with the whole board visible, centred.

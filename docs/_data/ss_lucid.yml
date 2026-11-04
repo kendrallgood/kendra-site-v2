@@ -1,10 +1,7 @@
-world_width: 5000
-world_height: 5560
-items:
-  - kind: image
-    key: lucid-board
-    src: /assets/images/projects/lucid/kendra-board.webp
-    alt: Spring/Summer material trend board, Lucid export
-    x: 0
-    y: 0
-    w: 5000
+world_width: 12000
+world_height: 13342
+tiles:
+  size: 512
+  levels: 3
+  path: /assets/images/projects/lucid/tiles
+items: []
