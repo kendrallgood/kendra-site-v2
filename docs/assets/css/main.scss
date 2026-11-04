@@ -1787,6 +1787,13 @@ body:has(#float-field) .float-backdrop__tint {
     text-underline-offset: 3px;
   }
 
+  // The selected button stays light red; hover still goes full red.
+  &.is-active {
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+    text-decoration-color: #ff6b6b;
+  }
+
   &:hover {
     color: #ff0000;
     border-color: #ff0000;
