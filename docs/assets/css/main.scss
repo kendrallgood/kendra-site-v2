@@ -1937,7 +1937,8 @@ body.footwear-active .float-backdrop::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, calc(-50% + 6px));
-  white-space: nowrap;
+  width: 70%; // wraps inside the tile, with space at each edge
+  white-space: normal;
   font-family: acumin-variable, sans-serif;
   font-size: 15px;
   text-align: center;
