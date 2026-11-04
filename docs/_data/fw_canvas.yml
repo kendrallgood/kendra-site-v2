@@ -1,12 +1,12 @@
-world_width: 2660
-world_height: 3221
+world_width: 1660
+world_height: 1557
 items:
   - kind: image
     key: fw28-moodboards
     src: /assets/images/projects/fall-winter-material-trend/fw28-moodboards.webp
     alt: FALL/WINTER Material Trend, fw28-moodboards
     enlarge: true
-    x: 960
+    x: 40
     y: 40
     w: 500
     h: 304
@@ -15,7 +15,7 @@ items:
     src: /assets/images/projects/fall-winter-material-trend/fw28-after-dark-oasis.webp
     alt: FALL/WINTER Material Trend, fw28-after-dark-oasis
     enlarge: true
-    x: 1500
+    x: 580
     y: 40
     w: 500
     h: 706
@@ -24,7 +24,7 @@ items:
     src: /assets/images/projects/fall-winter-material-trend/fw28-brutalist-luxe.webp
     alt: FALL/WINTER Material Trend, fw28-brutalist-luxe
     enlarge: true
-    x: 2040
+    x: 1120
     y: 40
     w: 500
     h: 701
@@ -33,7 +33,7 @@ items:
     src: /assets/images/projects/fall-winter-material-trend/fw28-love-worn-denim.webp
     alt: FALL/WINTER Material Trend, fw28-love-worn-denim
     enlarge: true
-    x: 960
+    x: 40
     y: 414
     w: 500
     h: 706
@@ -42,7 +42,7 @@ items:
     src: /assets/images/projects/fall-winter-material-trend/fw28-tinted-translucence.webp
     alt: FALL/WINTER Material Trend, fw28-tinted-translucence
     enlarge: true
-    x: 2040
+    x: 1120
     y: 811
     w: 500
     h: 706

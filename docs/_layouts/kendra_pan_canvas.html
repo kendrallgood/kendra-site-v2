@@ -174,7 +174,7 @@ layout: kendra_default_no_footer
     var TOP_BAND = 48;
     function fit() {
       var vw = viewport.clientWidth, vh = viewport.clientHeight - TOP_BAND;
-      scale = Math.min(vw / WORLD_W, vh / WORLD_H, 1) * 0.95;
+      scale = Math.min(vw / WORLD_W, vh / WORLD_H) * 0.95;
       minScale = scale;  // zooming out stops at this preset
       tx = (vw - WORLD_W * scale) / 2;
       ty = TOP_BAND + (vh - WORLD_H * scale) / 2;
