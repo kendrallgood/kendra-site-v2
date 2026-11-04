@@ -1754,6 +1754,7 @@ body:has(#float-field) .float-backdrop__tint {
   position: sticky;
   top: 0;
   z-index: 3;
+  gap: 10px; // the two buttons are separate boxes
 }
 
 // Debossed filter buttons: pressed into the backdrop, with shadow on the
@@ -1766,10 +1767,11 @@ body:has(#float-field) .float-backdrop__tint {
   font-size: 23px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 3.5px 18px; // 7px of space between the two buttons
-  margin-left: -18px; // lines the words up with the site name
+  padding: 6px 16px;
+  margin-left: 0; // the box edge lines up with the site name
   background: transparent;
-  border: 0; // no button shape; the underline marks the selection
+  border: 1px solid #fff; // each button is its own outlined box
+  border-radius: 0;
   color: #fff;
   box-shadow: none;
   transition: box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
@@ -1787,6 +1789,7 @@ body:has(#float-field) .float-backdrop__tint {
 
   &:hover {
     color: #ff0000;
+    border-color: #ff0000;
     text-decoration-color: #ff0000;
   }
 
@@ -1979,8 +1982,6 @@ body.footwear-active .float-backdrop::after {
 
   .float-page .projects-filter__pill {
     margin-left: 0;
-    padding-left: 0;
-    padding-right: 0;
     text-align: left;
   }
 
