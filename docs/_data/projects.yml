@@ -243,5 +243,5 @@ projects:
     category: trend
     project_url: "/previous-seasonal-material-trend/"
     hover_color: "#9fb8cf"
-    cutout_image_url: "/assets/images/cutouts/previous-seasonal-material-trend.webp"
-    spotlight_image_url: "/assets/images/cutouts/previous-seasonal-material-trend.webp"
+    cutout_image_url: "/assets/images/cutouts/previous-seasonal-material-trend-gradient.webp"
+    spotlight_image_url: "/assets/images/cutouts/previous-seasonal-material-trend-gradient.webp"
