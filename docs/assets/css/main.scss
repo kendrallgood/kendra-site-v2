@@ -1797,7 +1797,7 @@ body:has(#float-field) .float-backdrop__tint {
   &:hover {
     color: #ff0000;
     border-color: #ff0000;
-    text-decoration-color: #ff0000;
+    text-decoration: none;
   }
 
 }
