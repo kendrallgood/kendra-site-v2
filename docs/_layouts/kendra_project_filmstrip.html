@@ -42,7 +42,7 @@ layout: kendra_default_no_footer
             {% if forloop.index0 >= half %}{% assign keep = true %}{% endif %}
           {% endif %}
           {% if keep %}
-          <figure class="filmstrip-item">
+          <figure class="filmstrip-item"{% if page.stagger %} style="margin-top: {% cycle '0px', '90px' %};"{% endif %}>
             {% if image_url.type == "video" %}
               <video class="filmstrip-img" controls>
                 <source src="{{ site.baseurl }}{{ image_url.url }}" type="video/mp4">

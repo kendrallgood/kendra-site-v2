@@ -2,8 +2,9 @@
 layout: kendra_project_filmstrip
 title: FALL/WINTER Material Trend
 permalink: /fall-winter-material-trend/
-filmstrip_rows: 3
-row_counts: "5,4,5"
+filmstrip_rows: 1
+row_counts: "5"
+stagger: true
 square_photos: true
 ---
 
