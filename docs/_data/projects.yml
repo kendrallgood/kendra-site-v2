@@ -239,3 +239,9 @@ projects:
       - url: "/assets/images/projects/fall-winter-material-trend/rockin-rolled-goods.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/breathability-lightweight.jpg"
       - url: "/assets/images/projects/fall-winter-material-trend/fw26-boards.jpg"
+  - title: PREVIOUS SEASONAL MATERIAL TREND
+    category: trend
+    project_url: "/previous-seasonal-material-trend/"
+    hover_color: "#9fb8cf"
+    cutout_image_url: "/assets/images/cutouts/previous-seasonal-material-trend.webp"
+    spotlight_image_url: "/assets/images/cutouts/previous-seasonal-material-trend.webp"
