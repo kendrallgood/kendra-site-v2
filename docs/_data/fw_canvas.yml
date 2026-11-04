@@ -1,12 +1,6 @@
 world_width: 2660
 world_height: 3221
 items:
-  - kind: text
-    key: title
-    x: 40
-    y: 40
-    w: 340
-    text: "FALL/WINTER MATERIAL TREND FW26 + FW27"
   - kind: image
     key: fw28-moodboards
     src: /assets/images/projects/fall-winter-material-trend/fw28-moodboards.webp
