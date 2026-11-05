@@ -229,7 +229,132 @@ layout: kendra_default_no_footer
     var photoImg = photo.querySelector('img');
     var downX = 0, downY = 0, downTarget = null;
 
+    // Touch: one finger drags the board, two fingers pinch to zoom, and a finger
+    // that rests still over the photos for a moment pushes them away while held.
+    var touches = {};
+    var pinch = null, pinched = false;
+    var lingerTimer = null, lingering = false, lingerX = 0, lingerY = 0;
+    var LINGER_MS = 350, MOVE_SLOP = 10, LINGER_PUSH = 0.3;
+
+    function openPhoto(target) {
+      var pic = target && target.closest ? target.closest('[data-enlarge] img') : null;
+      if (pic) {
+        photoImg.src = pic.src;
+        photoImg.alt = pic.alt;
+        photo.hidden = false;
+      }
+    }
+    function boardPoint(cx, cy) {
+      var r = viewport.getBoundingClientRect();
+      return { x: (cx - r.left - tx) / scale, y: (cy - r.top - ty) / scale };
+    }
+    // Pushes the photos near a board point away from it, by an amount.
+    function pushAt(px, py, amount) {
+      var reach0 = REACH_PX / scale;
+      scatter.forEach(function (s) {
+        var dx = (s.cx + s.x) - px, dy = (s.cy + s.y) - py;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        var reach = Math.max(s.w, s.h) / 2 + reach0;
+        if (d < reach) {
+          var k = (1 - d / reach) * amount;
+          var nx = d > 0 ? dx / d : 0, ny = d > 0 ? dy / d : 0;
+          s.vx += nx * k;
+          s.vy += ny * k;
+        }
+      });
+      kick();
+    }
+    function lingerLoop() {
+      if (!lingering) return;
+      var p = boardPoint(lingerX, lingerY);
+      pushAt(p.x, p.y, PUSH * LINGER_PUSH);
+      requestAnimationFrame(lingerLoop);
+    }
+    function pinchState() {
+      var ids = Object.keys(touches).slice(0, 2);
+      var a = touches[ids[0]], b = touches[ids[1]];
+      var r = viewport.getBoundingClientRect();
+      return {
+        dist: Math.hypot(a.x - b.x, a.y - b.y),
+        mx: (a.x + b.x) / 2 - r.left,
+        my: (a.y + b.y) / 2 - r.top
+      };
+    }
+    function startPinch() {
+      var s = pinchState();
+      pinch = { dist: s.dist, scale: scale, wx: (s.mx - tx) / scale, wy: (s.my - ty) / scale };
+      pinched = true;
+      dragging = false;
+    }
+    function updatePinch() {
+      if (!pinch || pinch.dist === 0) return;
+      var s = pinchState();
+      var next = Math.min(MAX_SCALE, Math.max(minScale, pinch.scale * s.dist / pinch.dist));
+      scale = next;
+      if (next <= minScale) {
+        // At the smallest size, centre the whole board.
+        var vw = viewport.clientWidth, vh = viewport.clientHeight - TOP_BAND;
+        tx = (vw - WORLD_W * scale) / 2;
+        ty = TOP_BAND + Math.max(0, (vh - WORLD_H * scale) / 2);
+      } else {
+        // The point between the fingers stays put, and the board follows them.
+        tx = s.mx - pinch.wx * next;
+        ty = s.my - pinch.wy * next;
+      }
+      apply();
+    }
+    function endTouch(e) {
+      var t = touches[e.pointerId];
+      delete touches[e.pointerId];
+      var remaining = Object.keys(touches);
+      if (remaining.length === 0) {
+        // A tap (no move, no pinch, no hold) opens the photo under the finger.
+        if (t && !t.moved && !lingering && !pinched) openPhoto(t.target);
+        clearTimeout(lingerTimer);
+        lingering = false;
+        pinch = null; pinched = false;
+        dragging = false;
+        viewport.classList.remove('is-dragging');
+      } else if (remaining.length === 1) {
+        // One finger lifted from a pinch: carry on panning with the other.
+        pinch = null;
+        var rest = touches[remaining[0]];
+        rest.moved = true;
+        lastX = rest.x; lastY = rest.y;
+        dragging = true;
+      }
+    }
+    function stop() {
+      dragging = false;
+      viewport.classList.remove('is-dragging');
+    }
+
     viewport.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'touch') {
+        touches[e.pointerId] = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, moved: false, target: e.target };
+        try { viewport.setPointerCapture(e.pointerId); } catch (err) { /* capture is optional */ }
+        var n = Object.keys(touches).length;
+        if (n === 1) {
+          dragging = true;
+          lastX = e.clientX; lastY = e.clientY;
+          lingerX = e.clientX; lingerY = e.clientY;
+          viewport.classList.add('is-dragging');
+          var id = e.pointerId;
+          clearTimeout(lingerTimer);
+          lingerTimer = setTimeout(function () {
+            var t = touches[id];
+            if (t && !t.moved && Object.keys(touches).length === 1) {
+              lingering = true;
+              lingerLoop();
+            }
+          }, LINGER_MS);
+        } else if (n === 2) {
+          clearTimeout(lingerTimer);
+          lingering = false;
+          startPinch();
+        }
+        return;
+      }
       dragging = true;
       lastX = e.clientX; lastY = e.clientY;
       downX = e.clientX; downY = e.clientY;
@@ -238,30 +363,46 @@ layout: kendra_default_no_footer
       viewport.setPointerCapture(e.pointerId);
     });
     viewport.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') {
+        var t = touches[e.pointerId];
+        if (!t) return;
+        t.x = e.clientX; t.y = e.clientY;
+        if (Object.keys(touches).length >= 2) { updatePinch(); return; }
+        if (!t.moved) {
+          if (Math.hypot(t.x - t.sx, t.y - t.sy) <= MOVE_SLOP) return;
+          // Moving past the slop means panning, so the hold is off. Pan from
+          // where the finger first touched down.
+          t.moved = true;
+          clearTimeout(lingerTimer);
+          lingering = false;
+          lastX = t.sx; lastY = t.sy;
+          dragging = true;
+        }
+        if (!dragging) return;
+        tx += e.clientX - lastX; ty += e.clientY - lastY;
+        lastX = e.clientX; lastY = e.clientY;
+        apply();
+        return;
+      }
       if (!dragging) return;
       tx += e.clientX - lastX; ty += e.clientY - lastY;
       lastX = e.clientX; lastY = e.clientY;
       apply();
     });
-    function stop() {
-      dragging = false;
-      viewport.classList.remove('is-dragging');
-    }
     viewport.addEventListener('pointerup', function (e) {
+      if (e.pointerType === 'touch') { endTouch(e); return; }
       var moved = Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 6;
-      var pic = downTarget && downTarget.closest ? downTarget.closest('[data-enlarge] img') : null;
-      if (!moved && pic) {
-        photoImg.src = pic.src;
-        photoImg.alt = pic.alt;
-        photo.hidden = false;
-      }
+      if (!moved) openPhoto(downTarget);
       stop();
     });
     photo.addEventListener('click', function () { photo.hidden = true; });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') photo.hidden = true;
     });
-    viewport.addEventListener('pointercancel', stop);
+    viewport.addEventListener('pointercancel', function (e) {
+      if (e.pointerType === 'touch') { endTouch(e); return; }
+      stop();
+    });
 
     // Hover-disperse: photos are pushed away from the pointer as it passes
     // over them, then spring back to their home position.
@@ -294,23 +435,13 @@ layout: kendra_default_no_footer
     function kick() {
       if (!running) { running = true; requestAnimationFrame(step); }
     }
+    // Mouse: photos are pushed away as the pointer passes over them. Touch uses
+    // the press-and-hold above instead.
     viewport.addEventListener('pointermove', function (e) {
-      var r = viewport.getBoundingClientRect();
-      // Pointer in board coordinates, so the reach stays the same on screen at any zoom.
-      var px = (e.clientX - r.left - tx) / scale, py = (e.clientY - r.top - ty) / scale;
-      var reach0 = REACH_PX / scale;
-      scatter.forEach(function (s) {
-        var dx = (s.cx + s.x) - px, dy = (s.cy + s.y) - py;
-        var d = Math.sqrt(dx * dx + dy * dy);
-        var reach = Math.max(s.w, s.h) / 2 + reach0;
-        if (d < reach) {
-          var k = 1 - d / reach;
-          var nx = d > 0 ? dx / d : 0, ny = d > 0 ? dy / d : 0;
-          s.vx += nx * PUSH * k;
-          s.vy += ny * PUSH * k;
-        }
-      });
-      kick();
+      if (e.pointerType === 'touch') return;
+      // The pointer in board coordinates, so the reach stays the same on screen at any zoom.
+      var p = boardPoint(e.clientX, e.clientY);
+      pushAt(p.x, p.y, PUSH);
     });
 
     // Images load after the layout, so fit once they are in.
