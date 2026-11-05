@@ -165,7 +165,7 @@ h3 {
 .masthead .masthead__menu-item a:hover,
 .masthead .kendra-link:hover,
 .masthead .site-title:hover {
-  color: #ff0000 !important;
+  color: #d1463f !important;
 }
 // The mobile menu drops down on a white panel, so its links are black.
 .greedy-nav .hidden-links a,
@@ -591,8 +591,8 @@ body:has(.square-photos) .filmstrip-item {
   cursor: pointer;
 }
 .booklet-open:hover {
-  color: #ff0000;
-  border-color: #ff0000;
+  color: #ce6841;
+  border-color: #ce6841;
 }
 
 .booklet-wrap {
@@ -1793,16 +1793,16 @@ body:has(#float-field) .float-backdrop__tint {
     text-underline-offset: 3px;
   }
 
-  // The selected button stays light red; hover still goes full red.
+  // The selected button stays light orange-red; hover still goes full red.
   &.is-active {
-    color: #ff6b6b;
-    border-color: #ff6b6b;
+    color: #d1463f;
+    border-color: #d1463f;
     text-decoration: none;
   }
 
   &:hover {
-    color: #ff0000;
-    border-color: #ff0000;
+    color: #ce6841;
+    border-color: #ce6841;
     text-decoration: none;
   }
 
@@ -2071,7 +2071,7 @@ body.footwear-active .float-backdrop::after {
 }
 
 .other-works__title a:hover {
-  color: #ff0000;
+  color: #d1463f;
   text-decoration: underline;
 }
 
@@ -2090,7 +2090,7 @@ body.footwear-active .float-backdrop::after {
 }
 
 .other-works__link:hover {
-  color: #ff0000;
+  color: #d1463f;
   text-decoration: underline;
 }
 
@@ -2128,7 +2128,7 @@ body.footwear-active .float-backdrop::after {
 .resume-download-btn:hover {
   background: transparent;
   box-shadow: none;
-  color: #ff0000;
+  color: #ce6841;
 }
 
 .seasonal-trend-page {
