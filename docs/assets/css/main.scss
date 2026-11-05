@@ -94,6 +94,11 @@ body:not(.kendra-project-page):not(:has(.pan-viewport)):not(:has(#hero-canvas)) 
 body:not(.kendra-project-page):not(:has(.pan-viewport)):not(:has(#hero-canvas)) {
     padding-top: 56px;
 }
+// Pages with the forest backdrop (Projects, About, Other Works, Resume) get the
+// same forest band in the header; other pages keep the grey band above.
+body.float-page:not(.kendra-project-page):not(:has(.pan-viewport)):not(:has(#hero-canvas)) .masthead {
+    background-image: url('/assets/images/textures/forest-green.webp');
+}
 // The nav sits on the debossed header bar, so it has no background of its own.
 .masthead #site-nav,
 .masthead .greedy-nav {
