@@ -190,9 +190,9 @@ layout: kendra_default_no_footer
       var vw = viewport.clientWidth, vh = viewport.clientHeight - TOP_BAND;
       var byWidth = vw / WORLD_W, byHeight = vh / WORLD_H;
       if (WORLD_H > WORLD_W * 1.5) {
-        // A tall board opens at photo size, and zooming out shows its full width.
-        scale = 1;
+        // A tall board opens showing its full width, and zooming out stops there too.
         minScale = byWidth * 0.95;
+        scale = minScale;
       } else {
         scale = Math.min(byWidth, byHeight) * 0.95;
         minScale = scale;  // zooming out stops at this preset

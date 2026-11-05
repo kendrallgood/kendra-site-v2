@@ -2,7 +2,7 @@
 # Photos are the original concept images; posters are the clean concept prints.
 world_width: 2341
 world_height: 3728
-plain: true
+plain: false
 items:
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L00.webp", alt: "Death_To_Stock___Jelly_Luise_DTS_TOUCHING_GRASS_JELLY_LUISE_Photos_ID9955", x: 927, y: 393, w: 275, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L01.webp", alt: "Death_To_Stock___Nick_Fancher_DTS_LUNAR_Daniel_Faro_Photos_ID11251", x: 1202, y: 75, w: 375, rotate: 0.0, enlarge: true}
@@ -16,7 +16,7 @@ items:
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L09.webp", alt: "reflective running", x: 1478, y: 344, w: 272, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/concepts/after-dark-oasis.webp", alt: "After Dark Oasis", caption: "After Dark Oasis", x: 132, y: 151, w: 527, rotate: -1.74, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/concepts/brutalist-luxe.webp", alt: "Brutalist Luxe + Conscious Comfort", caption: "Brutalist Luxe + Conscious Comfort", x: 983, y: 1112, w: 498, rotate: 2.02, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/concepts/love-worn-denim.webp", alt: "Love Worn Denim + Thread Works", caption: "Love Worn Denim + Thread Works", x: 795, y: 2142, w: 510, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/concepts/love-worn-denim.webp", alt: "Love Worn Denim + Thread Works", caption: "Love Worn Denim + Thread Works", x: 795, y: 2062, w: 510, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/concepts/tinted-translucence.webp", alt: "Tinted Translucence", caption: "Tinted Translucence", x: 1257, y: 3064, w: 506, rotate: 2.69, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L10.webp", alt: "ERL_erl_clothing_erl_clothing_1788339715", x: 1994, y: 1357, w: 273, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L11.webp", alt: "@kith_instagram_kith_1774441834", x: 1528, y: 1064, w: 330, rotate: 0.0, enlarge: true}
@@ -34,23 +34,23 @@ items:
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L23.webp", alt: "Gruppo_Peretti_Gruppo_Peretti_IMG_8787", x: 489, y: 1336, w: 250, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L24.webp", alt: "Bioworks_prv120724_BIOWORKS_IMG_5434", x: 500, y: 1113, w: 250, rotate: -90.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L25.webp", alt: "Recyctex_Co._Ltd_prv20724_Recyctex_41", x: 469, y: 1528, w: 250, rotate: -0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L26.webp", alt: "@lasvitdesign_001_lasvitdesign_Screenshot_2026-08-28_at_22.51.03", x: 75, y: 2097, w: 287, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L27.webp", alt: "d58196923c6951e7614d8ec48c43174b", x: 1725, y: 2300, w: 287, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L28.webp", alt: "@thenorthface_instagram_thenorthface_1778694614", x: 75, y: 2488, w: 250, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L29.webp", alt: "@refloslab_refloslab_1724165015_3438867854034508865_58432602813", x: 287, y: 2534, w: 250, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L30.webp", alt: "@wearebraindead_instagram_wearebraindead_1778263877", x: 432, y: 2114, w: 275, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L31.webp", alt: "@craig__green_Craig_Green_Screenshot_2026-03-11_at_165743", x: 1374, y: 2469, w: 250, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L32.webp", alt: "M&J_Group_M_J_GROUP_IMG_0065", x: 464, y: 2635, w: 250, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L33.webp", alt: "Tongkun_Group_Tongkun_6432", x: 481, y: 2464, w: 250, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L34.webp", alt: "Advance_Denim_Advance_1776", x: 290, y: 2163, w: 225, rotate: -90.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L35.webp", alt: "ISKO_ISKO_IMG_9916", x: 307, y: 2358, w: 225, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L36.webp", alt: "c6f8ce63ebb4ff4b4bf583a85c34c16d", x: 1609, y: 2528, w: 150, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L37.webp", alt: "Domyo_Domyo_012", x: 1743, y: 2148, w: 252, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L38.webp", alt: "@samklemick_mebltransformingfurniture_sam_klemick", x: 1384, y: 2161, w: 378, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L39.webp", alt: "@zomer.official_instagram_karhuofficial_1776076243", x: 1757, y: 2616, w: 216, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L40.webp", alt: "@loefflerrandall_instagram_loefflerrandall_1778247766", x: 1380, y: 2302, w: 187, rotate: 0.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L41.webp", alt: "Emily_McCann_2047810_assignsubmission_file_Emily_McCann_LCFemccann0220232_violentlyhappy1", x: 1589, y: 2355, w: 142, rotate: -90.0, enlarge: true}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L42.webp", alt: "thread works", x: 1397, y: 2095, w: 490, rotate: 0.0, enlarge: false}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L26.webp", alt: "@lasvitdesign_001_lasvitdesign_Screenshot_2026-08-28_at_22.51.03", x: 75, y: 2017, w: 287, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L27.webp", alt: "d58196923c6951e7614d8ec48c43174b", x: 1725, y: 2220, w: 287, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L28.webp", alt: "@thenorthface_instagram_thenorthface_1778694614", x: 75, y: 2408, w: 250, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L29.webp", alt: "@refloslab_refloslab_1724165015_3438867854034508865_58432602813", x: 287, y: 2454, w: 250, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L30.webp", alt: "@wearebraindead_instagram_wearebraindead_1778263877", x: 432, y: 2034, w: 275, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L31.webp", alt: "@craig__green_Craig_Green_Screenshot_2026-03-11_at_165743", x: 1374, y: 2389, w: 250, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L32.webp", alt: "M&J_Group_M_J_GROUP_IMG_0065", x: 464, y: 2555, w: 250, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L33.webp", alt: "Tongkun_Group_Tongkun_6432", x: 481, y: 2384, w: 250, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L34.webp", alt: "Advance_Denim_Advance_1776", x: 290, y: 2083, w: 225, rotate: -90.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L35.webp", alt: "ISKO_ISKO_IMG_9916", x: 307, y: 2278, w: 225, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L36.webp", alt: "c6f8ce63ebb4ff4b4bf583a85c34c16d", x: 1609, y: 2448, w: 150, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L37.webp", alt: "Domyo_Domyo_012", x: 1743, y: 2068, w: 252, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L38.webp", alt: "@samklemick_mebltransformingfurniture_sam_klemick", x: 1384, y: 2081, w: 378, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L39.webp", alt: "@zomer.official_instagram_karhuofficial_1776076243", x: 1757, y: 2536, w: 216, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L40.webp", alt: "@loefflerrandall_instagram_loefflerrandall_1778247766", x: 1380, y: 2222, w: 187, rotate: 0.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L41.webp", alt: "Emily_McCann_2047810_assignsubmission_file_Emily_McCann_LCFemccann0220232_violentlyhappy1", x: 1589, y: 2275, w: 142, rotate: -90.0, enlarge: true}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/thread-works.png", alt: "thread works", x: 1397, y: 2015, w: 490, rotate: 0.0, enlarge: false}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L43.webp", alt: "@kohler_design_milk_design_milk_1767987880", x: 701, y: 3090, w: 250, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L44.webp", alt: "@gnuhr_studio_instagram_gnuhr_studio_1783606020_lgncsx", x: 552, y: 3298, w: 250, rotate: 0.0, enlarge: true}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/layout/L45.webp", alt: "@pneuhaus_pneuhaus_1749849989_3654329029492247463_1190973696", x: 151, y: 3481, w: 300, rotate: 0.0, enlarge: true}
@@ -65,5 +65,5 @@ items:
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/after-dark-oasis.png", alt: "After Dark Oasis", x: 687, y: 57, w: 309, rotate: 0, enlarge: false}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/brutalist-luxe.png", alt: "brutalist luxe", x: 342, y: 1037, w: 324, rotate: 0, enlarge: false}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/conscious-comfort.png", alt: "Conscious Comfort", x: 1530, y: 1013, w: 488, rotate: 0, enlarge: false}
-  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/love-worn-denim.png", alt: "Love Worn Denim", x: 111, y: 2043, w: 712, rotate: 0, enlarge: false}
+  - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/love-worn-denim.png", alt: "Love Worn Denim", x: 111, y: 1963, w: 712, rotate: 0, enlarge: false}
   - {kind: "image", src: "/assets/images/projects/fall-winter-material-trend/titles/tinted-translucence.png", alt: "Tinted Translucence", x: 241, y: 3112, w: 270, rotate: 0, enlarge: false}
