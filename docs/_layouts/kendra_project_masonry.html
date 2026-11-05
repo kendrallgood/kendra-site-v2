@@ -1,0 +1,89 @@
+---
+layout: kendra_default_no_footer
+---
+<script>document.body.classList.add('kendra-project-page', 'masonry-page');</script>
+<style>
+  body.masonry-page {
+    background-size: cover;
+  }
+  .masonry-wrap {
+    width: 100%;
+    padding: 120px 16px 60px;
+    box-sizing: border-box;
+  }
+  .masonry-header {
+    max-width: 1400px;
+    margin: 0 auto 28px;
+  }
+  .masonry-header .project-title {
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+  .masonry-header .project-year {
+    margin: 4px 0 0;
+  }
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 14px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .masonry-item {
+    break-inside: avoid;
+    margin: 0 0 14px;
+  }
+  .masonry-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+  }
+  @media (max-width: 900px) {
+    .masonry-grid { column-count: 2; }
+  }
+  @media (max-width: 520px) {
+    .masonry-grid { column-count: 1; }
+  }
+</style>
+{% for project in site.data.projects.projects %}
+  {% if project.title == page.title %}
+    <div class="masonry-wrap">
+      <header class="masonry-header">
+        <p class="project-title">{{ project.title }}</p>
+        {% if project.year %}
+          <p class="project-year">{{ project.year }}</p>
+        {% endif %}
+      </header>
+
+      <div class="masonry-grid">
+        {% for image in project.images %}
+          <figure class="masonry-item">
+            <img src="{{ site.baseurl }}{{ image.url }}" alt="{{ project.title }}" loading="lazy">
+          </figure>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="photo-zoom" id="masonry-zoom" hidden>
+      <img src="" alt="">
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var zoom = document.getElementById('masonry-zoom');
+        var zoomImg = zoom.querySelector('img');
+        document.querySelectorAll('.masonry-item img').forEach(function (img) {
+          img.addEventListener('click', function () {
+            zoomImg.src = img.src;
+            zoomImg.alt = img.alt;
+            zoom.hidden = false;
+          });
+        });
+        zoom.addEventListener('click', function () { zoom.hidden = true; });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') zoom.hidden = true;
+        });
+      });
+    </script>
+  {% endif %}
+{% endfor %}

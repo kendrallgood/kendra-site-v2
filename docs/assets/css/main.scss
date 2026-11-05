@@ -75,6 +75,25 @@ h3 {
 .masthead {
     border-bottom: none;
 }
+// The button pages (Projects, About, Other Works, Resume) keep the header locked
+// to the top. Project pages, the trend canvases and the full-screen hero let it
+// scroll away as before.
+body:not(.kendra-project-page):not(:has(.pan-viewport)):not(:has(#hero-canvas)) .masthead {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    // An opaque band in the page's own texture, so tiles and photos slide
+    // beneath the header instead of showing through its links.
+    background-image: url('/assets/images/textures/forest-green.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+body:not(.kendra-project-page):not(:has(.pan-viewport)):not(:has(#hero-canvas)) {
+    padding-top: 56px;
+}
 // The nav sits on the debossed header bar, so it has no background of its own.
 .masthead #site-nav,
 .masthead .greedy-nav {
@@ -165,7 +184,7 @@ h3 {
 .masthead .masthead__menu-item a:hover,
 .masthead .kendra-link:hover,
 .masthead .site-title:hover {
-  color: #d1463f !important;
+  color: #e24f4b !important;
 }
 // The mobile menu drops down on a white panel, so its links are black.
 .greedy-nav .hidden-links a,
@@ -192,7 +211,7 @@ body:has(#hero-canvas) {
   background-color: #b8b8b8;
   background-image: url('/assets/images/textures/projects_background_76.webp');
   background-blend-mode: normal;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
 // On the Projects page the yellow canvas sits in the backdrop, and the
@@ -201,7 +220,7 @@ body:has(#hero-canvas) {
 // white wash over it to lighten it.
 body.kendra-project-page {
   background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -210,7 +229,7 @@ body.kendra-project-page {
 // same white wash as the other project pages.
 body:has(.seasonal-trend-page) .float-backdrop {
   background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 body:has(.seasonal-trend-page) .float-backdrop__base,
@@ -221,7 +240,7 @@ body:has(.seasonal-trend-page) .float-backdrop__grain {
 // The Projects page background: one image stretched to fill the page.
 body:has(#float-field) .float-backdrop {
   background-image: url('/assets/images/textures/projects_background_76.webp');
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 body:has(#float-field) .float-backdrop__base,
@@ -255,7 +274,7 @@ body:has(.process-page):not(:has(#hero-canvas)),
 body:has(.pan-viewport):not(:has(#hero-canvas)) {
   background-color: #b8b8b8;
   background-image: url('/assets/images/textures/projects_background_76.webp');
-  background-size: 100% 100%;
+  background-size: cover;
   background-attachment: scroll;
 }
 
@@ -591,8 +610,8 @@ body:has(.square-photos) .filmstrip-item {
   cursor: pointer;
 }
 .booklet-open:hover {
-  color: #ce6841;
-  border-color: #ce6841;
+  color: #e86e49;
+  border-color: #e86e49;
 }
 
 .booklet-wrap {
@@ -665,7 +684,7 @@ body:has(.square-photos) .filmstrip-item {
 // About page: the same background as the project pages, and black-and-white photos.
 body:has(.about-page) .float-backdrop {
   background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 body:has(.about-page) .float-backdrop__base,
@@ -1758,9 +1777,35 @@ body:has(#float-field) .float-backdrop__tint {
 
 .float-page .projects-filter {
   position: sticky;
-  top: 0;
+  top: 56px; // sits just below the locked header, not under it
   z-index: 3;
   gap: 10px; // the two buttons are separate boxes
+  // An opaque band in the same texture as the page behind it, fixed to the
+  // screen, so the tiles slide under it and disappear instead of showing
+  // through behind the buttons.
+  background-image: url('/assets/images/textures/forest-green.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+// The band fades out below the buttons, so tiles soften into the page
+// instead of stopping at a hard line.
+.float-page .projects-filter::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 90px;
+  pointer-events: none;
+  background-image: url('/assets/images/textures/forest-green.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
 }
 
 // Debossed filter buttons: pressed into the backdrop, with shadow on the
@@ -1795,14 +1840,14 @@ body:has(#float-field) .float-backdrop__tint {
 
   // The selected button stays light orange-red; hover still goes full red.
   &.is-active {
-    color: #d1463f;
-    border-color: #d1463f;
+    color: #e24f4b;
+    border-color: #e24f4b;
     text-decoration: none;
   }
 
   &:hover {
-    color: #ce6841;
-    border-color: #ce6841;
+    color: #e86e49;
+    border-color: #e86e49;
     text-decoration: none;
   }
 
@@ -2071,7 +2116,7 @@ body.footwear-active .float-backdrop::after {
 }
 
 .other-works__title a:hover {
-  color: #d1463f;
+  color: #e24f4b;
   text-decoration: underline;
 }
 
@@ -2090,7 +2135,7 @@ body.footwear-active .float-backdrop::after {
 }
 
 .other-works__link:hover {
-  color: #d1463f;
+  color: #e24f4b;
   text-decoration: underline;
 }
 
@@ -2128,7 +2173,7 @@ body.footwear-active .float-backdrop::after {
 .resume-download-btn:hover {
   background: transparent;
   box-shadow: none;
-  color: #ce6841;
+  color: #e86e49;
 }
 
 .seasonal-trend-page {
