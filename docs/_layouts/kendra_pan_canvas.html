@@ -46,6 +46,11 @@ layout: kendra_default_no_footer
     -webkit-user-drag: none;
     user-select: none;
   }
+  /* A photo given a height keeps its box; the image fills it and crops evenly. */
+  .pan-item.is-sized img {
+    height: 100%;
+    object-fit: cover;
+  }
   .pan-item figcaption {
     margin-top: 12px;
     font-family: 'acumin-variable', sans-serif;
@@ -56,6 +61,7 @@ layout: kendra_default_no_footer
   }
   .pan-text {
     position: absolute;
+    z-index: 2; /* titles sit above the photos and posters */
     margin: 0;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
@@ -89,12 +95,12 @@ layout: kendra_default_no_footer
     <div class="pan-tiles" id="pan-tiles"></div>
     {% for item in board.items %}
       {% if item.kind == "image" %}
-        <figure class="pan-item" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px; transform: rotate({{ item.rotate | default: 0 }}deg);"{% if item.enlarge %} data-enlarge{% endif %}>
+        <figure class="pan-item{% if item.h %} is-sized{% endif %}" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px;{% if item.h %} height: {{ item.h }}px;{% endif %} transform: rotate({{ item.rotate | default: 0 }}deg);"data-rot="{{ item.rotate | default: 0 }}"{% if item.enlarge %} data-enlarge{% endif %}>
           <img src="{{ site.baseurl }}{{ item.src }}" alt="{{ item.alt }}" loading="lazy" draggable="false">
           {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
         </figure>
       {% elsif item.kind == "text" %}
-        <p class="pan-text" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px; font-size: {{ item.size | default: 16 }}px;">{{ item.text }}</p>
+        <p class="pan-text" style="left: {{ item.x }}px; top: {{ item.y }}px; width: {{ item.w }}px; font-size: {{ item.size | default: 16 }}px;{% if item.font %} font-family: {{ item.font }};{% endif %}{% if item.color %} color: {{ item.color }};{% endif %}{% if item.weight %} font-weight: {{ item.weight }};{% endif %}">{{ item.text }}</p>
       {% endif %}
     {% endfor %}
   </div>
@@ -257,9 +263,60 @@ layout: kendra_default_no_footer
     });
     viewport.addEventListener('pointercancel', stop);
 
+    // Hover-disperse: photos are pushed away from the pointer as it passes
+    // over them, then spring back to their home position.
+    var STIFF = 0.04, DAMP = 0.9, PUSH = 60, REACH_PX = 120;
+    var scatter = [].slice.call(world.querySelectorAll('.pan-item[data-enlarge]')).map(function (el) {
+      return { el: el, rot: parseFloat(el.dataset.rot) || 0, x: 0, y: 0, vx: 0, vy: 0, cx: 0, cy: 0, w: 0, h: 0 };
+    });
+    function measureScatter() {
+      scatter.forEach(function (s) {
+        s.w = s.el.offsetWidth; s.h = s.el.offsetHeight;
+        s.cx = s.el.offsetLeft + s.w / 2; s.cy = s.el.offsetTop + s.h / 2;
+      });
+    }
+    var running = false;
+    function step() {
+      var moving = false;
+      scatter.forEach(function (s) {
+        s.vx = (s.vx - STIFF * s.x) * DAMP;
+        s.vy = (s.vy - STIFF * s.y) * DAMP;
+        s.x += s.vx; s.y += s.vy;
+        if (Math.abs(s.x) < 0.05 && Math.abs(s.y) < 0.05 && Math.abs(s.vx) < 0.05 && Math.abs(s.vy) < 0.05) {
+          s.x = 0; s.y = 0; s.vx = 0; s.vy = 0;
+        } else {
+          moving = true;
+        }
+        s.el.style.transform = 'translate(' + s.x + 'px, ' + s.y + 'px) rotate(' + s.rot + 'deg)';
+      });
+      if (moving) { requestAnimationFrame(step); } else { running = false; }
+    }
+    function kick() {
+      if (!running) { running = true; requestAnimationFrame(step); }
+    }
+    viewport.addEventListener('pointermove', function (e) {
+      var r = viewport.getBoundingClientRect();
+      // Pointer in board coordinates, so the reach stays the same on screen at any zoom.
+      var px = (e.clientX - r.left - tx) / scale, py = (e.clientY - r.top - ty) / scale;
+      var reach0 = REACH_PX / scale;
+      scatter.forEach(function (s) {
+        var dx = (s.cx + s.x) - px, dy = (s.cy + s.y) - py;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        var reach = Math.max(s.w, s.h) / 2 + reach0;
+        if (d < reach) {
+          var k = 1 - d / reach;
+          var nx = d > 0 ? dx / d : 0, ny = d > 0 ? dy / d : 0;
+          s.vx += nx * PUSH * k;
+          s.vy += ny * PUSH * k;
+        }
+      });
+      kick();
+    });
+
     // Images load after the layout, so fit once they are in.
-    window.addEventListener('load', fit);
-    window.addEventListener('resize', fit);
+    window.addEventListener('load', function () { fit(); measureScatter(); });
+    window.addEventListener('resize', function () { fit(); measureScatter(); });
     fit();
+    measureScatter();
   })();
 </script>
