@@ -104,7 +104,15 @@ layout: kendra_default_no_footer
       {% endif %}
     {% endfor %}
   </div>
-  <p class="pan-hint">drag to move · scroll to zoom</p>
+  <style>
+    /* Touch screens get the finger commands; mouse users keep the scroll wheel wording. */
+    .pan-hint .hint-touch { display: none; }
+    @media (pointer: coarse) {
+      .pan-hint .hint-mouse { display: none; }
+      .pan-hint .hint-touch { display: inline; }
+    }
+  </style>
+  <p class="pan-hint"><span class="hint-mouse">drag to move · scroll to zoom</span><span class="hint-touch">one finger to move · pinch to zoom</span></p>
 </div>
 
 <div class="photo-zoom" id="pan-photo" hidden>
