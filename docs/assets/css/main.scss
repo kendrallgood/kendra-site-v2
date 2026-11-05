@@ -83,9 +83,9 @@ body:not(.kendra-project-page):not(:has(.pan-viewport)):not(:has(#hero-canvas)) 
     top: 0;
     left: 0;
     right: 0;
-    // An opaque band in the page's own texture, so tiles and photos slide
-    // beneath the header instead of showing through its links.
-    background-image: url('/assets/images/textures/forest-green.webp');
+    // An opaque band in the grey page texture (with the same light wash as the
+    // project pages), so tiles and photos slide beneath the header.
+    background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/assets/images/textures/projects_background_76.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
