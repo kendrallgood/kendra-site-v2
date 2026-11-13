@@ -4,5 +4,4 @@
 
 layout: kendra_home
 title: Kendra Allgood
-webgl_script: "/assets/js/fabric.js"
 ---

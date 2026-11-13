@@ -1,0 +1,36 @@
+<!-- Back button for project pages: returns to the page you came from, or to Projects. -->
+<style>
+  .project-back {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 60;
+    padding: 8px 14px;
+    font-family: 'acumin-variable', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #1a1a1a;
+  }
+  .project-back:hover {
+    color: #e86e49;
+    border-color: #e86e49;
+  }
+</style>
+<a class="project-back" href="{{ site.baseurl }}/projects/" data-project-back>&larr; Back</a>
+<script>
+  (function () {
+    var link = document.querySelector('[data-project-back]');
+    if (!link) return;
+    link.addEventListener('click', function (e) {
+      // Came from elsewhere on the site: go back the way they came.
+      if (document.referrer.indexOf(location.origin) === 0 && history.length > 1) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  })();
+</script>
