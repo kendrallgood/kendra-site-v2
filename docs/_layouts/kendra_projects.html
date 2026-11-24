@@ -90,6 +90,12 @@ layout: kendra_default
       });
     });
 
+    // Coming back to this page (Back from a project) can restore it still faded from
+    // the tile click, so clear that state whenever the page is shown again.
+    window.addEventListener('pageshow', function () {
+      document.body.classList.remove('is-leaving');
+    });
+
     // Pressing a tile fades this page out, then opens the project.
     items.forEach(function (el) {
       el.addEventListener('click', function (e) {
